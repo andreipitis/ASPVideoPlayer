@@ -1,0 +1,16 @@
+PODS:
+  - ASPVideoPlayer (0.1.0)
+
+DEPENDENCIES:
+  - ASPVideoPlayer (from `../`)
+
+EXTERNAL SOURCES:
+  ASPVideoPlayer:
+    :path: ../
+
+SPEC CHECKSUMS:
+  ASPVideoPlayer: 6f94a6ab955225ac2546513fc2ae8707c4938e32
+
+PODFILE CHECKSUM: 198baadec4a635a8e1d5f11b79e6f02fb481e2d0
+
+COCOAPODS: 1.0.1

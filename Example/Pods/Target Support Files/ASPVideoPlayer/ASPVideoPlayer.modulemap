@@ -1,0 +1,6 @@
+framework module ASPVideoPlayer {
+  umbrella header "ASPVideoPlayer-umbrella.h"
+
+  export *
+  module * { export * }
+}
