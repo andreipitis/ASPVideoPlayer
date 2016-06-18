@@ -236,30 +236,6 @@ class ASPVideoPlayerTests: XCTestCase {
 		}
 	}
 	
-	func testPauseVideo_ShouldPauseVideoPlaybackAtTimeGreaterThanZero() {
-		let expectation = expectationWithDescription("Timeout expectation")
-		
-		let player = ASPVideoPlayer()
-		player.startPlayingWhenReady = true
-		player.videoURL = videoURL
-
-		player.finishedVideo = { (progress) in
-			player.playVideo()
-		}
-		
-		player.startedVideo = { [weak expectation] in
-			XCTAssertEqual(player.currentTime, 0.0)
-			XCTAssertEqual(player.status, ASPVideoPlayer.PlayerStatus.Playing)
-			expectation?.fulfill()
-		}
-		
-		waitForExpectationsWithTimeout(5.0) { (error) in
-			if let error = error {
-				print(error)
-			}
-		}
-	}
-	
 	func testStopVideo_ShouldStopVideo() {
 		let expectation = expectationWithDescription("Timeout expectation")
 		
@@ -292,9 +268,9 @@ class ASPVideoPlayerTests: XCTestCase {
 		player.startPlayingWhenReady = true
 		player.videoURL = videoURL
 		
-		player.finishedVideo = { [weak expectation] in
+		player.finishedVideo = {
 			XCTAssertEqual(player.status, ASPVideoPlayer.PlayerStatus.Playing)
-			expectation?.fulfill()
+			expectation.fulfill()
 		}
 
 		waitForExpectationsWithTimeout(20.0) { (error) in

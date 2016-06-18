@@ -526,6 +526,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 6413D42FB72838EDAACC4E3A /* Pods-ASPVideoPlayer_Tests.debug.xcconfig */;
 			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ENABLE_MODULES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
@@ -541,6 +542,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Tests/ASPVideoPlayer_Tests-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ASPVideoPlayer_Example.app/ASPVideoPlayer_Example";
 			};
 			name = Debug;
 		};
@@ -548,6 +550,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 16780EF3EFB81E20B4795D34 /* Pods-ASPVideoPlayer_Tests.release.xcconfig */;
 			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ENABLE_MODULES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
@@ -558,6 +561,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Tests/ASPVideoPlayer_Tests-Bridging-Header.h";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ASPVideoPlayer_Example.app/ASPVideoPlayer_Example";
 			};
 			name = Release;
 		};
