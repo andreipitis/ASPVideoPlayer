@@ -8,16 +8,20 @@
 
 import UIKit
 
-public class AnimationForwarder: UIView {
-    
-    private weak var backingView: UIView?
-    
-    public convenience init(view: UIView) {
-        self.init()
-        backingView = view
-    }
-    
-    public override func actionForLayer(layer: CALayer, forKey event: String) -> CAAction? {
-        return backingView?.actionForLayer(layer, forKey: event)
-    }
+/**
+Internal class used to forward the layer actions from the backing view to a layer.
+It should be used as the delegate of a layer.
+*/
+internal class AnimationForwarder: UIView {
+	
+	private weak var backingView: UIView?
+	
+	internal convenience init(view: UIView) {
+		self.init()
+		backingView = view
+	}
+	
+	internal override func actionForLayer(layer: CALayer, forKey event: String) -> CAAction? {
+		return backingView?.actionForLayer(layer, forKey: event)
+	}
 }

@@ -10,6 +10,9 @@ import UIKit
 import AVKit
 import AVFoundation
 
+/**
+A simple UIView subclass that can play a video and allows animations to be applied during playback.
+*/
 @IBDesignable public class ASPVideoPlayer: UIView {
 	
 	//MARK: - Enumerations -
@@ -28,28 +31,83 @@ import AVFoundation
 		case Error
 	}
 	
-	//MARK: - Clojures -
+	//MARK: - Closures -
 	
-	public typealias VoidClojure = (() -> Void)?
+	/**
+	Basic closure type.
+	*/
+	public typealias VoidClosure = (() -> Void)?
+	/**
+	Closure type for recurring actions.
+	- parameter progress: The progress indicator value. Between 0.0 and 1.0.
+	*/
 	public typealias ProgressClojure = ((progress: Double) -> Void)?
+	/**
+	Closure type for error handling.
+	- parameter error: The error that occured.
+	*/
 	public typealias ErrorClojure = ((error: NSError) -> Void)?
 	
-	public var newVideo: VoidClojure
-	public var readyToPlayVideo: VoidClojure
-	public var startedVideo: VoidClojure
+	/**
+	A closure that will be called when a new video is loaded.
+	*/
+	public var newVideo: VoidClosure
+	
+	/**
+	A closure that will be called when the video is ready to play.
+	*/
+	public var readyToPlayVideo: VoidClosure
+	
+	/**
+	A closure that will be called when a video is started.
+	*/
+	public var startedVideo: VoidClosure
+	
+	/**
+	A closure that will be called repeatedly while the video is playing.
+	*/
 	public var playingVideo: ProgressClojure
-	public var pausedVideo: VoidClojure
-	public var finishedVideo: VoidClojure
-	public var stoppedVideo: VoidClojure
+	
+	/**
+	A closure that will be called when a video is paused.
+	*/
+	public var pausedVideo: VoidClosure
+	
+	/**
+	A closure that will be called when the end of the video has been reached.
+	*/
+	public var finishedVideo: VoidClosure
+	
+	/**
+	A closure that will be called when a video is stopped.
+	*/
+	public var stoppedVideo: VoidClosure
+	
+	/**
+	A closure that will be called when an error occured.
+	*/
 	public var error: ErrorClojure
 	
 	//MARK: - Public Variables -
 	
+	/**
+	Sets wether the video should loop.
+	*/
 	public var shouldLoop: Bool = false
+	
+	/**
+	Sets wether the video should start automatically after it has been successfuly loaded.
+	*/
 	public var startPlayingWhenReady: Bool = false
 	
+	/**
+	The current status of the video player.
+	*/
 	public var status: PlayerStatus = .New
 	
+	/**
+	The url of the video that should be loaded.
+	*/
 	public var videoURL: NSURL? = nil {
 		didSet {
 			guard let url = videoURL else {
@@ -77,6 +135,9 @@ import AVFoundation
 		}
 	}
 	
+	/**
+	The gravity of the video. Adjusts how the video fills the space of the container.
+	*/
 	public var gravity: PlayerContentMode = .AspectFill {
 		didSet {
 			switch gravity {
@@ -92,6 +153,9 @@ import AVFoundation
 		}
 	}
 	
+	/**
+	The volume of the player. Should be a value between 0.0 and 1.0.
+	*/
 	public var volume: Float {
 		set {
 			let value = min(1.0, max(0.0, newValue))
@@ -102,6 +166,9 @@ import AVFoundation
 		}
 	}
 	
+	/**
+	The current playback time in seconds.
+	*/
 	public var currentTime: Double {
 		if let time = videoPlayerLayer.player?.currentItem?.currentTime() {
 			return time.seconds
@@ -110,6 +177,9 @@ import AVFoundation
 		return 0.0
 	}
 	
+	/**
+	The length of the video in seconds.
+	*/
 	public var videoLength: Double {
 		if let duration = videoPlayerLayer.player?.currentItem?.asset.duration {
 			return duration.seconds
@@ -158,11 +228,13 @@ import AVFoundation
 	
 	deinit {
 		deinitObservers()
-		print("ASPVideoPlayer deinit called")
 	}
 	
 	//MARK: - Public methods -
 	
+	/**
+	Starts the video player from the beginning.
+	*/
 	public func playVideo() {
 		if progress >= 1.0 {
 			seek(0.0)
@@ -178,12 +250,18 @@ import AVFoundation
 		}
 	}
 	
+	/**
+	Pauses the video.
+	*/
 	public func pauseVideo() {
 		videoPlayerLayer.player?.rate = 0.0
 		status = .Paused
 		pausedVideo?()
 	}
 	
+	/**
+	Stops the video.
+	*/
 	public func stopVideo() {
 		videoPlayerLayer.player?.rate = 0.0
 		seek(0.0)
@@ -191,6 +269,9 @@ import AVFoundation
 		stoppedVideo?()
 	}
 	
+	/**
+	Seek to specific position in video. Should be a value between 0.0 and 1.0.
+	*/
 	public func seek(percentage: Double) {
 		progress = min(1.0, max(0.0, percentage))
 		if let currentItem = videoPlayerLayer.player?.currentItem {

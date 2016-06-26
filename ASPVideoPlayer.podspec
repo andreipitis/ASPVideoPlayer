@@ -9,7 +9,7 @@
 Pod::Spec.new do |s|
   s.name             = 'ASPVideoPlayer'
   s.version          = '0.1.0'
-  s.summary          = 'A short description of ASPVideoPlayer.'
+  s.summary          = 'A simple UIView subclass that can play a video and allows animations to be applied during playback.'
 
 # This description is used to generate tags and improve search results.
 #   * Think: What does it do? Why did you write it? What is the focus?
@@ -18,15 +18,15 @@ Pod::Spec.new do |s|
 #   * Finally, don't worry about the indent, CocoaPods strips it!
 
   s.description      = <<-DESC
-TODO: Add long description of the pod here.
+A simple UIView subclass that can play a video and allows animations to be applied during playback. The component offers various hooks as closures for various playback states.
                        DESC
 
-  s.homepage         = 'https://github.com/<GITHUB_USERNAME>/ASPVideoPlayer'
+  s.homepage         = 'https://github.com/andreipitis/ASPVideoPlayer'
   # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'Andrei-Sergiu Pitis' => 'andrei.pitis@lateral-inc.com' }
-  s.source           = { :git => 'https://github.com/<GITHUB_USERNAME>/ASPVideoPlayer.git', :tag => s.version.to_s }
-  # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
+  s.source           = { :git => 'https://github.com/andreipitis/ASPVideoPlayer.git', :tag => s.version.to_s }
+  # s.social_media_url = 'https://twitter.com/AndyPitis'
 
   s.ios.deployment_target = '8.0'
 
