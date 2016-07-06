@@ -29,21 +29,28 @@
                                 </connections>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hvu-cl-B3g" customClass="ASPVideoPlayer" customModule="ASPVideoPlayer">
-                                <rect key="frame" x="20" y="0.0" width="560" height="560"/>
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="550"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="Hvu-cl-B3g" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="top" id="10j-ZA-HIl"/>
-                            <constraint firstAttribute="trailing" secondItem="Hvu-cl-B3g" secondAttribute="trailing" constant="20" id="5dx-W4-wVk"/>
+                            <constraint firstAttribute="trailing" secondItem="Hvu-cl-B3g" secondAttribute="trailing" id="5dx-W4-wVk"/>
                             <constraint firstItem="ro4-CU-el9" firstAttribute="top" secondItem="Hvu-cl-B3g" secondAttribute="bottom" id="ATh-UD-qIQ"/>
-                            <constraint firstItem="Hvu-cl-B3g" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" constant="20" id="a7k-Xr-Abo"/>
+                            <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="Hvu-cl-B3g" secondAttribute="bottom" constant="50" id="P0S-Eb-3an"/>
+                            <constraint firstItem="Hvu-cl-B3g" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="a7k-Xr-Abo"/>
                             <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="ro4-CU-el9" secondAttribute="bottom" id="aoj-g8-r2b"/>
                             <constraint firstItem="ro4-CU-el9" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="iDB-fI-3Vl"/>
                             <constraint firstAttribute="trailing" secondItem="ro4-CU-el9" secondAttribute="trailing" id="ndC-XN-BhC"/>
                             <constraint firstItem="ro4-CU-el9" firstAttribute="top" secondItem="Hvu-cl-B3g" secondAttribute="bottom" id="rhL-3j-28a"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="ATh-UD-qIQ"/>
+                                <exclude reference="rhL-3j-28a"/>
+                            </mask>
+                        </variation>
                     </view>
                     <connections>
                         <outlet property="videoBottomConstraint" destination="ATh-UD-qIQ" id="bYV-N2-08p"/>

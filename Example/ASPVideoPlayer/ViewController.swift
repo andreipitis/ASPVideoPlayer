@@ -24,7 +24,6 @@ class ViewController: UIViewController {
 		
 		self.videoPlayer.videoURL = videoURL
 		self.videoPlayer.gravity = .AspectFit
-		//        self.videoPlayer.startPlayingWhenReady = true
 		self.videoPlayer.shouldLoop = true
 		
 		self.videoPlayer.backgroundColor = UIColor.blackColor()
@@ -35,7 +34,6 @@ class ViewController: UIViewController {
 		
 		self.videoPlayer.readyToPlayVideo = {
 			print("readyToPlay")
-			//            self.videoPlayer.playVideo()
 		}
 		
 		self.videoPlayer.startedVideo = {
@@ -46,41 +44,37 @@ class ViewController: UIViewController {
 		self.videoPlayer.finishedVideo = {
 			print("finishedVideo")
 			
-			//            UIView.animateWithDuration(1.3, delay: 0.0, options: .CurveEaseIn, animations: {
-			//                self.videoTopConstraint.constant = 0
-			//				self.videoBottomConstraint.constant = 0
-			//				self.videoLeadingConstraint.constant = 0
-			//				self.videoTrailingConstraint.constant = 0
-			//				self.view.layoutIfNeeded()
-			//                }, completion: { (finished) in
-			//                    UIView.animateWithDuration(1.3, delay: 2.0, options: .CurveEaseIn, animations: {
-			//
-			//						self.videoTopConstraint.constant = 50
-			//						self.videoBottomConstraint.constant = 50
-			//						self.videoLeadingConstraint.constant = 50
-			//						self.videoTrailingConstraint.constant = 50
-			//
-			//						self.view.layoutIfNeeded()
-			//                        }, completion: { (finished) in
-			//
-			//                    })
-			//            })
+			UIView.animateWithDuration(0.3, delay: 0.0, options: .CurveEaseIn, animations: {
+				self.videoTopConstraint.constant = 0
+				self.videoBottomConstraint.constant = 0
+				self.videoLeadingConstraint.constant = 0
+				self.videoTrailingConstraint.constant = 0
+				self.view.layoutIfNeeded()
+				}, completion: { (finished) in
+					UIView.animateWithDuration(0.3, delay: 1.0, options: .CurveEaseIn, animations: {
+						
+						self.videoTopConstraint.constant = 150
+						self.videoBottomConstraint.constant = 150
+						self.videoLeadingConstraint.constant = 150
+						self.videoTrailingConstraint.constant = 150
+						
+						self.view.layoutIfNeeded()
+						}, completion: { (finished) in
+							
+					})
+			})
 		}
 		
 		self.videoPlayer.playingVideo = { (progress) -> Void in
 			print("progress: \(progress)")
-			
-			//            self.videoPlayer.pauseVideo()
 		}
 		
 		self.videoPlayer.pausedVideo = {
 			print("paused")
-			//            self.videoPlayer.stopVideo()
 		}
 		
 		self.videoPlayer.stoppedVideo = {
 			print("stopped")
-			//            self.videoPlayer.playVideo()
 		}
 		
 		self.videoPlayer.error = { (error) -> Void in

@@ -41,12 +41,12 @@ A simple UIView subclass that can play a video and allows animations to be appli
 	Closure type for recurring actions.
 	- parameter progress: The progress indicator value. Between 0.0 and 1.0.
 	*/
-	public typealias ProgressClojure = ((progress: Double) -> Void)?
+	public typealias ProgressClosure = ((progress: Double) -> Void)?
 	/**
 	Closure type for error handling.
 	- parameter error: The error that occured.
 	*/
-	public typealias ErrorClojure = ((error: NSError) -> Void)?
+	public typealias ErrorClosure = ((error: NSError) -> Void)?
 	
 	/**
 	A closure that will be called when a new video is loaded.
@@ -66,7 +66,7 @@ A simple UIView subclass that can play a video and allows animations to be appli
 	/**
 	A closure that will be called repeatedly while the video is playing.
 	*/
-	public var playingVideo: ProgressClojure
+	public var playingVideo: ProgressClosure
 	
 	/**
 	A closure that will be called when a video is paused.
@@ -86,7 +86,7 @@ A simple UIView subclass that can play a video and allows animations to be appli
 	/**
 	A closure that will be called when an error occured.
 	*/
-	public var error: ErrorClojure
+	public var error: ErrorClosure
 	
 	//MARK: - Public Variables -
 	
@@ -103,7 +103,7 @@ A simple UIView subclass that can play a video and allows animations to be appli
 	/**
 	The current status of the video player.
 	*/
-	public var status: PlayerStatus = .New
+	public private(set) var status: PlayerStatus = .New
 	
 	/**
 	The url of the video that should be loaded.
