@@ -16,17 +16,17 @@ class ViewController: UIViewController {
 	@IBOutlet weak var videoTrailingConstraint: NSLayoutConstraint!
 	@IBOutlet weak var videoPlayer: ASPVideoPlayer!
 	
-	let videoURL = NSBundle.mainBundle().URLForResource("video", withExtension: "mov")
+	let videoURL = Bundle.main.url(forResource: "video", withExtension: "mov")
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		// Do any additional setup after loading the view, typically from a nib.
 		
 		self.videoPlayer.videoURL = videoURL
-		self.videoPlayer.gravity = .AspectFit
+		self.videoPlayer.gravity = .aspectFit
 		self.videoPlayer.shouldLoop = true
 		
-		self.videoPlayer.backgroundColor = UIColor.blackColor()
+		self.videoPlayer.backgroundColor = UIColor.black
 		
 		self.videoPlayer.newVideo = {
 			print("newVideo")
@@ -44,14 +44,14 @@ class ViewController: UIViewController {
 		self.videoPlayer.finishedVideo = {
 			print("finishedVideo")
 			
-			UIView.animateWithDuration(0.3, delay: 0.0, options: .CurveEaseIn, animations: {
+			UIView.animate(withDuration: 0.3, delay: 0.0, options: .curveEaseIn, animations: {
 				self.videoTopConstraint.constant = 0
 				self.videoBottomConstraint.constant = 0
 				self.videoLeadingConstraint.constant = 0
 				self.videoTrailingConstraint.constant = 0
 				self.view.layoutIfNeeded()
 				}, completion: { (finished) in
-					UIView.animateWithDuration(0.3, delay: 1.0, options: .CurveEaseIn, animations: {
+					UIView.animate(withDuration: 0.3, delay: 1.0, options: .curveEaseIn, animations: {
 						
 						self.videoTopConstraint.constant = 150
 						self.videoBottomConstraint.constant = 150
@@ -82,7 +82,7 @@ class ViewController: UIViewController {
 		}
 	}
 	
-	override func viewDidAppear(animated: Bool) {
+	override func viewDidAppear(_ animated: Bool) {
 		super.viewDidAppear(animated)
 		
 	}

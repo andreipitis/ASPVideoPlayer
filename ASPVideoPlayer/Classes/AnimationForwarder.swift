@@ -14,14 +14,14 @@ It should be used as the delegate of a layer.
 */
 internal class AnimationForwarder: UIView {
 	
-	private weak var backingView: UIView?
+	fileprivate weak var backingView: UIView?
 	
 	internal convenience init(view: UIView) {
 		self.init()
 		backingView = view
 	}
 	
-	internal override func actionForLayer(layer: CALayer, forKey event: String) -> CAAction? {
-		return backingView?.actionForLayer(layer, forKey: event)
+	internal func actionForLayer(layer: CALayer, forKey event: String) -> CAAction? {
+		return backingView?.action(for: layer, forKey: event)
 	}
 }

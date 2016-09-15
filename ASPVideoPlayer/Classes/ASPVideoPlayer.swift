@@ -13,22 +13,22 @@ import AVFoundation
 /**
 A simple UIView subclass that can play a video and allows animations to be applied during playback.
 */
-@IBDesignable public class ASPVideoPlayer: UIView {
+@IBDesignable open class ASPVideoPlayer: UIView {
 	
 	//MARK: - Enumerations -
 	public enum PlayerContentMode {
-		case AspectFill
-		case AspectFit
-		case Resize
+		case aspectFill
+		case aspectFit
+		case resize
 	}
 	
 	public enum PlayerStatus {
-		case New
-		case ReadyToPlay
-		case Playing
-		case Paused
-		case Stopped
-		case Error
+		case new
+		case readyToPlay
+		case playing
+		case paused
+		case stopped
+		case error
 	}
 	
 	//MARK: - Closures -
@@ -41,95 +41,95 @@ A simple UIView subclass that can play a video and allows animations to be appli
 	Closure type for recurring actions.
 	- parameter progress: The progress indicator value. Between 0.0 and 1.0.
 	*/
-	public typealias ProgressClosure = ((progress: Double) -> Void)?
+	public typealias ProgressClosure = ((_ progress: Double) -> Void)?
 	/**
 	Closure type for error handling.
 	- parameter error: The error that occured.
 	*/
-	public typealias ErrorClosure = ((error: NSError) -> Void)?
+	public typealias ErrorClosure = ((_ error: NSError) -> Void)?
 	
 	/**
 	A closure that will be called when a new video is loaded.
 	*/
-	public var newVideo: VoidClosure
+	open var newVideo: VoidClosure
 	
 	/**
 	A closure that will be called when the video is ready to play.
 	*/
-	public var readyToPlayVideo: VoidClosure
+	open var readyToPlayVideo: VoidClosure
 	
 	/**
 	A closure that will be called when a video is started.
 	*/
-	public var startedVideo: VoidClosure
+	open var startedVideo: VoidClosure
 	
 	/**
 	A closure that will be called repeatedly while the video is playing.
 	*/
-	public var playingVideo: ProgressClosure
+	open var playingVideo: ProgressClosure
 	
 	/**
 	A closure that will be called when a video is paused.
 	*/
-	public var pausedVideo: VoidClosure
+	open var pausedVideo: VoidClosure
 	
 	/**
 	A closure that will be called when the end of the video has been reached.
 	*/
-	public var finishedVideo: VoidClosure
+	open var finishedVideo: VoidClosure
 	
 	/**
 	A closure that will be called when a video is stopped.
 	*/
-	public var stoppedVideo: VoidClosure
+	open var stoppedVideo: VoidClosure
 	
 	/**
 	A closure that will be called when an error occured.
 	*/
-	public var error: ErrorClosure
+	open var error: ErrorClosure
 	
 	//MARK: - Public Variables -
 	
 	/**
 	Sets wether the video should loop.
 	*/
-	public var shouldLoop: Bool = false
+	open var shouldLoop: Bool = false
 	
 	/**
 	Sets wether the video should start automatically after it has been successfuly loaded.
 	*/
-	public var startPlayingWhenReady: Bool = false
+	open var startPlayingWhenReady: Bool = false
 	
 	/**
 	The current status of the video player.
 	*/
-	public private(set) var status: PlayerStatus = .New
+	open fileprivate(set) var status: PlayerStatus = .new
 	
 	/**
 	The url of the video that should be loaded.
 	*/
-	public var videoURL: NSURL? = nil {
+	open var videoURL: URL? = nil {
 		didSet {
 			guard let url = videoURL else {
-				status = .Error
+				status = .error
 				
 				let userInfo = [NSLocalizedDescriptionKey: "Video URL is invalid."]
 				let videoError = NSError(domain: "com.andreisergiupitis.aspvideoplayer", code: 99, userInfo: userInfo)
 				
-				error?(error: videoError)
+				error?(videoError)
 				return
 			}
 			
 			deinitObservers()
 			
-			videoPlayerLayer.player = AVPlayer(URL: url)
+			videoPlayerLayer.player = AVPlayer(url: url)
 			videoPlayerLayer.player?.rate = 0.0
 			videoPlayerLayer.videoGravity = videoGravity
 			
 			videoPlayerLayer.player?.addObserver(self, forKeyPath: "status", options: [], context: nil)
 			
-			status = .New
-			dispatch_async(dispatch_get_main_queue()) { [weak self] () -> Void in
+			status = .new
+			DispatchQueue.main.async { [weak self] () -> Void in
 				self?.newVideo?()
 			}
 		}
@@ -138,14 +138,14 @@ A simple UIView subclass that can play a video and allows animations to be appli
 	/**
 	The gravity of the video. Adjusts how the video fills the space of the container.
 	*/
-	public var gravity: PlayerContentMode = .AspectFill {
+	open var gravity: PlayerContentMode = .aspectFill {
 		didSet {
 			switch gravity {
-			case .AspectFill:
+			case .aspectFill:
 				videoGravity = AVLayerVideoGravityResizeAspectFill
-			case .AspectFit:
+			case .aspectFit:
 				videoGravity = AVLayerVideoGravityResizeAspect
-			case .Resize:
+			case .resize:
 				videoGravity = AVLayerVideoGravityResize
 			}
 			
@@ -156,7 +156,7 @@ A simple UIView subclass that can play a video and allows animations to be appli
 	/**
 	The volume of the player. Should be a value between 0.0 and 1.0.
 	*/
-	public var volume: Float {
+	open var volume: Float {
 		set {
 			let value = min(1.0, max(0.0, newValue))
 			videoPlayerLayer.player?.volume = value
@@ -169,7 +169,7 @@ A simple UIView subclass that can play a video and allows animations to be appli
 	/**
 	The current playback time in seconds.
 	*/
-	public var currentTime: Double {
+	open var currentTime: Double {
 		if let time = videoPlayerLayer.player?.currentItem?.currentTime() {
 			return time.seconds
 		}
@@ -180,7 +180,7 @@ A simple UIView subclass that can play a video and allows animations to be appli
 	/**
 	The length of the video in seconds.
 	*/
-	public var videoLength: Double {
+	open var videoLength: Double {
 		if let duration = videoPlayerLayer.player?.currentItem?.asset.duration {
 			return duration.seconds
 		}
@@ -188,17 +188,17 @@ A simple UIView subclass that can play a video and allows animations to be appli
 		return 0.0
 	}
 	
-	private(set) var progress: Double = 0.0
+	fileprivate(set) var progress: Double = 0.0
 	
 	//MARK: - Private Variables and Constants -
 	
-	private let videoPlayerLayer: AVPlayerLayer = AVPlayerLayer()
+	fileprivate let videoPlayerLayer: AVPlayerLayer = AVPlayerLayer()
 	
-	private var animationForwarder: AnimationForwarder!
+	fileprivate var animationForwarder: AnimationForwarder!
 	
-	private var videoGravity: String! = AVLayerVideoGravityResizeAspectFill
+	fileprivate var videoGravity: String! = AVLayerVideoGravityResizeAspectFill
 	
-	private var timeObserver: AnyObject?
+	fileprivate var timeObserver: AnyObject?
 	
 	//MARK: - Superclass methods -
 	
@@ -214,13 +214,13 @@ A simple UIView subclass that can play a video and allows animations to be appli
 		commonInit()
 	}
 	
-	public override var frame: CGRect {
+	open override var frame: CGRect {
 		didSet {
 			videoPlayerLayer.frame = bounds
 		}
 	}
 	
-	public override func layoutSubviews() {
+	open override func layoutSubviews() {
 		super.layoutSubviews()
 		
 		videoPlayerLayer.frame = bounds
@@ -235,60 +235,60 @@ A simple UIView subclass that can play a video and allows animations to be appli
 	/**
 	Starts the video player from the beginning.
 	*/
-	public func playVideo() {
+	open func playVideo() {
 		if progress >= 1.0 {
 			seek(0.0)
 		}
 		
-		status = .Playing
+		status = .playing
 		videoPlayerLayer.player?.rate = 1.0
 		startedVideo?()
 		
-		NSNotificationCenter.defaultCenter().removeObserver(self)
+		NotificationCenter.default.removeObserver(self)
 		if let currentItem = videoPlayerLayer.player?.currentItem {
-			NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(itemDidFinishPlaying(_:)) , name: AVPlayerItemDidPlayToEndTimeNotification, object: currentItem)
+			NotificationCenter.default.addObserver(self, selector: #selector(itemDidFinishPlaying(_:)) , name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: currentItem)
 		}
 	}
 	
 	/**
 	Pauses the video.
 	*/
-	public func pauseVideo() {
+	open func pauseVideo() {
 		videoPlayerLayer.player?.rate = 0.0
-		status = .Paused
+		status = .paused
 		pausedVideo?()
 	}
 	
 	/**
 	Stops the video.
 	*/
-	public func stopVideo() {
+	open func stopVideo() {
 		videoPlayerLayer.player?.rate = 0.0
 		seek(0.0)
-		status = .Stopped
+		status = .stopped
 		stoppedVideo?()
 	}
 	
 	/**
 	Seek to specific position in video. Should be a value between 0.0 and 1.0.
 	*/
-	public func seek(percentage: Double) {
+	open func seek(_ percentage: Double) {
 		progress = min(1.0, max(0.0, percentage))
 		if let currentItem = videoPlayerLayer.player?.currentItem {
 			let time = CMTime(seconds: progress * currentItem.asset.duration.seconds, preferredTimescale: currentItem.asset.duration.timescale)
-			videoPlayerLayer.player?.seekToTime(time, toleranceBefore: kCMTimeZero, toleranceAfter: kCMTimeZero)
+			videoPlayerLayer.player?.seek(to: time, toleranceBefore: kCMTimeZero, toleranceAfter: kCMTimeZero)
 		}
 	}
 	
 	//MARK: - KeyValueObserving methods -
 	
-	public override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
+	open override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
 		guard let player = object as? AVPlayer, let keyPath = keyPath else { return }
 		
 		if player == videoPlayerLayer.player && keyPath == "status" {
-			if player.status == .ReadyToPlay {
-				if status == .New {
-					status = .ReadyToPlay
+			if player.status == .readyToPlay {
+				if status == .new {
+					status = .readyToPlay
 				}
 				addTimeObserver()
 				
@@ -297,44 +297,44 @@ A simple UIView subclass that can play a video and allows animations to be appli
 				} else {
 					readyToPlayVideo?()
 				}
-			} else if player.status == .Failed {
-				status = .Error
+			} else if player.status == .failed {
+				status = .error
 				
 				let userInfo = [NSLocalizedDescriptionKey: "Error loading video."]
 				let videoError = NSError(domain: "com.andreisergiupitis.aspvideoplayer", code: 99, userInfo: userInfo)
 				
-				error?(error: videoError)
+				error?(videoError)
 			}
 		}
 	}
 	
 	//MARK: - Private methods -
 	
-	private func commonInit() {
+	fileprivate func commonInit() {
 		layer.addSublayer(videoPlayerLayer)
 		animationForwarder = AnimationForwarder(view: self)
 		videoPlayerLayer.delegate = animationForwarder
 	}
 	
-	private func addTimeObserver() {
+	fileprivate func addTimeObserver() {
 		if let observer = timeObserver {
 			videoPlayerLayer.player?.removeTimeObserver(observer)
 		}
 		
-		timeObserver = videoPlayerLayer.player?.addPeriodicTimeObserverForInterval(CMTime(seconds: 0.5, preferredTimescale: Int32(NSEC_PER_SEC)), queue: nil, usingBlock: { [weak self] (time) in
-			guard let weakSelf = self where self?.status == .Playing else { return }
+		timeObserver = videoPlayerLayer.player?.addPeriodicTimeObserver(forInterval: CMTime(seconds: 0.5, preferredTimescale: Int32(NSEC_PER_SEC)), queue: nil, using: { [weak self] (time) in
+			guard let weakSelf = self , self?.status == .playing else { return }
 			
 			let currentTime = time.seconds
 			weakSelf.progress = currentTime / weakSelf.videoLength
 			
-			dispatch_async(dispatch_get_main_queue(), {
-				weakSelf.playingVideo?(progress: weakSelf.progress)
+			DispatchQueue.main.async(execute: {
+				weakSelf.playingVideo?(weakSelf.progress)
 			})
-			})
+			}) as AnyObject?
 	}
 	
-	private func deinitObservers() {
-		NSNotificationCenter.defaultCenter().removeObserver(self)
+	fileprivate func deinitObservers() {
+		NotificationCenter.default.removeObserver(self)
 		videoPlayerLayer.player?.removeObserver(self, forKeyPath: "status")
 		if let observer = timeObserver {
 			videoPlayerLayer.player?.removeTimeObserver(observer)
@@ -342,12 +342,12 @@ A simple UIView subclass that can play a video and allows animations to be appli
 		}
 	}
 	
-	@objc internal func itemDidFinishPlaying(notification: NSNotification) {
+	@objc internal func itemDidFinishPlaying(_ notification: Notification) {
 		let currentItem = videoPlayerLayer.player?.currentItem
 		let notificationObject = notification.object as! AVPlayerItem
 		
 		finishedVideo?()
-		dispatch_async(dispatch_get_main_queue(), { [weak self] () -> Void in
+		DispatchQueue.main.async(execute: { [weak self] () -> Void in
 			if currentItem == notificationObject && self?.shouldLoop == true {
 				self?.seek(0.0)
 				self?.videoPlayerLayer.player?.rate = 1.0

@@ -16,22 +16,22 @@ public protocol VideoPlayerControls {
 	func stop()
 	func jumpForward()
 	func jumpBackward()
-	func volume(value: Float)
+	func volume(_ value: Float)
 }
 
 public protocol VideoPlayerSeekControls {
 	weak var videoPlayer: ASPVideoPlayer? {get set}
 	
-	func seek(min: Double, max: Double, value: Double)
+	func seek(_ min: Double, max: Double, value: Double)
 }
 
 public extension VideoPlayerSeekControls {
-	func seek(min: Double = 0.0, max: Double = 1.0, value: Double) {
+	func seek(_ min: Double = 0.0, max: Double = 1.0, value: Double) {
 		let value = rangeMap(value, min: min, max: max, newMin: 0.0, newMax: 1.0)
 		videoPlayer?.seek(Double(value))
 	}
 	
-	private func rangeMap(value: Double, min: Double, max: Double, newMin: Double, newMax: Double) -> Double {
+	fileprivate func rangeMap(_ value: Double, min: Double, max: Double, newMin: Double, newMax: Double) -> Double {
 		return (((value - min) * (newMax - newMin)) / (max - min)) + newMin
 	}
 }
@@ -63,19 +63,19 @@ public extension VideoPlayerControls {
 		}
 	}
 	
-	func volume(value: Float) {
+	func volume(_ value: Float) {
 		videoPlayer?.volume = value
 	}
 }
 
-@IBDesignable public class ASPVideoPlayerControls: UIView, VideoPlayerControls, VideoPlayerSeekControls {
+@IBDesignable open class ASPVideoPlayerControls: UIView, VideoPlayerControls, VideoPlayerSeekControls {
 	
-	@IBOutlet public weak var videoPlayer: ASPVideoPlayer?
+	@IBOutlet open weak var videoPlayer: ASPVideoPlayer?
 	
-	public let playPauseButton = UIButton()
-	public let forwardButton = UIButton()
-	public let backwardButton = UIButton()
-	public let stopButton = UIButton()
+	open let playPauseButton = UIButton()
+	open let forwardButton = UIButton()
+	open let backwardButton = UIButton()
+	open let stopButton = UIButton()
 	
 	public override init(frame: CGRect) {
 		super.init(frame: frame)
@@ -90,7 +90,7 @@ public extension VideoPlayerControls {
 	}
 	
 	convenience init(videoPlayer: ASPVideoPlayer) {
-		self.init(frame: CGRectZero)
+		self.init(frame: CGRect.zero)
 		self.videoPlayer = videoPlayer
 		
 		commonInit()
@@ -112,21 +112,21 @@ public extension VideoPlayerControls {
 		jumpBackward()
 	}
 
-	private func commonInit() {
+	fileprivate func commonInit() {
 		playPauseButton.translatesAutoresizingMaskIntoConstraints = false
 		stopButton.translatesAutoresizingMaskIntoConstraints = false
 		forwardButton.translatesAutoresizingMaskIntoConstraints = false
 		backwardButton.translatesAutoresizingMaskIntoConstraints = false
 		
-		playPauseButton.backgroundColor = .blackColor()
-		stopButton.backgroundColor = .yellowColor()
-		forwardButton.backgroundColor = .greenColor()
-		backwardButton.backgroundColor = .purpleColor()
+		playPauseButton.backgroundColor = .black
+		stopButton.backgroundColor = .yellow
+		forwardButton.backgroundColor = .green
+		backwardButton.backgroundColor = .purple
 		
-		playPauseButton.addTarget(self, action: #selector(ASPVideoPlayerControls.playButtonPressed), forControlEvents: .TouchUpInside)
-		stopButton.addTarget(self, action: #selector(ASPVideoPlayerControls.stopButtonPressed), forControlEvents: .TouchUpInside)
-		forwardButton.addTarget(self, action: #selector(ASPVideoPlayerControls.forwardButtonPressed), forControlEvents: .TouchUpInside)
-		backwardButton.addTarget(self, action: #selector(ASPVideoPlayerControls.backwardButtonPressed), forControlEvents: .TouchUpInside)
+		playPauseButton.addTarget(self, action: #selector(ASPVideoPlayerControls.playButtonPressed), for: .touchUpInside)
+		stopButton.addTarget(self, action: #selector(ASPVideoPlayerControls.stopButtonPressed), for: .touchUpInside)
+		forwardButton.addTarget(self, action: #selector(ASPVideoPlayerControls.forwardButtonPressed), for: .touchUpInside)
+		backwardButton.addTarget(self, action: #selector(ASPVideoPlayerControls.backwardButtonPressed), for: .touchUpInside)
 		
 		addSubview(playPauseButton)
 		addSubview(stopButton)
@@ -136,7 +136,7 @@ public extension VideoPlayerControls {
 		setupLayout()
 	}
 	
-	private func setupLayout() {
+	fileprivate func setupLayout() {
 		let viewsDictionary = ["playPauseButton":playPauseButton,
 		                       "forwardButton":forwardButton,
 		                       "backwardButton":backwardButton,
@@ -144,11 +144,11 @@ public extension VideoPlayerControls {
 		
 		var constraintsArray = [NSLayoutConstraint]()
 		
-		constraintsArray.appendContentsOf(NSLayoutConstraint.constraintsWithVisualFormat("H:|-[backwardButton(==forwardButton)]-[stopButton(==forwardButton)]-[playPauseButton(==forwardButton)]-[forwardButton]-|", options: [], metrics: nil, views: viewsDictionary))
-		constraintsArray.appendContentsOf(NSLayoutConstraint.constraintsWithVisualFormat("V:|-[backwardButton]-|", options: [], metrics: nil, views: viewsDictionary))
-		constraintsArray.appendContentsOf(NSLayoutConstraint.constraintsWithVisualFormat("V:|-[stopButton]-|", options: [], metrics: nil, views: viewsDictionary))
-		constraintsArray.appendContentsOf(NSLayoutConstraint.constraintsWithVisualFormat("V:|-[playPauseButton]-|", options: [], metrics: nil, views: viewsDictionary))
-		constraintsArray.appendContentsOf(NSLayoutConstraint.constraintsWithVisualFormat("V:|-[forwardButton]-|", options: [], metrics: nil, views: viewsDictionary))
+		constraintsArray.append(contentsOf: NSLayoutConstraint.constraints(withVisualFormat: "H:|-[backwardButton(==forwardButton)]-[stopButton(==forwardButton)]-[playPauseButton(==forwardButton)]-[forwardButton]-|", options: [], metrics: nil, views: viewsDictionary))
+		constraintsArray.append(contentsOf: NSLayoutConstraint.constraints(withVisualFormat: "V:|-[backwardButton]-|", options: [], metrics: nil, views: viewsDictionary))
+		constraintsArray.append(contentsOf: NSLayoutConstraint.constraints(withVisualFormat: "V:|-[stopButton]-|", options: [], metrics: nil, views: viewsDictionary))
+		constraintsArray.append(contentsOf: NSLayoutConstraint.constraints(withVisualFormat: "V:|-[playPauseButton]-|", options: [], metrics: nil, views: viewsDictionary))
+		constraintsArray.append(contentsOf: NSLayoutConstraint.constraints(withVisualFormat: "V:|-[forwardButton]-|", options: [], metrics: nil, views: viewsDictionary))
 		
 		addConstraints(constraintsArray)
 	}

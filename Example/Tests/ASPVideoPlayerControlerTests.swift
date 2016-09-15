@@ -11,12 +11,12 @@ import XCTest
 
 class ASPVideoPlayerControlerTests: XCTestCase {
     
-	var videoURL: NSURL!
+	var videoURL: URL!
 	
 	override func setUp() {
 		super.setUp()
 		
-		videoURL = NSBundle.mainBundle().URLForResource("video", withExtension: "mov")
+		videoURL = Bundle.main.url(forResource: "video", withExtension: "mov")
 	}
     
     override func tearDown() {
@@ -38,7 +38,7 @@ class ASPVideoPlayerControlerTests: XCTestCase {
 		
 		sut.play()
 		
-		XCTAssertEqual(sut.videoPlayer?.status, ASPVideoPlayer.PlayerStatus.Playing, "Video is playing.")
+		XCTAssertEqual(sut.videoPlayer?.status, ASPVideoPlayer.PlayerStatus.playing, "Video is playing.")
 	}
 	
 	func testPauseCalled_ShouldPauseVideoPlayback() {
@@ -48,7 +48,7 @@ class ASPVideoPlayerControlerTests: XCTestCase {
 		
 		sut.pause()
 		
-		XCTAssertEqual(sut.videoPlayer?.status, ASPVideoPlayer.PlayerStatus.Paused, "Video is paused.")
+		XCTAssertEqual(sut.videoPlayer?.status, ASPVideoPlayer.PlayerStatus.paused, "Video is paused.")
 	}
 	
 	func testStopCalled_ShouldStopVideoPlayback() {
@@ -58,7 +58,7 @@ class ASPVideoPlayerControlerTests: XCTestCase {
 		
 		sut.stop()
 		
-		XCTAssertEqual(sut.videoPlayer?.status, ASPVideoPlayer.PlayerStatus.Stopped, "Video is stopped.")
+		XCTAssertEqual(sut.videoPlayer?.status, ASPVideoPlayer.PlayerStatus.stopped, "Video is stopped.")
 	}
  
 	func testJumpForwardCalled_ShouldJumpVideoPlaybackForward() {
