@@ -125,29 +125,7 @@ class ASPVideoPlayerTests: XCTestCase {
 			}
 		}
 	}
-	
-	func testSeekToPercentage_ShouldSetCurrentTimeDifferentThanZero() {
-		let expectation = self.expectation(description: "Timeout expectation")
 		
-		let player = ASPVideoPlayer()
-		player.videoURL = videoURL
-		player.readyToPlayVideo = {
-			player.seek(0.5)
-			player.pauseVideo()
-		}
-		
-		player.pausedVideo = { [weak expectation] in
-			XCTAssertEqual(player.currentTime, player.videoLength * 0.5)
-			expectation?.fulfill()
-		}
-		
-		waitForExpectations(timeout: 5.0) { (error) in
-			if let error = error {
-				print(error)
-			}
-		}
-	}
-	
 	func testSeekToPercentageBelowMinimum_ShouldSetCurrentTimeToZero() {
 		let expectation = self.expectation(description: "Timeout expectation")
 		
@@ -169,29 +147,7 @@ class ASPVideoPlayerTests: XCTestCase {
 			}
 		}
 	}
-	
-	func testSeekToPercentageAboveMaximum_ShouldSetCurrentTimeToMaximum() {
-		let expectation = self.expectation(description: "Timeout expectation")
 		
-		let player = ASPVideoPlayer()
-		player.videoURL = videoURL
-		player.readyToPlayVideo = {
-			player.seek(2.0)
-			player.pauseVideo()
-		}
-		
-		player.pausedVideo = { [weak expectation] in
-			XCTAssertEqual(player.currentTime, player.videoLength)
-			expectation?.fulfill()
-		}
-		
-		waitForExpectations(timeout: 5.0) { (error) in
-			if let error = error {
-				print(error)
-			}
-		}
-	}
-	
 	func testPlayVideo_ShouldStartVideoPlayback() {
 		let expectation = self.expectation(description: "Timeout expectation")
 		
