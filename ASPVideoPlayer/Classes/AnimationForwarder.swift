@@ -21,7 +21,7 @@ internal class AnimationForwarder: UIView {
 		backingView = view
 	}
 	
-	internal func actionForLayer(layer: CALayer, forKey event: String) -> CAAction? {
-		return backingView?.action(for: layer, forKey: event)
-	}
+    override func action(for layer: CALayer, forKey event: String) -> CAAction? {
+        return backingView?.action(for: layer, forKey: event)
+    }
 }
