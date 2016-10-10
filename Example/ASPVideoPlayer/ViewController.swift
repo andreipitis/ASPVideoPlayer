@@ -16,7 +16,7 @@ class ViewController: UIViewController {
 	@IBOutlet weak var videoTrailingConstraint: NSLayoutConstraint!
 	@IBOutlet weak var videoPlayer: ASPVideoPlayer!
 	
-	let videoURL = Bundle.main.url(forResource: "video", withExtension: "mov")
+	let videoURL = Bundle.main.url(forResource: "video", withExtension: "mp4")
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -45,18 +45,18 @@ class ViewController: UIViewController {
 			print("finishedVideo")
 			
 			UIView.animate(withDuration: 0.3, delay: 0.0, options: .curveEaseIn, animations: {
-				self.videoTopConstraint.constant = 0
-				self.videoBottomConstraint.constant = 0
-				self.videoLeadingConstraint.constant = 0
-				self.videoTrailingConstraint.constant = 0
+				self.videoTopConstraint.constant = 150.0
+				self.videoBottomConstraint.constant = 150.0
+				self.videoLeadingConstraint.constant = 150.0
+				self.videoTrailingConstraint.constant = 150.0
 				self.view.layoutIfNeeded()
 				}, completion: { (finished) in
 					UIView.animate(withDuration: 0.3, delay: 1.0, options: .curveEaseIn, animations: {
 						
-						self.videoTopConstraint.constant = 150
-						self.videoBottomConstraint.constant = 150
-						self.videoLeadingConstraint.constant = 150
-						self.videoTrailingConstraint.constant = 150
+						self.videoTopConstraint.constant = 0.0
+						self.videoBottomConstraint.constant = 0.0
+						self.videoLeadingConstraint.constant = 0.0
+						self.videoTrailingConstraint.constant = 0.0
 						
 						self.view.layoutIfNeeded()
 						}, completion: { (finished) in
@@ -66,7 +66,8 @@ class ViewController: UIViewController {
 		}
 		
 		self.videoPlayer.playingVideo = { (progress) -> Void in
-			print("progress: \(progress)")
+            let progressString = String.localizedStringWithFormat("%.2f", progress)
+			print("progress: \(progressString) % complete.")
 		}
 		
 		self.videoPlayer.pausedVideo = {
