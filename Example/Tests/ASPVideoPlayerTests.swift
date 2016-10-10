@@ -16,7 +16,7 @@ class ASPVideoPlayerTests: XCTestCase {
 	override func setUp() {
 		super.setUp()
 		
-		videoURL = Bundle.main.url(forResource: "video", withExtension: "mov")
+		videoURL = Bundle.main.url(forResource: "video", withExtension: "mp4")
 	}
 	
 	override func tearDown() {
@@ -91,8 +91,8 @@ class ASPVideoPlayerTests: XCTestCase {
 		
 		let player = ASPVideoPlayer()
 		player.newVideo = { [weak expectation] in
+            XCTAssertEqual(player.status, ASPVideoPlayer.PlayerStatus.new)
 			XCTAssertNotNil(player.videoURL, "Video URL is not nil.")
-			XCTAssertEqual(player.status, ASPVideoPlayer.PlayerStatus.new)
 			expectation?.fulfill()
 		}
 		

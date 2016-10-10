@@ -16,7 +16,7 @@ class ASPVideoPlayerControlerTests: XCTestCase {
 	override func setUp() {
 		super.setUp()
 		
-		videoURL = Bundle.main.url(forResource: "video", withExtension: "mov")
+		videoURL = Bundle.main.url(forResource: "video", withExtension: "mp4")
 	}
     
     override func tearDown() {
