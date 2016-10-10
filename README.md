@@ -10,7 +10,35 @@
 
 To run the example project, clone the repo, and run `pod install` from the Example directory first.
 
-## Requirements
+## Usage
+
+You can instantiate the object from code:
+
+```swift
+let videoPlayer = ASPVideoPlayer()
+```
+
+You can also instantiate it from Interface Builder and create an IBOutlet:
+
+```swift
+@IBOutlet weak var videoPlayer: ASPVideoPlayer!
+```
+
+Once you have the reference, you can set a video url and use the closures to handle different events:
+
+```swift
+let videoURL = Bundle.main.url(forResource: "video", withExtension: "mp4")
+
+videoPlayer.videoURL = videoURL
+
+videoPlayer.readyToPlayVideo = {
+  print("Video has been successfully loaded and can be played.")
+}
+    
+videoPlayer.startedVideo = {
+  print("Video has started playing.")			
+}
+```
 
 ## Installation
 
