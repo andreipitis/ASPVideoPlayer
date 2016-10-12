@@ -97,7 +97,11 @@ public extension VideoPlayerControls {
 	}
 	
 	func playButtonPressed() {
-		play()
+		if videoPlayer?.status == .playing {
+			pause()
+		} else {
+			play()
+		}
 	}
 	
 	func stopButtonPressed() {

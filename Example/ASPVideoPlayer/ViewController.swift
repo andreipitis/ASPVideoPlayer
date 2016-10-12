@@ -16,13 +16,14 @@ class ViewController: UIViewController {
 	@IBOutlet weak var videoTrailingConstraint: NSLayoutConstraint!
 	@IBOutlet weak var videoPlayer: ASPVideoPlayer!
 	
-	let videoURL = Bundle.main.url(forResource: "video", withExtension: "mp4")
+	let firstVideoURL = Bundle.main.url(forResource: "video", withExtension: "mp4")
+	let secondVideoURL = Bundle.main.url(forResource: "video2", withExtension: "mp4")
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		// Do any additional setup after loading the view, typically from a nib.
 		
-		self.videoPlayer.videoURL = videoURL
+		self.videoPlayer.videoURL = firstVideoURL
 		self.videoPlayer.gravity = .aspectFit
 		self.videoPlayer.shouldLoop = true
 		
@@ -43,6 +44,10 @@ class ViewController: UIViewController {
 		
 		self.videoPlayer.finishedVideo = {
 			print("finishedVideo")
+			if self.videoPlayer.videoURL == self.firstVideoURL {
+				self.videoPlayer.startPlayingWhenReady = true
+				self.videoPlayer.videoURL = self.secondVideoURL
+			}
 			
 			UIView.animate(withDuration: 0.3, delay: 0.0, options: .curveEaseIn, animations: {
 				self.videoTopConstraint.constant = 150.0

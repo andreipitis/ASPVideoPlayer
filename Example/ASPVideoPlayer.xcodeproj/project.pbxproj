@@ -15,6 +15,7 @@
 		607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDE1AFB9204008FA782 /* LaunchScreen.xib */; };
 		75093D8A1D14C1CA0054E08D /* ASPVideoPlayerControlerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75093D881D14C1CA0054E08D /* ASPVideoPlayerControlerTests.swift */; };
 		75093D8B1D14C1CA0054E08D /* ASPVideoPlayerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75093D891D14C1CA0054E08D /* ASPVideoPlayerTests.swift */; };
+		754153EA1DAE114C00E16BE9 /* video2.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 754153E91DAE114C00E16BE9 /* video2.mp4 */; };
 		757F34C81DAB829700ACF36D /* video.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 757F34C71DAB829700ACF36D /* video.mp4 */; };
 		82AABB55DE4BABA586F5C65B /* Pods_ASPVideoPlayer_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 657113FC20D81D253680D24D /* Pods_ASPVideoPlayer_Example.framework */; };
 /* End PBXBuildFile section */
@@ -48,6 +49,7 @@
 		75093D871D14C1CA0054E08D /* ASPVideoPlayer_Tests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ASPVideoPlayer_Tests-Bridging-Header.h"; sourceTree = "<group>"; };
 		75093D881D14C1CA0054E08D /* ASPVideoPlayerControlerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ASPVideoPlayerControlerTests.swift; sourceTree = "<group>"; };
 		75093D891D14C1CA0054E08D /* ASPVideoPlayerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ASPVideoPlayerTests.swift; sourceTree = "<group>"; };
+		754153E91DAE114C00E16BE9 /* video2.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = video2.mp4; sourceTree = "<group>"; };
 		757F34C71DAB829700ACF36D /* video.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = video.mp4; sourceTree = "<group>"; };
 		8179CAB6F1755BD934B98047 /* Pods-ASPVideoPlayer_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ASPVideoPlayer_Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-ASPVideoPlayer_Example/Pods-ASPVideoPlayer_Example.release.xcconfig"; sourceTree = "<group>"; };
 		D4D561E4D863E435F2EE8D02 /* Pods_ASPVideoPlayer_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ASPVideoPlayer_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -121,6 +123,7 @@
 		607FACD31AFB9204008FA782 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				754153E91DAE114C00E16BE9 /* video2.mp4 */,
 				757F34C71DAB829700ACF36D /* video.mp4 */,
 				607FACD41AFB9204008FA782 /* Info.plist */,
 			);
@@ -259,6 +262,7 @@
 				757F34C81DAB829700ACF36D /* video.mp4 in Resources */,
 				607FACDB1AFB9204008FA782 /* Main.storyboard in Resources */,
 				607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */,
+				754153EA1DAE114C00E16BE9 /* video2.mp4 in Resources */,
 				607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

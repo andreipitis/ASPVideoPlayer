@@ -346,9 +346,11 @@ A simple UIView subclass that can play a video and allows animations to be appli
 		let currentItem = videoPlayerLayer.player?.currentItem
 		let notificationObject = notification.object as! AVPlayerItem
 		
+		status = .stopped
 		finishedVideo?()
 		DispatchQueue.main.async(execute: { [weak self] () -> Void in
-			if currentItem == notificationObject && self?.shouldLoop == true {
+			if currentItem == notificationObject && self?.shouldLoop == true && self?.status == .stopped {
+				self?.status = .playing
 				self?.seek(0.0)
 				self?.videoPlayerLayer.player?.rate = 1.0
 			}
