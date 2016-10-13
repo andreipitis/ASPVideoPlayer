@@ -8,25 +8,72 @@
 
 import UIKit
 
+/**
+Protocol defining the player controls behaviour.
+*/
 public protocol VideoPlayerControls {
+	/**
+	Reference to the video player.
+	*/
 	weak var videoPlayer: ASPVideoPlayer? {get set}
 	
+	/**
+	Starts the video playback.
+	*/
 	func play()
+	
+	/**
+	Pauses the video playback.
+	*/
 	func pause()
+	
+	/**
+	Stops the video playback.
+	*/
 	func stop()
-	func jumpForward()
-	func jumpBackward()
+	
+	/**
+	Jumps forward in the video playback.
+	- Parameter value: The amount by which the current progress percentage will be increased.
+	*/
+	func jumpForward(_ value: Double)
+	
+	/**
+	Jumps backwards in the video playback.
+	- Parameter value: The amount by which the current progress percentage will be decreased.
+	*/
+	func jumpBackward(_ value: Double)
+	
+	/**
+	Set the volume of the video.
+	- Parameter value: The new volume value.
+	*/
 	func volume(_ value: Float)
 }
 
+/**
+Protocol defining the player seek behaviour.
+*/
 public protocol VideoPlayerSeekControls {
+	/**
+	Reference to the video player.
+	*/
 	weak var videoPlayer: ASPVideoPlayer? {get set}
 	
-	func seek(_ min: Double, max: Double, value: Double)
+	/**
+	Set the new position in the video playback.
+	- Parameter min: The minimum value of the used range.
+	- Parameter max: The maximum value of the used range.
+	- Parameter value: The value where the new video position should be, in the range [min, max].
+	*/
+	func seek(min: Double, max: Double, value: Double)
 }
 
+/**
+	Default implementation of the `VideoPlayerSeekControls` protocol.
+*/
 public extension VideoPlayerSeekControls {
-	func seek(_ min: Double = 0.0, max: Double = 1.0, value: Double) {
+	func seek(min: Double = 0.0, max: Double = 1.0, value: Double) {
 		let value = rangeMap(value, min: min, max: max, newMin: 0.0, newMax: 1.0)
 		videoPlayer?.seek(Double(value))
 	}
@@ -36,6 +83,9 @@ public extension VideoPlayerSeekControls {
 	}
 }
 
+/**
+Default implementation of the `VideoPlayerControls` protocol.
+*/
 public extension VideoPlayerControls {
 	func play() {
 		videoPlayer?.playVideo()
@@ -49,16 +99,16 @@ public extension VideoPlayerControls {
 		videoPlayer?.stopVideo()
 	}
 	
-	func jumpForward() {
+	func jumpForward(_ value: Double = 0.05) {
 		if let currentPercentage = videoPlayer?.progress {
-			let newPercentage = min(1.0, max(0.0, currentPercentage + 0.05))
+			let newPercentage = min(1.0, max(0.0, currentPercentage + value))
 			videoPlayer?.seek(newPercentage)
 		}
 	}
 	
-	func jumpBackward() {
+	func jumpBackward(_ value: Double = 0.05) {
 		if let currentPercentage = videoPlayer?.progress {
-			let newPercentage = min(1.0, max(0.0, currentPercentage - 0.05))
+			let newPercentage = min(1.0, max(0.0, currentPercentage - value))
 			videoPlayer?.seek(newPercentage)
 		}
 	}

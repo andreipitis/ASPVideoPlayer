@@ -15,38 +15,67 @@ A simple UIView subclass that can play a video and allows animations to be appli
 */
 @IBDesignable open class ASPVideoPlayer: UIView {
 	
+	//MARK: - Type definitions -
+	
+	/**
+	Basic closure type.
+	*/
+	public typealias VoidClosure = (() -> Void)?
+	
+	/**
+	Closure type for recurring actions.
+	- Parameter progress: The progress indicator value. Value is in range [0.0, 1.0].
+	*/
+	public typealias ProgressClosure = ((_ progress: Double) -> Void)?
+	
+	/**
+	Closure type for error handling.
+	- Parameter error: The error that occured.
+	*/
+	public typealias ErrorClosure = ((_ error: NSError) -> Void)?
+	
 	//MARK: - Enumerations -
+	
+	/**
+	Specifies how the video is displayed within a player layer’s bounds.
+	*/
 	public enum PlayerContentMode {
 		case aspectFill
 		case aspectFit
 		case resize
 	}
 	
+	/**
+	Specifies the current status of the player.
+	*/
 	public enum PlayerStatus {
+		/**
+		A new video has been assigned.
+		*/
 		case new
+		/**
+		The video is ready to be played.
+		*/
 		case readyToPlay
+		/**
+		The video is currently being played.
+		*/
 		case playing
+		/**
+		The video has been paused.
+		*/
 		case paused
+		/**
+		The video playback has been stopped.
+		*/
 		case stopped
+		/**
+		An error occured. For more details use the `error` closure.
+		*/
 		case error
 	}
 	
 	//MARK: - Closures -
-	
-	/**
-	Basic closure type.
-	*/
-	public typealias VoidClosure = (() -> Void)?
-	/**
-	Closure type for recurring actions.
-	- parameter progress: The progress indicator value. Between 0.0 and 1.0.
-	*/
-	public typealias ProgressClosure = ((_ progress: Double) -> Void)?
-	/**
-	Closure type for error handling.
-	- parameter error: The error that occured.
-	*/
-	public typealias ErrorClosure = ((_ error: NSError) -> Void)?
 	
 	/**
 	A closure that will be called when a new video is loaded.
@@ -128,8 +157,8 @@ A simple UIView subclass that can play a video and allows animations to be appli
 			
 			videoPlayerLayer.player?.addObserver(self, forKeyPath: "status", options: [], context: nil)
 			
-			status = .new
 			DispatchQueue.main.async { [weak self] () -> Void in
+				self?.status = .new
 				self?.newVideo?()
 			}
 		}
@@ -154,7 +183,7 @@ A simple UIView subclass that can play a video and allows animations to be appli
 	}
 	
 	/**
-	The volume of the player. Should be a value between 0.0 and 1.0.
+	The volume of the player. Should be a value in the range [0.0, 1.0].
 	*/
 	open var volume: Float {
 		set {
@@ -270,7 +299,7 @@ A simple UIView subclass that can play a video and allows animations to be appli
 	}
 	
 	/**
-	Seek to specific position in video. Should be a value between 0.0 and 1.0.
+	Seek to specific position in video. Should be a value in the range [0.0, 1.0].
 	*/
 	open func seek(_ percentage: Double) {
 		progress = min(1.0, max(0.0, percentage))

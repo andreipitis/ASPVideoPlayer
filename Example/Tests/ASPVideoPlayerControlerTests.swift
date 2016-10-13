@@ -106,7 +106,7 @@ class ASPVideoPlayerControlerTests: XCTestCase {
 		let maximumValue = 3.0
 		let value = 1.5
 		
-		sut.seek(minimumValue, max: maximumValue, value: value)
+		sut.seek(min: minimumValue, max: maximumValue, value: value)
 		XCTAssertEqual(sut.videoPlayer!.progress, 0.5, "Video set to specified percentage.")
 	}
 }
