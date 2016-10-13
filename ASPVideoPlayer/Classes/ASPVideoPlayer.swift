@@ -157,8 +157,8 @@ A simple UIView subclass that can play a video and allows animations to be appli
 			
 			videoPlayerLayer.player?.addObserver(self, forKeyPath: "status", options: [], context: nil)
 			
+			status = .new
 			DispatchQueue.main.async { [weak self] () -> Void in
-				self?.status = .new
 				self?.newVideo?()
 			}
 		}
