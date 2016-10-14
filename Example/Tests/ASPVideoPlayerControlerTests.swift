@@ -109,4 +109,57 @@ class ASPVideoPlayerControlerTests: XCTestCase {
 		sut.seek(min: minimumValue, max: maximumValue, value: value)
 		XCTAssertEqual(sut.videoPlayer!.progress, 0.5, "Video set to specified percentage.")
 	}
+	
+	func testPressPlayButton_ShouldStartVideoPlayback() {
+		let videoPlayer = ASPVideoPlayer()
+		videoPlayer.videoURL = videoURL
+		let sut = ASPVideoPlayerControls(videoPlayer: videoPlayer)
+		sut.playButtonPressed()
+		
+		XCTAssertEqual(sut.videoPlayer?.status, ASPVideoPlayer.PlayerStatus.playing, "Video is playing.")
+	}
+	
+	func testPressPlayButtonWhileVideoIsPlaying_ShouldPauseVideoPlayback() {
+		let videoPlayer = ASPVideoPlayer()
+		videoPlayer.videoURL = videoURL
+		let sut = ASPVideoPlayerControls(videoPlayer: videoPlayer)
+		sut.playButtonPressed()
+		sut.playButtonPressed()
+		
+		XCTAssertEqual(sut.videoPlayer?.status, ASPVideoPlayer.PlayerStatus.paused, "Video is paused.")
+	}
+	
+	func testPressStopButton_ShouldStopVideoPlayback() {
+		let videoPlayer = ASPVideoPlayer()
+		videoPlayer.videoURL = videoURL
+		let sut = ASPVideoPlayerControls(videoPlayer: videoPlayer)
+		
+		sut.stopButtonPressed()
+		
+		XCTAssertEqual(sut.videoPlayer?.status, ASPVideoPlayer.PlayerStatus.stopped, "Video playback has stopped.")
+	}
+	
+	func testPressJumpForwardButton_ShouldStopVideoPlayback() {
+		let videoPlayer = ASPVideoPlayer()
+		videoPlayer.videoURL = videoURL
+		let sut = ASPVideoPlayerControls(videoPlayer: videoPlayer)
+		videoPlayer.seek(0.5)
+		let initialProgress = videoPlayer.progress
+		
+		sut.forwardButtonPressed()
+		
+		XCTAssertGreaterThan(sut.videoPlayer!.progress, initialProgress, "Video jumped forward.")
+	}
+	
+	func testPressJumpBackwardButton_ShouldStopVideoPlayback() {
+		let videoPlayer = ASPVideoPlayer()
+		videoPlayer.videoURL = videoURL
+		let sut = ASPVideoPlayerControls(videoPlayer: videoPlayer)
+		videoPlayer.seek(0.5)
+		let initialProgress = videoPlayer.progress
+		
+		sut.backwardButtonPressed()
+		
+		XCTAssertLessThan(sut.videoPlayer!.progress, initialProgress, "Video jumped backwards.")
+	}
 }
