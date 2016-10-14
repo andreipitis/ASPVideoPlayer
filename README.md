@@ -2,6 +2,7 @@
 
 [![CI Status](http://img.shields.io/travis/andreipitis/ASPVideoPlayer.svg?style=flat)](https://travis-ci.org/andreipitis/ASPVideoPlayer)
 [![codebeat badge](https://codebeat.co/badges/0901c849-d9a7-4b2f-901b-7aa804e9da4b)](https://codebeat.co/projects/github-com-andreipitis-aspvideoplayer)
+[![codecov](https://codecov.io/gh/andreipitis/ASPVideoPlayer/branch/master/graph/badge.svg)](https://codecov.io/gh/andreipitis/ASPVideoPlayer)
 [![Version](https://img.shields.io/cocoapods/v/ASPVideoPlayer.svg?style=flat)](http://cocoapods.org/pods/ASPVideoPlayer)
 [![License](https://img.shields.io/cocoapods/l/ASPVideoPlayer.svg?style=flat)](http://cocoapods.org/pods/ASPVideoPlayer)
 [![Platform](https://img.shields.io/cocoapods/p/ASPVideoPlayer.svg?style=flat)](http://cocoapods.org/pods/ASPVideoPlayer)
