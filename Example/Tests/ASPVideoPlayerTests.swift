@@ -12,11 +12,15 @@ import XCTest
 class ASPVideoPlayerTests: XCTestCase {
 	
 	var videoURL: URL!
+	var secondVideoURL: URL!
+	var invalidVideoURL: URL!
 	
 	override func setUp() {
 		super.setUp()
 		
 		videoURL = Bundle.main.url(forResource: "video", withExtension: "mp4")
+		secondVideoURL = Bundle.main.url(forResource: "video2", withExtension: "mp4")
+		invalidVideoURL = Bundle.main.url(forResource: "video3", withExtension: "mp4")
 	}
 	
 	override func tearDown() {
@@ -77,13 +81,52 @@ class ASPVideoPlayerTests: XCTestCase {
 		XCTAssertEqual(player.gravity, ASPVideoPlayer.PlayerContentMode.resize, "Content Mode is Resize.")
 	}
 	
-	func testLoadVideoURLWithInvalidURL_ShouldSetVideoURLToNil() {
+	func testLoadInvalidURL_ShouldChangeStateToError() {
 		let player = ASPVideoPlayer()
 		player.error = { (error) in
 			XCTAssertNil(player.videoURL, "Video URL is nil.")
 			XCTAssertEqual(error.localizedDescription, "Video URL is invalid.")
+			XCTAssertEqual(player.status, ASPVideoPlayer.PlayerStatus.error)
 		}
-		player.videoURL = nil
+		player.videoURL = invalidVideoURL
+	}
+	
+	func testLoadInvalidURL_ShouldReturnZeroForCurrentTime() {
+		let expectation = self.expectation(description: "Timeout expectation")
+		
+		let player = ASPVideoPlayer()
+		
+		player.error = { [weak expectation] error in
+			XCTAssertEqual(player.currentTime, 0.0, "Current Time is Zero")
+			expectation?.fulfill()
+		}
+		
+		player.videoURL = invalidVideoURL
+		
+		waitForExpectations(timeout: 5.0) { (error) in
+			if let error = error {
+				print(error)
+			}
+		}
+	}
+	
+	func testLoadInvalidURL_ShouldReturnZeroForVideoLength() {
+		let expectation = self.expectation(description: "Timeout expectation")
+		
+		let player = ASPVideoPlayer()
+		
+		player.error = { [weak expectation] error in
+			XCTAssertEqual(player.videoLength, 0.0, "Video Length is Zero")
+			expectation?.fulfill()
+		}
+		
+		player.videoURL = invalidVideoURL
+		
+		waitForExpectations(timeout: 5.0) { (error) in
+			if let error = error {
+				print(error)
+			}
+		}
 	}
 	
 	func testLoadVideoURL_ShouldLoadVideoAtURL() {
@@ -97,6 +140,32 @@ class ASPVideoPlayerTests: XCTestCase {
 		}
 		
 		player.videoURL = videoURL
+		
+		waitForExpectations(timeout: 5.0) { (error) in
+			if let error = error {
+				print(error)
+			}
+		}
+	}
+	
+	func testLoadNewVideoURL_ShouldLoadVideoAtURL() {
+		let expectation = self.expectation(description: "Timeout expectation")
+		
+		let player = ASPVideoPlayer()
+		
+		player.readyToPlayVideo = {
+			player.videoURL = self.secondVideoURL
+		}
+		
+		player.videoURL = videoURL
+		
+		player.newVideo = { [weak expectation] in
+			XCTAssertEqual(player.status, ASPVideoPlayer.PlayerStatus.new)
+			XCTAssertEqual(player.videoURL, self.secondVideoURL)
+			expectation?.fulfill()
+		}
+		
+		
 		
 		waitForExpectations(timeout: 5.0) { (error) in
 			if let error = error {
@@ -137,7 +206,7 @@ class ASPVideoPlayerTests: XCTestCase {
 		}
 		
 		player.pausedVideo = { [weak expectation] in
-			XCTAssertEqual(player.currentTime, 0.0)
+			XCTAssertEqual(player.currentTime, 0.0, "Current Time is Zero")
 			expectation?.fulfill()
 		}
 		
@@ -158,7 +227,32 @@ class ASPVideoPlayerTests: XCTestCase {
 		}
 		
 		player.playingVideo = { [weak expectation] (progress) in
-			XCTAssertEqual(player.status, ASPVideoPlayer.PlayerStatus.playing)
+			XCTAssertEqual(player.status, ASPVideoPlayer.PlayerStatus.playing, "Video is playing.")
+			player.stopVideo()
+			expectation?.fulfill()
+		}
+		
+		waitForExpectations(timeout: 5.0) { (error) in
+			if let error = error {
+				print(error)
+			}
+		}
+	}
+	
+	func testPlayVideoThatIsAtMaximumPercentage_ShouldStartVideoPlaybackFromStartOfVideo() {
+		let expectation = self.expectation(description: "Timeout expectation")
+		
+		let player = ASPVideoPlayer()
+		player.videoURL = videoURL
+		player.readyToPlayVideo = {
+			player.seek(1.0)
+			player.playVideo()
+		}
+		
+		player.playingVideo = { [weak expectation] (progress) in
+			XCTAssertEqual(player.status, ASPVideoPlayer.PlayerStatus.playing, "Video is playing.")
+			XCTAssertEqual(player.progress, 0.0, "Progress is Zero")
+			
 			player.stopVideo()
 			expectation?.fulfill()
 		}
@@ -180,7 +274,7 @@ class ASPVideoPlayerTests: XCTestCase {
 		}
 		
 		player.playingVideo = { [weak expectation] (progress) in
-			XCTAssertEqual(player.status, ASPVideoPlayer.PlayerStatus.playing)
+			XCTAssertEqual(player.status, ASPVideoPlayer.PlayerStatus.playing, "Video is playing.")
 			player.stopVideo()
 			expectation?.fulfill()
 		}
@@ -206,7 +300,7 @@ class ASPVideoPlayerTests: XCTestCase {
 		}
 		
 		player.stoppedVideo = { [weak expectation] in
-			XCTAssertEqual(player.status, ASPVideoPlayer.PlayerStatus.stopped)
+			XCTAssertEqual(player.status, ASPVideoPlayer.PlayerStatus.stopped, "Video playback has stopped.")
 			expectation?.fulfill()
 		}
 		
@@ -225,7 +319,7 @@ class ASPVideoPlayerTests: XCTestCase {
 		player.videoURL = videoURL
 		
 		player.finishedVideo = {
-			XCTAssertEqual(player.status, ASPVideoPlayer.PlayerStatus.playing)
+			XCTAssertEqual(player.status, ASPVideoPlayer.PlayerStatus.playing, "Video is playing.")
 			expectation.fulfill()
 		}
 
