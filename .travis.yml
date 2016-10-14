@@ -10,7 +10,7 @@ before_install:
 - gem install cocoapods --pre # Since Travis is not always on latest version
 # - pod install --project-directory=Example
 script:
-- set -o pipefail && xcodebuild -workspace 'Example/ASPVideoPlayer.xcworkspace' -scheme 'ASPVideoPlayer-Example' -sdk iphonesimulator -destination 'platform=iOS Simulator,OS=10.0,name=iPhone 6s' -enableCodeCoverage YES build test | xcpretty
+- set -o pipefail && xcodebuild -workspace 'Example/ASPVideoPlayer.xcworkspace' -scheme 'ASPVideoPlayer-Example' -sdk iphonesimulator -destination 'platform=iOS Simulator,OS=10.0,name=iPhone 6s' | xcpretty
 - pod lib lint
 after_success:
-  - bash <(curl -s https://codecov.io/bash) -J 'ASPVideoPlayer'
+  - bash <(curl -s https://codecov.io/bash)
