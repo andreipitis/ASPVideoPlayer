@@ -246,14 +246,14 @@ class ASPVideoPlayerTests: XCTestCase {
 			player.playVideo()
 		}
 		
-		player.playingVideo = { [weak expectation] (progress) in
+		player.startedVideo = { [weak expectation] in
 			XCTAssertEqual(player.status, ASPVideoPlayer.PlayerStatus.playing, "Video is playing.")
 			XCTAssertEqual(player.progress, 0.0, "Progress is Zero")
 			
 			player.stopVideo()
 			expectation?.fulfill()
 		}
-		
+
 		player.videoURL = videoURL
 		
 		waitForExpectations(timeout: 5.0) { (error) in
