@@ -300,7 +300,7 @@ A simple UIView subclass that can play a video and allows animations to be appli
 	Seek to specific position in video. Should be a value in the range [0.0, 1.0].
 	*/
 	open func seek(_ percentage: Double) {
-		progress = min(1.0, max(0.0, percentage))
+		progress = round(min(1.0, max(0.0, percentage)) * 100) / 100
 		if let currentItem = videoPlayerLayer.player?.currentItem {
 			let time = CMTime(seconds: progress * currentItem.asset.duration.seconds, preferredTimescale: currentItem.asset.duration.timescale)
 			videoPlayerLayer.player?.seek(to: time, toleranceBefore: kCMTimeZero, toleranceAfter: kCMTimeZero)
@@ -352,7 +352,7 @@ A simple UIView subclass that can play a video and allows animations to be appli
 			guard let weakSelf = self , self?.status == .playing else { return }
 			
 			let currentTime = time.seconds
-			weakSelf.progress = currentTime / weakSelf.videoLength
+			weakSelf.progress = round(currentTime / weakSelf.videoLength * 100) / 100
 			
 			weakSelf.playingVideo?(weakSelf.progress)
 			}) as AnyObject?
