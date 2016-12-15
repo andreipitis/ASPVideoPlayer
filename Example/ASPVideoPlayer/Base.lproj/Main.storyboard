@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="vXZ-lx-hvc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="EOn-E5-GcR">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -18,17 +21,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ro4-CU-el9" customClass="ASPVideoPlayerControls" customModule="ASPVideoPlayer">
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="40" id="QCk-22-73e"/>
-                                    <constraint firstAttribute="height" constant="40" id="ubj-KZ-rbM"/>
-                                </constraints>
-                                <connections>
-                                    <outlet property="videoPlayer" destination="Hvu-cl-B3g" id="Kft-ua-iZq"/>
-                                </connections>
-                            </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hvu-cl-B3g" customClass="ASPVideoPlayer" customModule="ASPVideoPlayer">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hvu-cl-B3g" customClass="ASPVideoPlayerView" customModule="ASPVideoPlayer">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
                         </subviews>
@@ -36,23 +30,12 @@
                         <constraints>
                             <constraint firstItem="Hvu-cl-B3g" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="top" id="10j-ZA-HIl"/>
                             <constraint firstAttribute="trailing" secondItem="Hvu-cl-B3g" secondAttribute="trailing" id="5dx-W4-wVk"/>
-                            <constraint firstItem="ro4-CU-el9" firstAttribute="top" secondItem="Hvu-cl-B3g" secondAttribute="bottom" id="ATh-UD-qIQ"/>
-                            <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="Hvu-cl-B3g" secondAttribute="bottom" constant="50" id="P0S-Eb-3an"/>
+                            <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="Hvu-cl-B3g" secondAttribute="bottom" id="P0S-Eb-3an"/>
                             <constraint firstItem="Hvu-cl-B3g" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="a7k-Xr-Abo"/>
-                            <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="ro4-CU-el9" secondAttribute="bottom" id="aoj-g8-r2b"/>
-                            <constraint firstItem="ro4-CU-el9" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="iDB-fI-3Vl"/>
-                            <constraint firstAttribute="trailing" secondItem="ro4-CU-el9" secondAttribute="trailing" id="ndC-XN-BhC"/>
-                            <constraint firstItem="ro4-CU-el9" firstAttribute="top" secondItem="Hvu-cl-B3g" secondAttribute="bottom" id="rhL-3j-28a"/>
                         </constraints>
-                        <variation key="default">
-                            <mask key="constraints">
-                                <exclude reference="ATh-UD-qIQ"/>
-                                <exclude reference="rhL-3j-28a"/>
-                            </mask>
-                        </variation>
                     </view>
                     <connections>
-                        <outlet property="videoBottomConstraint" destination="ATh-UD-qIQ" id="bYV-N2-08p"/>
+                        <outlet property="videoBottomConstraint" destination="P0S-Eb-3an" id="5R5-lm-Q0H"/>
                         <outlet property="videoLeadingConstraint" destination="a7k-Xr-Abo" id="1K4-CK-ebq"/>
                         <outlet property="videoPlayer" destination="Hvu-cl-B3g" id="x3z-4H-FSn"/>
                         <outlet property="videoTopConstraint" destination="10j-ZA-HIl" id="1kO-wl-3D9"/>
@@ -61,6 +44,41 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="32.799999999999997" y="37.331334332833585"/>
+        </scene>
+        <!--Player View Controller-->
+        <scene sceneID="8I2-Y7-Io3">
+            <objects>
+                <viewController id="EOn-E5-GcR" customClass="PlayerViewController" customModule="ASPVideoPlayer_Example" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="udt-In-Mlc"/>
+                        <viewControllerLayoutGuide type="bottom" id="SsN-lY-oaF"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="aPq-f4-bC9">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WOE-LH-9YQ" customClass="ASPVideoPlayer" customModule="ASPVideoPlayer">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="SsN-lY-oaF" firstAttribute="top" secondItem="WOE-LH-9YQ" secondAttribute="bottom" id="5Gq-yU-3Jj"/>
+                            <constraint firstItem="WOE-LH-9YQ" firstAttribute="leading" secondItem="aPq-f4-bC9" secondAttribute="leading" id="dWZ-0u-E3A"/>
+                            <constraint firstItem="WOE-LH-9YQ" firstAttribute="top" secondItem="aPq-f4-bC9" secondAttribute="top" id="gUu-9y-rnX"/>
+                            <constraint firstAttribute="trailing" secondItem="WOE-LH-9YQ" secondAttribute="trailing" id="lIu-Lu-Vhu"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="videoPlayer" destination="WOE-LH-9YQ" id="IdS-he-ew1"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2Hg-Ni-G9M" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="893.60000000000002" y="37.331334332833585"/>
         </scene>
     </scenes>
 </document>

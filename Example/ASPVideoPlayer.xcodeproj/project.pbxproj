@@ -17,6 +17,7 @@
 		75093D8B1D14C1CA0054E08D /* ASPVideoPlayerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75093D891D14C1CA0054E08D /* ASPVideoPlayerTests.swift */; };
 		754153EA1DAE114C00E16BE9 /* video2.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 754153E91DAE114C00E16BE9 /* video2.mp4 */; };
 		757F34C81DAB829700ACF36D /* video.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 757F34C71DAB829700ACF36D /* video.mp4 */; };
+		75A4727D1DFAB12100F459E9 /* PlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75A4727C1DFAB12100F459E9 /* PlayerViewController.swift */; };
 		82AABB55DE4BABA586F5C65B /* Pods_ASPVideoPlayer_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 657113FC20D81D253680D24D /* Pods_ASPVideoPlayer_Example.framework */; };
 /* End PBXBuildFile section */
 
@@ -51,6 +52,7 @@
 		75093D891D14C1CA0054E08D /* ASPVideoPlayerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ASPVideoPlayerTests.swift; sourceTree = "<group>"; };
 		754153E91DAE114C00E16BE9 /* video2.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = video2.mp4; sourceTree = "<group>"; };
 		757F34C71DAB829700ACF36D /* video.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = video.mp4; sourceTree = "<group>"; };
+		75A4727C1DFAB12100F459E9 /* PlayerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerViewController.swift; sourceTree = "<group>"; };
 		8179CAB6F1755BD934B98047 /* Pods-ASPVideoPlayer_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ASPVideoPlayer_Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-ASPVideoPlayer_Example/Pods-ASPVideoPlayer_Example.release.xcconfig"; sourceTree = "<group>"; };
 		D4D561E4D863E435F2EE8D02 /* Pods_ASPVideoPlayer_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ASPVideoPlayer_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E46EEA47B4689CB9C4BB8112 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
@@ -111,6 +113,7 @@
 			children = (
 				607FACD51AFB9204008FA782 /* AppDelegate.swift */,
 				607FACD71AFB9204008FA782 /* ViewController.swift */,
+				75A4727C1DFAB12100F459E9 /* PlayerViewController.swift */,
 				607FACD91AFB9204008FA782 /* Main.storyboard */,
 				607FACDC1AFB9204008FA782 /* Images.xcassets */,
 				607FACDE1AFB9204008FA782 /* LaunchScreen.xib */,
@@ -221,7 +224,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0730;
-				LastUpgradeCheck = 0800;
+				LastUpgradeCheck = 0810;
 				ORGANIZATIONNAME = CocoaPods;
 				TargetAttributes = {
 					607FACCF1AFB9204008FA782 = {
@@ -376,6 +379,7 @@
 			files = (
 				607FACD81AFB9204008FA782 /* ViewController.swift in Sources */,
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
+				75A4727D1DFAB12100F459E9 /* PlayerViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
