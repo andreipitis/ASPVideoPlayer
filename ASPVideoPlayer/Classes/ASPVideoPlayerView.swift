@@ -276,7 +276,7 @@ A simple UIView subclass that can play a video and allows animations to be appli
 	*/
 	open func playVideo() {
 		if progress >= 1.0 {
-			seek(0.0)
+			seekToZero()
 		}
 		
 		status = .playing
@@ -303,7 +303,7 @@ A simple UIView subclass that can play a video and allows animations to be appli
 	*/
 	open func stopVideo() {
 		videoPlayerLayer.player?.rate = 0.0
-		seek(0.0)
+		seekToZero()
 		status = .stopped
 		stoppedVideo?()
 	}
@@ -315,8 +315,7 @@ A simple UIView subclass that can play a video and allows animations to be appli
 		progress = min(1.0, max(0.0, percentage))
 		if let currentItem = videoPlayerLayer.player?.currentItem {
 				if progress == 0.0 {
-					let time = CMTime(seconds: 0.0, preferredTimescale: 1)
-					videoPlayerLayer.player?.seek(to: time, toleranceBefore: kCMTimeZero, toleranceAfter: kCMTimeZero)
+					seekToZero()
 					playingVideo?(progress)
 				} else {
 					let time = CMTime(seconds: progress * currentItem.asset.duration.seconds, preferredTimescale: currentItem.asset.duration.timescale)
@@ -361,6 +360,12 @@ A simple UIView subclass that can play a video and allows animations to be appli
 	}
 	
 	//MARK: - Private methods -
+	
+	fileprivate func seekToZero() {
+		progress = 0.0
+		let time = CMTime(seconds: 0.0, preferredTimescale: 1)
+		videoPlayerLayer.player?.seek(to: time, toleranceBefore: kCMTimeZero, toleranceAfter: kCMTimeZero)
+	}
 
 	fileprivate func addTimeObserver() {
 		if let observer = timeObserver {
@@ -393,7 +398,7 @@ A simple UIView subclass that can play a video and allows animations to be appli
 		finishedVideo?()
 		if currentItem == notificationObject && shouldLoop == true {
 			status = .playing
-			seek(0.0)
+			seekToZero()
 			videoPlayerLayer.player?.rate = 1.0
 		} else {
 			stopVideo()

@@ -14,7 +14,7 @@
 		607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDC1AFB9204008FA782 /* Images.xcassets */; };
 		607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDE1AFB9204008FA782 /* LaunchScreen.xib */; };
 		75093D8A1D14C1CA0054E08D /* ASPVideoPlayerControlerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75093D881D14C1CA0054E08D /* ASPVideoPlayerControlerTests.swift */; };
-		75093D8B1D14C1CA0054E08D /* ASPVideoPlayerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75093D891D14C1CA0054E08D /* ASPVideoPlayerTests.swift */; };
+		75093D8B1D14C1CA0054E08D /* ASPVideoPlayerViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75093D891D14C1CA0054E08D /* ASPVideoPlayerViewTests.swift */; };
 		754153EA1DAE114C00E16BE9 /* video2.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 754153E91DAE114C00E16BE9 /* video2.mp4 */; };
 		757F34C81DAB829700ACF36D /* video.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 757F34C71DAB829700ACF36D /* video.mp4 */; };
 		75A4727D1DFAB12100F459E9 /* PlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75A4727C1DFAB12100F459E9 /* PlayerViewController.swift */; };
@@ -49,7 +49,7 @@
 		657113FC20D81D253680D24D /* Pods_ASPVideoPlayer_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ASPVideoPlayer_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		75093D871D14C1CA0054E08D /* ASPVideoPlayer_Tests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ASPVideoPlayer_Tests-Bridging-Header.h"; sourceTree = "<group>"; };
 		75093D881D14C1CA0054E08D /* ASPVideoPlayerControlerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ASPVideoPlayerControlerTests.swift; sourceTree = "<group>"; };
-		75093D891D14C1CA0054E08D /* ASPVideoPlayerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ASPVideoPlayerTests.swift; sourceTree = "<group>"; };
+		75093D891D14C1CA0054E08D /* ASPVideoPlayerViewTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ASPVideoPlayerViewTests.swift; sourceTree = "<group>"; };
 		754153E91DAE114C00E16BE9 /* video2.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = video2.mp4; sourceTree = "<group>"; };
 		757F34C71DAB829700ACF36D /* video.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = video.mp4; sourceTree = "<group>"; };
 		75A4727C1DFAB12100F459E9 /* PlayerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerViewController.swift; sourceTree = "<group>"; };
@@ -137,7 +137,7 @@
 			isa = PBXGroup;
 			children = (
 				75093D881D14C1CA0054E08D /* ASPVideoPlayerControlerTests.swift */,
-				75093D891D14C1CA0054E08D /* ASPVideoPlayerTests.swift */,
+				75093D891D14C1CA0054E08D /* ASPVideoPlayerViewTests.swift */,
 				607FACE91AFB9204008FA782 /* Supporting Files */,
 				75093D871D14C1CA0054E08D /* ASPVideoPlayer_Tests-Bridging-Header.h */,
 			);
@@ -388,7 +388,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				75093D8A1D14C1CA0054E08D /* ASPVideoPlayerControlerTests.swift in Sources */,
-				75093D8B1D14C1CA0054E08D /* ASPVideoPlayerTests.swift in Sources */,
+				75093D8B1D14C1CA0054E08D /* ASPVideoPlayerViewTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -522,7 +522,7 @@
 				MODULE_NAME = ExampleApp;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 3.0.1;
 			};
 			name = Debug;
 		};
@@ -537,7 +537,7 @@
 				MODULE_NAME = ExampleApp;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 3.0.1;
 			};
 			name = Release;
 		};
