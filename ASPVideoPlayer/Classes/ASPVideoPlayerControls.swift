@@ -239,6 +239,7 @@ open class ASPBasicControls: UIView, VideoPlayerControls, VideoPlayerSeekControl
 	
 	@objc fileprivate func applicationDidEnterBackground() {
 		playPauseButton.isSelected = false
+		pause()
 	}
 	
 	fileprivate func setupVideoPlayerView() {
@@ -319,6 +320,7 @@ open class ASPBasicControls: UIView, VideoPlayerControls, VideoPlayerSeekControl
 	
 	fileprivate func commonInit() {
 		NotificationCenter.default.addObserver(self, selector: #selector(ASPVideoPlayerControls.applicationDidEnterBackground), name: NSNotification.Name.UIApplicationDidEnterBackground, object: nil)
+//		NotificationCenter.default.addObserver(self, selector: #selector(ASPVideoPlayerControls.applicationDidEnterBackground), name: NSNotification.Name.UIApplicationWillResignActive, object: nil)
 		
 		playPauseButton.translatesAutoresizingMaskIntoConstraints = false
 		progressSlider.translatesAutoresizingMaskIntoConstraints = false
