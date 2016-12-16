@@ -8,18 +8,44 @@
 
 import UIKit
 
+/**
+A video player implementation with basic functionality.
+*/
 @IBDesignable open class ASPVideoPlayer: UIView {
+	
+	//MARK: - Private Variables and Constants -
+	
 	fileprivate var videoPlayerView: ASPVideoPlayerView!
-	fileprivate var videoPlayerControls: ASPBasicControls!
 	
-	let fadeDuration = 0.3
+	//MARK: - Public Variables -
 	
+	/**
+	Sets the controls to use for the player. By default the controls are ASPVideoPlayerControls.
+	*/
+	open var videoPlayerControls: ASPBasicControls! {
+		didSet {
+			videoPlayerControls.videoPlayer = videoPlayerView
+			updateControls()
+		}
+	}
+	
+	/**
+	The duration of the fade animation.
+	*/
+	open var fadeDuration = 0.3
+	
+	/**
+	An array of URLs that the player will load. Can be local or remote URLs.
+	*/
 	open var videoURLs: [URL] = [] {
 		didSet {
 			videoPlayerView.videoURL = videoURLs.first
 		}
 	}
 	
+	/**
+	The gravity of the video. Adjusts how the video fills the space of the container.
+	*/
 	open var gravity: ASPVideoPlayerView.PlayerContentMode {
 		set {
 			videoPlayerView.gravity = newValue
@@ -29,6 +55,9 @@ import UIKit
 		}
 	}
 	
+	/**
+	Sets wether the playlist should loop. Once the last video has finished playing, the first one will start.
+	*/
 	open var shouldLoop: Bool {
 		set {
 			videoPlayerView.shouldLoop = newValue
@@ -38,11 +67,16 @@ import UIKit
 		}
 	}
 	
+	/**
+	Sets the color of the controls.
+	*/
 	override open var tintColor: UIColor! {
 		didSet {
 			videoPlayerControls.tintColor = tintColor
 		}
 	}
+	
+	//MARK: - Superclass methods -
 	
 	public override init(frame: CGRect) {
 		super.init(frame: frame)
@@ -56,7 +90,9 @@ import UIKit
 		commonInit()
 	}
 	
-	func toggleControls() {
+	//MARK: - Private methods -
+	
+	@objc fileprivate func toggleControls() {
 		if videoPlayerControls.alpha == 1.0 && videoPlayerView.status == .playing {
 			hideControls()
 		} else {
@@ -69,26 +105,19 @@ import UIKit
 		}
 	}
 	
-	func showControls() {
+	fileprivate func showControls() {
 		UIView.animate(withDuration: fadeDuration, animations: {
 			self.videoPlayerControls.alpha = 1.0
 		})
 	}
 	
-	func hideControls() {
+	@objc fileprivate func hideControls() {
 		UIView.animate(withDuration: fadeDuration, animations: {
 			self.videoPlayerControls.alpha = 0.0
 		})
 	}
 	
-	fileprivate func commonInit() {
-		let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(ASPVideoPlayer.toggleControls))
-		tapGestureRecognizer.delegate = self
-		addGestureRecognizer(tapGestureRecognizer)
-		
-		videoPlayerView = ASPVideoPlayerView()
-		videoPlayerControls = ASPVideoPlayerControls(videoPlayer: videoPlayerView)
-		
+	fileprivate func updateControls() {
 		videoPlayerControls.tintColor = tintColor
 		
 		videoPlayerControls.newVideo = {
@@ -143,11 +172,22 @@ import UIKit
 				}
 			}
 		}
+	}
+	
+	fileprivate func commonInit() {
+		let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(ASPVideoPlayer.toggleControls))
+		tapGestureRecognizer.delegate = self
+		addGestureRecognizer(tapGestureRecognizer)
+		
+		videoPlayerView = ASPVideoPlayerView()
+		videoPlayerControls = ASPVideoPlayerControls(videoPlayer: videoPlayerView)
 		
 		videoPlayerView.translatesAutoresizingMaskIntoConstraints = false
 		videoPlayerControls.translatesAutoresizingMaskIntoConstraints = false
 		
 		videoPlayerControls.backgroundColor = UIColor.black.withAlphaComponent(0.15)
+		
+		updateControls()
 		
 		addSubview(videoPlayerView)
 		addSubview(videoPlayerControls)

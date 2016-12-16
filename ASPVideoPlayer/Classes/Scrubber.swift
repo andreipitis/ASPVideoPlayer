@@ -8,76 +8,107 @@
 
 import UIKit
 
-class ScrubberThumb: CALayer {
-    var highlighted = false
-    weak var scrubber: Scrubber?
+internal class ScrubberThumb: CALayer {
+	var highlighted = false
+	weak var scrubber: Scrubber?
 }
 
 open class Scrubber: UIControl {
+	
+	//MARK: - Private Variables and Constants -
 	
 	fileprivate var previousLocation = CGPoint()
 	fileprivate let trackLayer = CALayer()
 	fileprivate let trackFillLayer = CALayer()
 	fileprivate let thumbLayer = ScrubberThumb()
 	
-    var minimumValue: CGFloat = 0.0  {
-        didSet {
-            updateFrames()
-        }
-    }
-    
-    var maximumValue: CGFloat = 1.0  {
-        didSet {
-            updateFrames()
-        }
-    }
-    
-    var value: CGFloat = 0.0  {
-        didSet {
-            if thumbLayer.highlighted == false {
-                let clampedValue = clamp(value, lower: minimumValue, upper: maximumValue)
-                let positionX = rangeMap(clampedValue, min: minimumValue, max: maximumValue, newMin: bounds.origin.x + thumbWidth / 2.0, newMax: bounds.size.width - thumbWidth / 2.0)
-                previousLocation = CGPoint(x: positionX, y: 0.0)
-            }
-            
-            updateFrames()
-            
-        }
-    }
+	//MARK: - Public Variables -
 	
-    var trackHeight: CGFloat = 6.0  {
-        didSet {
-            updateFrames()
-        }
-    }
-    
-    var trackColor = UIColor.white.withAlphaComponent(0.3).cgColor  {
-        didSet {
-            trackLayer.backgroundColor = trackColor
-            trackLayer.setNeedsDisplay()
-        }
-    }
+	/*
+	Sets the minimum value of the scrubber. Defaults to 0.0 .
+	*/
+	open var minimumValue: CGFloat = 0.0  {
+		didSet {
+			updateFrames()
+		}
+	}
 	
-    var trackFillColor = UIColor.white.cgColor  {
-        didSet {
-            trackFillLayer.backgroundColor = trackFillColor
-            trackFillLayer.setNeedsDisplay()
-        }
-    }
+	/*
+	Sets the maximum value of the scrubber. Defaults to 1.0 .
+	*/
+	open var maximumValue: CGFloat = 1.0  {
+		didSet {
+			updateFrames()
+		}
+	}
 	
-    var thumbColor = UIColor.white.cgColor  {
-        didSet {
-            thumbLayer.backgroundColor = thumbColor
-            thumbLayer.setNeedsDisplay()
-        }
-    }
+	/*
+	The current value of the scrubber.
+	*/
+	open var value: CGFloat = 0.0  {
+		didSet {
+			if thumbLayer.highlighted == false {
+				let clampedValue = clamp(value, lower: minimumValue, upper: maximumValue)
+				let positionX = rangeMap(clampedValue, min: minimumValue, max: maximumValue, newMin: bounds.origin.x + thumbWidth / 2.0, newMax: bounds.size.width - thumbWidth / 2.0)
+				previousLocation = CGPoint(x: positionX, y: 0.0)
+			}
+			
+			updateFrames()
+			
+		}
+	}
 	
-    var thumbWidth: CGFloat = 12.0  {
-        didSet {
-            updateFrames()
-        }
-    }
+	/*
+	The height of the track. Defaults to 6.0 .
+	*/
+	open var trackHeight: CGFloat = 6.0  {
+		didSet {
+			updateFrames()
+		}
+	}
 	
+	/*
+	Sets the color of the unfilled part of the track.
+	*/
+	open var trackColor = UIColor.white.withAlphaComponent(0.3).cgColor  {
+		didSet {
+			trackLayer.backgroundColor = trackColor
+			trackLayer.setNeedsDisplay()
+		}
+	}
+	
+	/*
+	Sets the color of the filled part of the track.
+	*/
+	open var trackFillColor = UIColor.white.cgColor  {
+		didSet {
+			trackFillLayer.backgroundColor = trackFillColor
+			trackFillLayer.setNeedsDisplay()
+		}
+	}
+	
+	/*
+	Sets the color of thumb.
+	*/
+	open var thumbColor = UIColor.white.cgColor  {
+		didSet {
+			thumbLayer.backgroundColor = thumbColor
+			thumbLayer.setNeedsDisplay()
+		}
+	}
+	
+	/*
+	Sets the width of the track.
+	*/
+	open var thumbWidth: CGFloat = 12.0  {
+		didSet {
+			updateFrames()
+		}
+	}
+	
+	/*
+	Sets the color of the thumb and track.
+	*/
 	open override var tintColor: UIColor! {
 		didSet {
 			thumbColor = tintColor.cgColor
@@ -85,64 +116,66 @@ open class Scrubber: UIControl {
 		}
 	}
 	
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        commonInit()
-    }
-    
-    required public init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        commonInit()
-    }
+	//MARK: - Superclass methods -
 	
-    override open var frame: CGRect {
-        didSet {
-            updateFrames()
-        }
-    }
+	override init(frame: CGRect) {
+		super.init(frame: frame)
+		commonInit()
+	}
 	
-    override open func layoutSubviews() {
-        value = value + 0.0
-        updateFrames()
-    }
+	required public init?(coder aDecoder: NSCoder) {
+		super.init(coder: aDecoder)
+		commonInit()
+	}
+	
+	override open var frame: CGRect {
+		didSet {
+			updateFrames()
+		}
+	}
+	
+	override open func layoutSubviews() {
+		value = value + 0.0
+		updateFrames()
+	}
 	
 	//MARK: - UIControl methods -
 	
-    override open func beginTracking(_ touch: UITouch, with event: UIEvent?) -> Bool {
-        previousLocation = thumbLayer.position
+	override open func beginTracking(_ touch: UITouch, with event: UIEvent?) -> Bool {
+		previousLocation = thumbLayer.position
 		
 		let extendedFrame = thumbLayer.frame.insetBy(dx: -thumbWidth * 1.5, dy: -thumbWidth * 1.5)
-        if extendedFrame.contains(touch.location(in: self)) {
+		if extendedFrame.contains(touch.location(in: self)) {
 			sendActions(for: .touchDown)
-            thumbLayer.highlighted = true
+			thumbLayer.highlighted = true
 			thumbWidth = 20.0
-        }
-        return thumbLayer.highlighted
-    }
-    
-    override open func continueTracking(_ touch: UITouch, with event: UIEvent?) -> Bool {
-        let location = touch.location(in: self)
-        
-        let clampedX = clamp(location.x, lower: bounds.origin.x + thumbWidth / 3.5, upper: bounds.size.width - thumbWidth / 3.5)
-        let deltaLocation = CGPoint(x: clampedX, y: location.y)
-        let deltaValue = rangeMap(deltaLocation.x, min: bounds.origin.x + thumbWidth / 3.5, max: bounds.size.width - thumbWidth / 3.5, newMin: minimumValue, newMax: maximumValue)
-        
-        previousLocation = deltaLocation
-        
-        if thumbLayer.highlighted {
-            value = deltaValue
-            sendActions(for: .valueChanged)
-        }
-        
-        return thumbLayer.highlighted
-    }
-    
-    override open func endTracking(_ touch: UITouch?, with event: UIEvent?) {
-        thumbLayer.highlighted = false
+		}
+		return thumbLayer.highlighted
+	}
+	
+	override open func continueTracking(_ touch: UITouch, with event: UIEvent?) -> Bool {
+		let location = touch.location(in: self)
+		
+		let clampedX = clamp(location.x, lower: bounds.origin.x + thumbWidth / 3.5, upper: bounds.size.width - thumbWidth / 3.5)
+		let deltaLocation = CGPoint(x: clampedX, y: location.y)
+		let deltaValue = rangeMap(deltaLocation.x, min: bounds.origin.x + thumbWidth / 3.5, max: bounds.size.width - thumbWidth / 3.5, newMin: minimumValue, newMax: maximumValue)
+		
+		previousLocation = deltaLocation
+		
+		if thumbLayer.highlighted {
+			value = deltaValue
+			sendActions(for: .valueChanged)
+		}
+		
+		return thumbLayer.highlighted
+	}
+	
+	override open func endTracking(_ touch: UITouch?, with event: UIEvent?) {
+		thumbLayer.highlighted = false
 		thumbWidth = 12.0
 		
 		sendActions(for: .touchUpInside)
-    }
+	}
 	
 	open override func cancelTracking(with event: UIEvent?) {
 		thumbLayer.highlighted = false

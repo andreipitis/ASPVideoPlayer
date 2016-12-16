@@ -132,13 +132,18 @@ open class ASPBasicControls: UIView, VideoPlayerControls, VideoPlayerSeekControl
 }
 
 @IBDesignable open class ASPVideoPlayerControls: ASPBasicControls {
-	
+	/**
+	Reference to the video player. Can be set through the Interface Builder.
+	*/
 	@IBOutlet open override weak var videoPlayer: ASPVideoPlayerView? {
 		didSet {
 			setupVideoPlayerView()
 		}
 	}
 	
+	/**
+	Sets the visibility of the next button.
+	*/
 	open override var nextButtonHidden: Bool {
 		set {
 			nextButton.isHidden = newValue
@@ -148,6 +153,9 @@ open class ASPBasicControls: UIView, VideoPlayerControls, VideoPlayerSeekControl
 		}
 	}
 	
+	/**
+	Sets the visibility of the previous button.
+	*/
 	open override var previousButtonHidden: Bool {
 		set {
 			previousButton.isHidden = newValue
@@ -157,6 +165,9 @@ open class ASPBasicControls: UIView, VideoPlayerControls, VideoPlayerSeekControl
 		}
 	}
 	
+	/**
+	Sets the color of the controls.
+	*/
 	open override var tintColor: UIColor! {
 		didSet {
 			playPauseButton.tintColor = tintColor
@@ -169,6 +180,8 @@ open class ASPBasicControls: UIView, VideoPlayerControls, VideoPlayerSeekControl
 			currentTimeLabel.textColor = tintColor
 		}
 	}
+	
+	//MARK: - Private Variables and Constants -
 	
 	fileprivate let playPauseButton = PlayPauseButton()
 	fileprivate let progressSlider = Scrubber()
@@ -184,6 +197,8 @@ open class ASPBasicControls: UIView, VideoPlayerControls, VideoPlayerSeekControl
 			interacting?(isInteracting)
 		}
 	}
+	
+	//MARK: - Superclass methods -
 	
 	public override init(frame: CGRect) {
 		super.init(frame: frame)
@@ -219,6 +234,8 @@ open class ASPBasicControls: UIView, VideoPlayerControls, VideoPlayerSeekControl
 			isInteracting = false
 		}
 	}
+	
+	//MARK: - Private methods -
 	
 	@objc fileprivate func nextButtonPressed() {
 		didPressNextButton?()
@@ -320,7 +337,6 @@ open class ASPBasicControls: UIView, VideoPlayerControls, VideoPlayerSeekControl
 	
 	fileprivate func commonInit() {
 		NotificationCenter.default.addObserver(self, selector: #selector(ASPVideoPlayerControls.applicationDidEnterBackground), name: NSNotification.Name.UIApplicationDidEnterBackground, object: nil)
-//		NotificationCenter.default.addObserver(self, selector: #selector(ASPVideoPlayerControls.applicationDidEnterBackground), name: NSNotification.Name.UIApplicationWillResignActive, object: nil)
 		
 		playPauseButton.translatesAutoresizingMaskIntoConstraints = false
 		progressSlider.translatesAutoresizingMaskIntoConstraints = false

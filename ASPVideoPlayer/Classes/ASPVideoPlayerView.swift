@@ -314,20 +314,20 @@ A simple UIView subclass that can play a video and allows animations to be appli
 	open func seek(_ percentage: Double) {
 		progress = min(1.0, max(0.0, percentage))
 		if let currentItem = videoPlayerLayer.player?.currentItem {
-				if progress == 0.0 {
-					seekToZero()
-					playingVideo?(progress)
-				} else {
-					let time = CMTime(seconds: progress * currentItem.asset.duration.seconds, preferredTimescale: currentItem.asset.duration.timescale)
-					videoPlayerLayer.player?.seek(to: time, toleranceBefore: kCMTimeZero, toleranceAfter: kCMTimeZero, completionHandler: { (finished) in
-						if finished == false {
-							self.seekStarted?()
-						} else {
-							self.seekEnded?()
-							self.playingVideo?(self.progress)
-						}
-					})
-				}
+			if progress == 0.0 {
+				seekToZero()
+				playingVideo?(progress)
+			} else {
+				let time = CMTime(seconds: progress * currentItem.asset.duration.seconds, preferredTimescale: currentItem.asset.duration.timescale)
+				videoPlayerLayer.player?.seek(to: time, toleranceBefore: kCMTimeZero, toleranceAfter: kCMTimeZero, completionHandler: { (finished) in
+					if finished == false {
+						self.seekStarted?()
+					} else {
+						self.seekEnded?()
+						self.playingVideo?(self.progress)
+					}
+				})
+			}
 		}
 	}
 	
@@ -366,7 +366,7 @@ A simple UIView subclass that can play a video and allows animations to be appli
 		let time = CMTime(seconds: 0.0, preferredTimescale: 1)
 		videoPlayerLayer.player?.seek(to: time, toleranceBefore: kCMTimeZero, toleranceAfter: kCMTimeZero)
 	}
-
+	
 	fileprivate func addTimeObserver() {
 		if let observer = timeObserver {
 			videoPlayerLayer.player?.removeTimeObserver(observer)

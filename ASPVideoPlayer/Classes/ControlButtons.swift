@@ -64,7 +64,7 @@ open class PlayPauseButton: UIButton {
 		playPauseLayer.color = tintColor
 	}
 	
-	open func changeState() {
+	@objc fileprivate func changeState() {
 		isSelected = !isSelected
 	}
 	
@@ -108,7 +108,6 @@ open class NextButton: UIButton {
 /*
 Previous button.
 */
-@IBDesignable
 open class PreviousButton: UIButton {
 	override open func draw(_ rect: CGRect) {
 		if let context = UIGraphicsGetCurrentContext() {

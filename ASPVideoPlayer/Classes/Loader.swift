@@ -9,9 +9,19 @@
 import UIKit
 
 open class Loader: UIView {
-
-	let progressLayer = CAShapeLayer()
-	var lineWidth: CGFloat = 5.0
+	
+	//MARK: - Private Variables and Constants -
+	
+	fileprivate let progressLayer = CAShapeLayer()
+	
+	//MARK: - Public Variables -
+	
+	/*
+	The width of the circle.
+	*/
+	open var lineWidth: CGFloat = 5.0
+	
+	//MARK: - Superclass methods -
 	
 	override init(frame: CGRect) {
 		super.init(frame: frame)
@@ -36,23 +46,11 @@ open class Loader: UIView {
 		updatePath()
 	}
 	
-	private func updatePath() {
-		let startAngle: CGFloat = 0.0
-		let endAngle: CGFloat = CGFloat(2.0 * M_PI)
-		let radius: CGFloat = min(bounds.size.width / 2.0, bounds.size.height / 2.0)
-		let path = UIBezierPath(arcCenter: CGPoint(x: bounds.midX, y: bounds.midY), radius: radius - lineWidth / 2.0, startAngle: startAngle, endAngle: endAngle, clockwise: true)
-		
-		progressLayer.contentsScale = UIScreen.main.scale
-		
-		progressLayer.path = path.cgPath
-
-		progressLayer.strokeColor = tintColor.cgColor
-		progressLayer.fillColor = backgroundColor?.cgColor
-		progressLayer.lineWidth = lineWidth
-		progressLayer.strokeStart = 0.0
-		progressLayer.strokeEnd = 0.0
-	}
+	//MARK: - Public methods -
 	
+	/*
+	Starts the loader animation.
+	*/
 	open func startAnimating() {
 		let rotationAnimation = CABasicAnimation(keyPath: "transform.rotation")
 		rotationAnimation.duration = 4.0
@@ -96,7 +94,29 @@ open class Loader: UIView {
 		progressLayer.add(animations, forKey: "fillAnimations")
 	}
 	
+	/*
+	Stops the loader animation.
+	*/
 	open func stopAnimating() {
 		progressLayer.removeAllAnimations()
+	}
+	
+	//MARK: - Private methods -
+	
+	private func updatePath() {
+		let startAngle: CGFloat = 0.0
+		let endAngle: CGFloat = CGFloat(2.0 * M_PI)
+		let radius: CGFloat = min(bounds.size.width / 2.0, bounds.size.height / 2.0)
+		let path = UIBezierPath(arcCenter: CGPoint(x: bounds.midX, y: bounds.midY), radius: radius - lineWidth / 2.0, startAngle: startAngle, endAngle: endAngle, clockwise: true)
+		
+		progressLayer.contentsScale = UIScreen.main.scale
+		
+		progressLayer.path = path.cgPath
+		
+		progressLayer.strokeColor = tintColor.cgColor
+		progressLayer.fillColor = backgroundColor?.cgColor
+		progressLayer.lineWidth = lineWidth
+		progressLayer.strokeStart = 0.0
+		progressLayer.strokeEnd = 0.0
 	}
 }

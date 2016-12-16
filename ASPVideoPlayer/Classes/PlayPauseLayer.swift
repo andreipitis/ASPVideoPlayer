@@ -8,7 +8,10 @@
 
 import UIKit
 
-open class PlayPauseLayer: CALayer {
+/*
+Internal class used for the play/pause animation on the PlayButton.
+*/
+internal class PlayPauseLayer: CALayer {
 	@NSManaged public var animationDirection: CGFloat
 	
 	public var color: UIColor = .black
