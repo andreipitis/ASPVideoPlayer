@@ -19,7 +19,9 @@ There are two objects you can use to display a video:
  2. `ASPVideoPlayerView`
  
 ### 1. ASPVideoPlayer
- 
+
+![aspvideoplayer](https://github.com/andreipitis/ASPVideoPlayer/blob/master/ASPVideoPlayer.gif?raw=true)
+
 `ASPVideoPlayer` is a full video player with UI controls. 
 
 You should use this if you just want to display videos in a player with controls such as play, pause, scrub, next, previous.
