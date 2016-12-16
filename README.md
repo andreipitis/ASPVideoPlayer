@@ -13,19 +13,63 @@ To run the example project, clone the repo, and run `pod install` from the Examp
 
 ## Usage
 
-You can instantiate the object from code:
+There are two objects you can use to display a video:
+
+ 1. `ASPVideoPlayer`
+ 2. `ASPVideoPlayerView`
+ 
+### 1. ASPVideoPlayer
+ 
+`ASPVideoPlayer` is a full video player with UI controls. 
+
+You should use this if you just want to display videos in a player with controls such as play, pause, scrub, next, previous.
+
+- You can instantiate the object from code:
 
 ```swift
 let videoPlayer = ASPVideoPlayer()
 ```
 
-You can also instantiate it from Interface Builder and create an IBOutlet:
+- You can also instantiate it from Interface Builder and create an IBOutlet:
 
 ```swift
 @IBOutlet weak var videoPlayer: ASPVideoPlayer!
 ```
 
-Once you have the reference, you can set a video url and use the closures to handle different events:
+- Once you have the reference, you can set the video URLs, the gravity and wether the videos should loop:
+
+```swift
+let firstVideoURL = Bundle.main.url(forResource: "video", withExtension: "mp4")
+let secondVideoURL = Bundle.main.url(forResource: "video2", withExtension: "mp4")
+
+videoPlayer.videoURLs = [firstVideoURL!, secondVideoURL!]
+
+videoPlayer.gravity = .aspectFit
+
+videoPlayer.shouldLoop = true
+```
+
+### 2. ASPVideoPlayerView
+ 
+`ASPVideoPlayerView` is a component that `ASPVideoPlayer` uses to display the video, but you can also use it by itself. 
+
+It's a simple UIView with no UI elements.
+
+If you wish to implement your own video player, or want a simple component to display a single video with no other UI elements, you should use this.
+
+- You can instantiate the object from code:
+
+```swift
+let videoPlayer = ASPVideoPlayerView()
+```
+
+- You can also instantiate it from Interface Builder and create an IBOutlet:
+
+```swift
+@IBOutlet weak var videoPlayer: ASPVideoPlayerView!
+```
+
+- Once you have the reference, you can set a video url and use the closures to handle different events:
 
 ```swift
 let videoURL = Bundle.main.url(forResource: "video", withExtension: "mp4")

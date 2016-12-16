@@ -14,39 +14,39 @@ class ViewController: UIViewController {
 	@IBOutlet weak var videoBottomConstraint: NSLayoutConstraint!
 	@IBOutlet weak var videoLeadingConstraint: NSLayoutConstraint!
 	@IBOutlet weak var videoTrailingConstraint: NSLayoutConstraint!
-	@IBOutlet weak var videoPlayer: ASPVideoPlayer!
+	@IBOutlet weak var videoPlayer: ASPVideoPlayerView!
 	
 	let firstVideoURL = Bundle.main.url(forResource: "video", withExtension: "mp4")
 	let secondVideoURL = Bundle.main.url(forResource: "video2", withExtension: "mp4")
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		// Do any additional setup after loading the view, typically from a nib.
+
+		videoPlayer.videoURL = firstVideoURL
+		videoPlayer.gravity = .aspectFit
+		videoPlayer.shouldLoop = true
+		videoPlayer.startPlayingWhenReady = true
 		
-		self.videoPlayer.videoURL = firstVideoURL
-		self.videoPlayer.gravity = .aspectFit
-		self.videoPlayer.shouldLoop = true
+		videoPlayer.backgroundColor = UIColor.black
 		
-		self.videoPlayer.backgroundColor = UIColor.black
-		
-		self.videoPlayer.newVideo = {
+		videoPlayer.newVideo = {
 			print("newVideo")
 		}
 		
-		self.videoPlayer.readyToPlayVideo = {
+		videoPlayer.readyToPlayVideo = {
 			print("readyToPlay")
 		}
 		
-		self.videoPlayer.startedVideo = {
+		videoPlayer.startedVideo = {
 			print("start")
 			
 		}
 		
-		self.videoPlayer.finishedVideo = {
+		videoPlayer.finishedVideo = {
 			print("finishedVideo")
-			if self.videoPlayer.videoURL == self.firstVideoURL {
-				self.videoPlayer.startPlayingWhenReady = true
-				self.videoPlayer.videoURL = self.secondVideoURL
+			if videoPlayer.videoURL == firstVideoURL {
+				videoPlayer.startPlayingWhenReady = true
+				videoPlayer.videoURL = secondVideoURL
 			}
 			
 			UIView.animate(withDuration: 0.3, delay: 0.0, options: .curveEaseIn, animations: {
@@ -70,20 +70,20 @@ class ViewController: UIViewController {
 			})
 		}
 		
-		self.videoPlayer.playingVideo = { (progress) -> Void in
+		videoPlayer.playingVideo = { (progress) -> Void in
             let progressString = String.localizedStringWithFormat("%.2f", progress)
 			print("progress: \(progressString) % complete.")
 		}
 		
-		self.videoPlayer.pausedVideo = {
+		videoPlayer.pausedVideo = {
 			print("paused")
 		}
 		
-		self.videoPlayer.stoppedVideo = {
+		videoPlayer.stoppedVideo = {
 			print("stopped")
 		}
 		
-		self.videoPlayer.error = { (error) -> Void in
+		videoPlayer.error = { (error) -> Void in
 			print("Error: \(error.localizedDescription)")
 		}
 	}

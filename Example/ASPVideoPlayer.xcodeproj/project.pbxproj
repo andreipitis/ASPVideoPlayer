@@ -14,9 +14,10 @@
 		607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDC1AFB9204008FA782 /* Images.xcassets */; };
 		607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDE1AFB9204008FA782 /* LaunchScreen.xib */; };
 		75093D8A1D14C1CA0054E08D /* ASPVideoPlayerControlerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75093D881D14C1CA0054E08D /* ASPVideoPlayerControlerTests.swift */; };
-		75093D8B1D14C1CA0054E08D /* ASPVideoPlayerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75093D891D14C1CA0054E08D /* ASPVideoPlayerTests.swift */; };
+		75093D8B1D14C1CA0054E08D /* ASPVideoPlayerViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75093D891D14C1CA0054E08D /* ASPVideoPlayerViewTests.swift */; };
 		754153EA1DAE114C00E16BE9 /* video2.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 754153E91DAE114C00E16BE9 /* video2.mp4 */; };
 		757F34C81DAB829700ACF36D /* video.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 757F34C71DAB829700ACF36D /* video.mp4 */; };
+		75A4727D1DFAB12100F459E9 /* PlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75A4727C1DFAB12100F459E9 /* PlayerViewController.swift */; };
 		82AABB55DE4BABA586F5C65B /* Pods_ASPVideoPlayer_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 657113FC20D81D253680D24D /* Pods_ASPVideoPlayer_Example.framework */; };
 /* End PBXBuildFile section */
 
@@ -48,9 +49,10 @@
 		657113FC20D81D253680D24D /* Pods_ASPVideoPlayer_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ASPVideoPlayer_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		75093D871D14C1CA0054E08D /* ASPVideoPlayer_Tests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ASPVideoPlayer_Tests-Bridging-Header.h"; sourceTree = "<group>"; };
 		75093D881D14C1CA0054E08D /* ASPVideoPlayerControlerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ASPVideoPlayerControlerTests.swift; sourceTree = "<group>"; };
-		75093D891D14C1CA0054E08D /* ASPVideoPlayerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ASPVideoPlayerTests.swift; sourceTree = "<group>"; };
+		75093D891D14C1CA0054E08D /* ASPVideoPlayerViewTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ASPVideoPlayerViewTests.swift; sourceTree = "<group>"; };
 		754153E91DAE114C00E16BE9 /* video2.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = video2.mp4; sourceTree = "<group>"; };
 		757F34C71DAB829700ACF36D /* video.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = video.mp4; sourceTree = "<group>"; };
+		75A4727C1DFAB12100F459E9 /* PlayerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerViewController.swift; sourceTree = "<group>"; };
 		8179CAB6F1755BD934B98047 /* Pods-ASPVideoPlayer_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ASPVideoPlayer_Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-ASPVideoPlayer_Example/Pods-ASPVideoPlayer_Example.release.xcconfig"; sourceTree = "<group>"; };
 		D4D561E4D863E435F2EE8D02 /* Pods_ASPVideoPlayer_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ASPVideoPlayer_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E46EEA47B4689CB9C4BB8112 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
@@ -111,6 +113,7 @@
 			children = (
 				607FACD51AFB9204008FA782 /* AppDelegate.swift */,
 				607FACD71AFB9204008FA782 /* ViewController.swift */,
+				75A4727C1DFAB12100F459E9 /* PlayerViewController.swift */,
 				607FACD91AFB9204008FA782 /* Main.storyboard */,
 				607FACDC1AFB9204008FA782 /* Images.xcassets */,
 				607FACDE1AFB9204008FA782 /* LaunchScreen.xib */,
@@ -134,7 +137,7 @@
 			isa = PBXGroup;
 			children = (
 				75093D881D14C1CA0054E08D /* ASPVideoPlayerControlerTests.swift */,
-				75093D891D14C1CA0054E08D /* ASPVideoPlayerTests.swift */,
+				75093D891D14C1CA0054E08D /* ASPVideoPlayerViewTests.swift */,
 				607FACE91AFB9204008FA782 /* Supporting Files */,
 				75093D871D14C1CA0054E08D /* ASPVideoPlayer_Tests-Bridging-Header.h */,
 			);
@@ -221,16 +224,19 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0730;
-				LastUpgradeCheck = 0800;
+				LastUpgradeCheck = 0820;
 				ORGANIZATIONNAME = CocoaPods;
 				TargetAttributes = {
 					607FACCF1AFB9204008FA782 = {
 						CreatedOnToolsVersion = 6.3.1;
+						DevelopmentTeam = SC5NQW88NN;
 						LastSwiftMigration = 0800;
+						ProvisioningStyle = Automatic;
 					};
 					607FACE41AFB9204008FA782 = {
 						CreatedOnToolsVersion = 6.3.1;
-						LastSwiftMigration = 0800;
+						DevelopmentTeam = SC5NQW88NN;
+						LastSwiftMigration = 0810;
 						TestTargetID = 607FACCF1AFB9204008FA782;
 					};
 				};
@@ -376,6 +382,7 @@
 			files = (
 				607FACD81AFB9204008FA782 /* ViewController.swift in Sources */,
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
+				75A4727D1DFAB12100F459E9 /* PlayerViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -384,7 +391,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				75093D8A1D14C1CA0054E08D /* ASPVideoPlayerControlerTests.swift in Sources */,
-				75093D8B1D14C1CA0054E08D /* ASPVideoPlayerTests.swift in Sources */,
+				75093D8B1D14C1CA0054E08D /* ASPVideoPlayerViewTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -457,12 +464,12 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 3.0.1;
 			};
 			name = Debug;
 		};
@@ -498,11 +505,11 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 3.0.1;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -513,11 +520,15 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = SC5NQW88NN;
 				INFOPLIST_FILE = ASPVideoPlayer/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MODULE_NAME = ExampleApp;
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.ASPVideoPlayer-Examples";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -528,10 +539,12 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = SC5NQW88NN;
 				INFOPLIST_FILE = ASPVideoPlayer/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MODULE_NAME = ExampleApp;
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.ASPVideoPlayer-Examples";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -543,6 +556,7 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ENABLE_MODULES = YES;
+				DEVELOPMENT_TEAM = SC5NQW88NN;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -564,6 +578,7 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ENABLE_MODULES = YES;
+				DEVELOPMENT_TEAM = SC5NQW88NN;
 				INFOPLIST_FILE = Tests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.$(PRODUCT_NAME:rfc1034identifier)";

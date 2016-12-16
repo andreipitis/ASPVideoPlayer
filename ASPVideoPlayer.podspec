@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'ASPVideoPlayer'
-  s.version          = '1.2.0'
+  s.version          = '2.0.0'
   s.summary          = 'A simple UIView subclass that can play a video and allows animations to be applied during playback.'
 
 # This description is used to generate tags and improve search results.
@@ -26,7 +26,7 @@ A simple UIView subclass that can play a video and allows animations to be appli
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'Andrei-Sergiu Pitis' => 'andrei.pitis@lateral-inc.com' }
   s.source           = { :git => 'https://github.com/andreipitis/ASPVideoPlayer.git', :tag => s.version.to_s }
-  #s.social_media_url = 'https://twitter.com/AndyPitis'
+  s.social_media_url = 'https://twitter.com/AndyPitis'
 
   s.ios.deployment_target = '8.0'
 

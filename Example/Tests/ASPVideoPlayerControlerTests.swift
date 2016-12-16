@@ -1,6 +1,6 @@
 //
-//  ASPVideoPlayerControlerTests.swift
-//  ASPVideoPlayer
+//  ASPVideoPlayerViewControlerTests.swift
+//  ASPVideoPlayerView
 //
 //  Created by Andrei-Sergiu Pițiș on 12/04/16.
 //  Copyright © 2016 Andrei-Sergiu Pițiș. All rights reserved.
@@ -10,7 +10,7 @@ import XCTest
 @testable import ASPVideoPlayer
 
 class ASPVideoPlayerControlerTests: XCTestCase {
-    
+	
 	var videoURL: URL!
 	
 	override func setUp() {
@@ -18,87 +18,111 @@ class ASPVideoPlayerControlerTests: XCTestCase {
 		
 		videoURL = Bundle.main.url(forResource: "video", withExtension: "mp4")
 	}
-    
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-        super.tearDown()
-    }
+	
+	override func tearDown() {
+		// Put teardown code here. This method is called after the invocation of each test method in the class.
+		super.tearDown()
+	}
 	
 	func testInitPlayerControler_ShouldSetWeakReferenceToViedeoPlayer() {
-		let videoPlayer = ASPVideoPlayer()
+		let videoPlayer = ASPVideoPlayerView()
 		let sut = ASPVideoPlayerControls(videoPlayer: videoPlayer)
 		
 		XCTAssertEqual(sut.videoPlayer, videoPlayer, "Players are equal.")
 	}
-    
+	
 	func testPlayCalled_ShoudStartVideoPlayback() {
-		let videoPlayer = ASPVideoPlayer()
+		let videoPlayer = ASPVideoPlayerView()
 		videoPlayer.videoURL = videoURL
 		let sut = ASPVideoPlayerControls(videoPlayer: videoPlayer)
 		
 		sut.play()
 		
-		XCTAssertEqual(sut.videoPlayer?.status, ASPVideoPlayer.PlayerStatus.playing, "Video is playing.")
+		XCTAssertEqual(sut.videoPlayer?.status, ASPVideoPlayerView.PlayerStatus.playing, "Video is playing.")
 	}
 	
 	func testPauseCalled_ShouldPauseVideoPlayback() {
-		let videoPlayer = ASPVideoPlayer()
+		let videoPlayer = ASPVideoPlayerView()
 		videoPlayer.videoURL = videoURL
 		let sut = ASPVideoPlayerControls(videoPlayer: videoPlayer)
 		
 		sut.pause()
 		
-		XCTAssertEqual(sut.videoPlayer?.status, ASPVideoPlayer.PlayerStatus.paused, "Video is paused.")
+		XCTAssertEqual(sut.videoPlayer?.status, ASPVideoPlayerView.PlayerStatus.paused, "Video is paused.")
 	}
 	
 	func testStopCalled_ShouldStopVideoPlayback() {
-		let videoPlayer = ASPVideoPlayer()
+		let videoPlayer = ASPVideoPlayerView()
 		videoPlayer.videoURL = videoURL
 		let sut = ASPVideoPlayerControls(videoPlayer: videoPlayer)
 		
 		sut.stop()
 		
-		XCTAssertEqual(sut.videoPlayer?.status, ASPVideoPlayer.PlayerStatus.stopped, "Video is stopped.")
+		XCTAssertEqual(sut.videoPlayer?.status, ASPVideoPlayerView.PlayerStatus.stopped, "Video is stopped.")
 	}
  
 	func testJumpForwardCalled_ShouldJumpVideoPlaybackForward() {
-		let videoPlayer = ASPVideoPlayer()
+		let expectation = self.expectation(description: "Timeout expectation")
+		
+		let videoPlayer = ASPVideoPlayerView()
 		videoPlayer.videoURL = videoURL
 		let sut = ASPVideoPlayerControls(videoPlayer: videoPlayer)
 		
-		videoPlayer.seek(0.5)
-		let initialProgress = videoPlayer.progress
+		videoPlayer.readyToPlayVideo = {
+			videoPlayer.seek(0.5)
+			let initialProgress = videoPlayer.progress
+			
+			sut.jumpForward()
+			
+			XCTAssertGreaterThan(sut.videoPlayer!.progress, initialProgress, "Video jumped forwards.")
+			expectation.fulfill()
+		}
 		
-		sut.jumpForward()
-		
-		XCTAssertGreaterThan(sut.videoPlayer!.progress, initialProgress, "Video jumped forwards.")
+		waitForExpectations(timeout: 5.0) { (error) in
+			if let error = error {
+				print(error)
+			}
+		}
 	}
 	
 	func testJumpBackwardCalled_ShouldJumpVideoPlaybackBackward() {
-		let videoPlayer = ASPVideoPlayer()
+		let expectation = self.expectation(description: "Timeout expectation")
+		
+		let videoPlayer = ASPVideoPlayerView()
 		videoPlayer.videoURL = videoURL
 		let sut = ASPVideoPlayerControls(videoPlayer: videoPlayer)
 		
-		videoPlayer.seek(0.5)
-		let initialProgress = videoPlayer.progress
+		videoPlayer.readyToPlayVideo = {
+			videoPlayer.seek(0.5)
+			let initialProgress = videoPlayer.progress
+			
+			sut.jumpBackward()
+			
+			XCTAssertLessThan(sut.videoPlayer!.progress, initialProgress, "Video jumped backwards.")
+			expectation.fulfill()
+		}
 		
-		sut.jumpBackward()
-		
-		XCTAssertLessThan(sut.videoPlayer!.progress, initialProgress, "Video jumped backwards.")
+		waitForExpectations(timeout: 5.0) { (error) in
+			if let error = error {
+				print(error)
+			}
+		}
 	}
 	
 	func testVolumeSet_ShouldChangeVolumeToNewValue () {
-		let videoPlayer = ASPVideoPlayer()
+		let videoPlayer = ASPVideoPlayerView()
 		videoPlayer.videoURL = videoURL
 		let sut = ASPVideoPlayerControls(videoPlayer: videoPlayer)
-
+		
 		sut.volume(0.5)
 		
 		XCTAssertEqual(sut.videoPlayer!.volume, 0.5, "Video volume set.")
 	}
 	
 	func testSeekToSpecificLocation_ShouldSeekVideoToPercentage() {
-		let videoPlayer = ASPVideoPlayer()
+		let expectation = self.expectation(description: "Timeout expectation")
+		
+		let videoPlayer = ASPVideoPlayerView()
 		videoPlayer.videoURL = videoURL
 		let sut = ASPVideoPlayerControls(videoPlayer: videoPlayer)
 		
@@ -106,60 +130,21 @@ class ASPVideoPlayerControlerTests: XCTestCase {
 		let maximumValue = 3.0
 		let value = 1.5
 		
-		sut.seek(min: minimumValue, max: maximumValue, value: value)
-		XCTAssertEqual(sut.videoPlayer!.progress, 0.5, "Video set to specified percentage.")
-	}
-	
-	func testPressPlayButton_ShouldStartVideoPlayback() {
-		let videoPlayer = ASPVideoPlayer()
-		videoPlayer.videoURL = videoURL
-		let sut = ASPVideoPlayerControls(videoPlayer: videoPlayer)
-		sut.playButtonPressed()
+		videoPlayer.seekEnded = {
+			let progress = sut.videoPlayer!.progress
+			
+			XCTAssertEqual(progress, 0.5, "Video set to specified percentage.")
+			expectation.fulfill()
+		}
 		
-		XCTAssertEqual(sut.videoPlayer?.status, ASPVideoPlayer.PlayerStatus.playing, "Video is playing.")
-	}
-	
-	func testPressPlayButtonWhileVideoIsPlaying_ShouldPauseVideoPlayback() {
-		let videoPlayer = ASPVideoPlayer()
-		videoPlayer.videoURL = videoURL
-		let sut = ASPVideoPlayerControls(videoPlayer: videoPlayer)
-		sut.playButtonPressed()
-		sut.playButtonPressed()
+		videoPlayer.readyToPlayVideo = {
+			sut.seek(min: minimumValue, max: maximumValue, value: value)
+		}
 		
-		XCTAssertEqual(sut.videoPlayer?.status, ASPVideoPlayer.PlayerStatus.paused, "Video is paused.")
-	}
-	
-	func testPressStopButton_ShouldStopVideoPlayback() {
-		let videoPlayer = ASPVideoPlayer()
-		videoPlayer.videoURL = videoURL
-		let sut = ASPVideoPlayerControls(videoPlayer: videoPlayer)
-		
-		sut.stopButtonPressed()
-		
-		XCTAssertEqual(sut.videoPlayer?.status, ASPVideoPlayer.PlayerStatus.stopped, "Video playback has stopped.")
-	}
-	
-	func testPressJumpForwardButton_ShouldStopVideoPlayback() {
-		let videoPlayer = ASPVideoPlayer()
-		videoPlayer.videoURL = videoURL
-		let sut = ASPVideoPlayerControls(videoPlayer: videoPlayer)
-		videoPlayer.seek(0.5)
-		let initialProgress = videoPlayer.progress
-		
-		sut.forwardButtonPressed()
-		
-		XCTAssertGreaterThan(sut.videoPlayer!.progress, initialProgress, "Video jumped forward.")
-	}
-	
-	func testPressJumpBackwardButton_ShouldStopVideoPlayback() {
-		let videoPlayer = ASPVideoPlayer()
-		videoPlayer.videoURL = videoURL
-		let sut = ASPVideoPlayerControls(videoPlayer: videoPlayer)
-		videoPlayer.seek(0.5)
-		let initialProgress = videoPlayer.progress
-		
-		sut.backwardButtonPressed()
-		
-		XCTAssertLessThan(sut.videoPlayer!.progress, initialProgress, "Video jumped backwards.")
+		waitForExpectations(timeout: 5.0) { (error) in
+			if let error = error {
+				print(error)
+			}
+		}
 	}
 }

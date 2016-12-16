@@ -11,8 +11,14 @@
 		2D6A0EED74D030C495CBF83D544E7D71 /* Pods-ASPVideoPlayer_Example-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = EC9B014EC9ABBAB808BE24C500D8A804 /* Pods-ASPVideoPlayer_Example-dummy.m */; };
 		3D2ABC381A37E8A783C23028C78BA819 /* ASPVideoPlayer-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 93AB706069ED16AFFDDFA177F1CA3C68 /* ASPVideoPlayer-dummy.m */; };
 		75093D811D14C1210054E08D /* AnimationForwarder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75093D7E1D14C1210054E08D /* AnimationForwarder.swift */; };
-		75093D831D14C1210054E08D /* ASPVideoPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75093D7F1D14C1210054E08D /* ASPVideoPlayer.swift */; };
+		75093D831D14C1210054E08D /* ASPVideoPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75093D7F1D14C1210054E08D /* ASPVideoPlayerView.swift */; };
 		75093D851D14C1210054E08D /* ASPVideoPlayerControls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75093D801D14C1210054E08D /* ASPVideoPlayerControls.swift */; };
+		75140AD61E02BF680007BF95 /* Math.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75140AD51E02BF680007BF95 /* Math.swift */; };
+		753C6F141E01256B00D8D697 /* Loader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 753C6F131E01256B00D8D697 /* Loader.swift */; };
+		75A472781DFA04B800F459E9 /* PlayPauseLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75A472761DFA04B800F459E9 /* PlayPauseLayer.swift */; };
+		75A4727B1DFAA49000F459E9 /* ASPVideoPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75A4727A1DFAA49000F459E9 /* ASPVideoPlayer.swift */; };
+		75A4727F1DFCE02300F459E9 /* Scrubber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75A4727E1DFCE02300F459E9 /* Scrubber.swift */; };
+		75E2B1931DFF3BC600DA5690 /* ControlButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75E2B1921DFF3BC600DA5690 /* ControlButtons.swift */; };
 		93822CDA0A626ACE04E6196B6CC0C263 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEC22C73C1608DFA5D5D78BDCB218219 /* Foundation.framework */; };
 		B43FCF033768DA901FD0ED0FB3F075DD /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEC22C73C1608DFA5D5D78BDCB218219 /* Foundation.framework */; };
 		C505D42412B61335D815C1AD6E7FB153 /* Pods-ASPVideoPlayer_Tests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 76C38C82AE0F553697DE1E485B446BCD /* Pods-ASPVideoPlayer_Tests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -44,8 +50,14 @@
 		3F3F51553A5782D5A9851AF931AEA472 /* Pods-ASPVideoPlayer_Tests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-ASPVideoPlayer_Tests-acknowledgements.markdown"; sourceTree = "<group>"; };
 		677B46737A023F79C64A03E47D94AF6C /* Pods-ASPVideoPlayer_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-ASPVideoPlayer_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		75093D7E1D14C1210054E08D /* AnimationForwarder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimationForwarder.swift; sourceTree = "<group>"; };
-		75093D7F1D14C1210054E08D /* ASPVideoPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ASPVideoPlayer.swift; sourceTree = "<group>"; };
+		75093D7F1D14C1210054E08D /* ASPVideoPlayerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ASPVideoPlayerView.swift; sourceTree = "<group>"; };
 		75093D801D14C1210054E08D /* ASPVideoPlayerControls.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ASPVideoPlayerControls.swift; sourceTree = "<group>"; };
+		75140AD51E02BF680007BF95 /* Math.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Math.swift; sourceTree = "<group>"; };
+		753C6F131E01256B00D8D697 /* Loader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Loader.swift; sourceTree = "<group>"; };
+		75A472761DFA04B800F459E9 /* PlayPauseLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayPauseLayer.swift; sourceTree = "<group>"; };
+		75A4727A1DFAA49000F459E9 /* ASPVideoPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ASPVideoPlayer.swift; sourceTree = "<group>"; };
+		75A4727E1DFCE02300F459E9 /* Scrubber.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Scrubber.swift; sourceTree = "<group>"; };
+		75E2B1921DFF3BC600DA5690 /* ControlButtons.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ControlButtons.swift; sourceTree = "<group>"; };
 		76526CBDC34BF9AF8FE6A49490F93995 /* Pods-ASPVideoPlayer_Tests-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-ASPVideoPlayer_Tests-frameworks.sh"; sourceTree = "<group>"; };
 		76C38C82AE0F553697DE1E485B446BCD /* Pods-ASPVideoPlayer_Tests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-ASPVideoPlayer_Tests-umbrella.h"; sourceTree = "<group>"; };
 		77EDF47C1B48CB7132F02974759130EA /* Pods-ASPVideoPlayer_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-ASPVideoPlayer_Example.release.xcconfig"; sourceTree = "<group>"; };
@@ -141,6 +153,17 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		753C6F151E0175A500D8D697 /* UIItems */ = {
+			isa = PBXGroup;
+			children = (
+				75A472761DFA04B800F459E9 /* PlayPauseLayer.swift */,
+				75E2B1921DFF3BC600DA5690 /* ControlButtons.swift */,
+				75A4727E1DFCE02300F459E9 /* Scrubber.swift */,
+				753C6F131E01256B00D8D697 /* Loader.swift */,
+			);
+			name = UIItems;
+			sourceTree = "<group>";
+		};
 		7DB346D0F39D3F0E887471402A8071AB = {
 			isa = PBXGroup;
 			children = (
@@ -169,8 +192,11 @@
 		8DC6017CF78EA690DA860C92EAC3FC03 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				753C6F151E0175A500D8D697 /* UIItems */,
+				75140AD51E02BF680007BF95 /* Math.swift */,
 				75093D7E1D14C1210054E08D /* AnimationForwarder.swift */,
-				75093D7F1D14C1210054E08D /* ASPVideoPlayer.swift */,
+				75A4727A1DFAA49000F459E9 /* ASPVideoPlayer.swift */,
+				75093D7F1D14C1210054E08D /* ASPVideoPlayerView.swift */,
 				75093D801D14C1210054E08D /* ASPVideoPlayerControls.swift */,
 			);
 			path = Classes;
@@ -320,10 +346,10 @@
 				LastUpgradeCheck = 0700;
 				TargetAttributes = {
 					2DC938451C9B8D766372BF1504D738F4 = {
-						LastSwiftMigration = 0800;
+						LastSwiftMigration = 0810;
 					};
 					7F8E29A2B33AB182636B056A75E452F9 = {
-						LastSwiftMigration = 0800;
+						LastSwiftMigration = 0810;
 					};
 				};
 			};
@@ -368,9 +394,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				3D2ABC381A37E8A783C23028C78BA819 /* ASPVideoPlayer-dummy.m in Sources */,
-				75093D831D14C1210054E08D /* ASPVideoPlayer.swift in Sources */,
+				75A4727F1DFCE02300F459E9 /* Scrubber.swift in Sources */,
+				75A472781DFA04B800F459E9 /* PlayPauseLayer.swift in Sources */,
+				75E2B1931DFF3BC600DA5690 /* ControlButtons.swift in Sources */,
+				753C6F141E01256B00D8D697 /* Loader.swift in Sources */,
+				75A4727B1DFAA49000F459E9 /* ASPVideoPlayer.swift in Sources */,
+				75093D831D14C1210054E08D /* ASPVideoPlayerView.swift in Sources */,
 				75093D811D14C1210054E08D /* AnimationForwarder.swift in Sources */,
 				75093D851D14C1210054E08D /* ASPVideoPlayerControls.swift in Sources */,
+				75140AD61E02BF680007BF95 /* Math.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -450,6 +482,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				STRIP_INSTALLED_PRODUCT = NO;
+				SWIFT_VERSION = 3.0.1;
 				SYMROOT = "${SRCROOT}/../build";
 				VALIDATE_PRODUCT = YES;
 			};
@@ -628,6 +661,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				ONLY_ACTIVE_ARCH = YES;
 				STRIP_INSTALLED_PRODUCT = NO;
+				SWIFT_VERSION = 3.0.1;
 				SYMROOT = "${SRCROOT}/../build";
 			};
 			name = Debug;
