@@ -13,11 +13,14 @@
 		607FACDB1AFB9204008FA782 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 607FACD91AFB9204008FA782 /* Main.storyboard */; };
 		607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDC1AFB9204008FA782 /* Images.xcassets */; };
 		607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDE1AFB9204008FA782 /* LaunchScreen.xib */; };
-		75093D8A1D14C1CA0054E08D /* ASPVideoPlayerControlerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75093D881D14C1CA0054E08D /* ASPVideoPlayerControlerTests.swift */; };
+		75093D8A1D14C1CA0054E08D /* ASPVideoPlayerControlsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75093D881D14C1CA0054E08D /* ASPVideoPlayerControlsTests.swift */; };
 		75093D8B1D14C1CA0054E08D /* ASPVideoPlayerViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75093D891D14C1CA0054E08D /* ASPVideoPlayerViewTests.swift */; };
 		754153EA1DAE114C00E16BE9 /* video2.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 754153E91DAE114C00E16BE9 /* video2.mp4 */; };
 		757F34C81DAB829700ACF36D /* video.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 757F34C71DAB829700ACF36D /* video.mp4 */; };
 		75A4727D1DFAB12100F459E9 /* PlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75A4727C1DFAB12100F459E9 /* PlayerViewController.swift */; };
+		75C6331D1E040D91000DBD42 /* ViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75C6331C1E040D91000DBD42 /* ViewControllerTests.swift */; };
+		75C633221E054198000DBD42 /* ASPVideoPlayerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75C633211E054198000DBD42 /* ASPVideoPlayerTests.swift */; };
+		75C6332A1E056478000DBD42 /* ASPVideoPlayer_ExampleUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75C633291E056478000DBD42 /* ASPVideoPlayer_ExampleUITests.swift */; };
 		82AABB55DE4BABA586F5C65B /* Pods_ASPVideoPlayer_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 657113FC20D81D253680D24D /* Pods_ASPVideoPlayer_Example.framework */; };
 /* End PBXBuildFile section */
 
@@ -28,6 +31,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = 607FACCF1AFB9204008FA782;
 			remoteInfo = ASPVideoPlayer;
+		};
+		75C6332C1E056478000DBD42 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 607FACC81AFB9204008FA782 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 607FACCF1AFB9204008FA782;
+			remoteInfo = ASPVideoPlayer_Example;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -48,11 +58,16 @@
 		6413D42FB72838EDAACC4E3A /* Pods-ASPVideoPlayer_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ASPVideoPlayer_Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ASPVideoPlayer_Tests/Pods-ASPVideoPlayer_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		657113FC20D81D253680D24D /* Pods_ASPVideoPlayer_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ASPVideoPlayer_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		75093D871D14C1CA0054E08D /* ASPVideoPlayer_Tests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ASPVideoPlayer_Tests-Bridging-Header.h"; sourceTree = "<group>"; };
-		75093D881D14C1CA0054E08D /* ASPVideoPlayerControlerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ASPVideoPlayerControlerTests.swift; sourceTree = "<group>"; };
+		75093D881D14C1CA0054E08D /* ASPVideoPlayerControlsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ASPVideoPlayerControlsTests.swift; sourceTree = "<group>"; };
 		75093D891D14C1CA0054E08D /* ASPVideoPlayerViewTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ASPVideoPlayerViewTests.swift; sourceTree = "<group>"; };
 		754153E91DAE114C00E16BE9 /* video2.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = video2.mp4; sourceTree = "<group>"; };
 		757F34C71DAB829700ACF36D /* video.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = video.mp4; sourceTree = "<group>"; };
 		75A4727C1DFAB12100F459E9 /* PlayerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerViewController.swift; sourceTree = "<group>"; };
+		75C6331C1E040D91000DBD42 /* ViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerTests.swift; sourceTree = "<group>"; };
+		75C633211E054198000DBD42 /* ASPVideoPlayerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ASPVideoPlayerTests.swift; sourceTree = "<group>"; };
+		75C633271E056478000DBD42 /* ASPVideoPlayer_ExampleUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ASPVideoPlayer_ExampleUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		75C633291E056478000DBD42 /* ASPVideoPlayer_ExampleUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ASPVideoPlayer_ExampleUITests.swift; sourceTree = "<group>"; };
+		75C6332B1E056478000DBD42 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8179CAB6F1755BD934B98047 /* Pods-ASPVideoPlayer_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ASPVideoPlayer_Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-ASPVideoPlayer_Example/Pods-ASPVideoPlayer_Example.release.xcconfig"; sourceTree = "<group>"; };
 		D4D561E4D863E435F2EE8D02 /* Pods_ASPVideoPlayer_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ASPVideoPlayer_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E46EEA47B4689CB9C4BB8112 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
@@ -75,6 +90,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		75C633241E056478000DBD42 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -93,6 +115,7 @@
 				607FACF51AFB993E008FA782 /* Podspec Metadata */,
 				607FACD21AFB9204008FA782 /* Example for ASPVideoPlayer */,
 				607FACE81AFB9204008FA782 /* Tests */,
+				75C633281E056478000DBD42 /* ASPVideoPlayer_ExampleUITests */,
 				607FACD11AFB9204008FA782 /* Products */,
 				B9102A8C5532C1DDA08E4EC4 /* Pods */,
 				0572317B3DBC9AC5420A16F7 /* Frameworks */,
@@ -104,6 +127,7 @@
 			children = (
 				607FACD01AFB9204008FA782 /* ASPVideoPlayer_Example.app */,
 				607FACE51AFB9204008FA782 /* ASPVideoPlayer_Tests.xctest */,
+				75C633271E056478000DBD42 /* ASPVideoPlayer_ExampleUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -136,7 +160,9 @@
 		607FACE81AFB9204008FA782 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
-				75093D881D14C1CA0054E08D /* ASPVideoPlayerControlerTests.swift */,
+				75C6331C1E040D91000DBD42 /* ViewControllerTests.swift */,
+				75C633211E054198000DBD42 /* ASPVideoPlayerTests.swift */,
+				75093D881D14C1CA0054E08D /* ASPVideoPlayerControlsTests.swift */,
 				75093D891D14C1CA0054E08D /* ASPVideoPlayerViewTests.swift */,
 				607FACE91AFB9204008FA782 /* Supporting Files */,
 				75093D871D14C1CA0054E08D /* ASPVideoPlayer_Tests-Bridging-Header.h */,
@@ -160,6 +186,15 @@
 				54C08F5A2526001DA6B08C80 /* LICENSE */,
 			);
 			name = "Podspec Metadata";
+			sourceTree = "<group>";
+		};
+		75C633281E056478000DBD42 /* ASPVideoPlayer_ExampleUITests */ = {
+			isa = PBXGroup;
+			children = (
+				75C633291E056478000DBD42 /* ASPVideoPlayer_ExampleUITests.swift */,
+				75C6332B1E056478000DBD42 /* Info.plist */,
+			);
+			path = ASPVideoPlayer_ExampleUITests;
 			sourceTree = "<group>";
 		};
 		B9102A8C5532C1DDA08E4EC4 /* Pods */ = {
@@ -217,13 +252,31 @@
 			productReference = 607FACE51AFB9204008FA782 /* ASPVideoPlayer_Tests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		75C633261E056478000DBD42 /* ASPVideoPlayer_ExampleUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 75C6332E1E056478000DBD42 /* Build configuration list for PBXNativeTarget "ASPVideoPlayer_ExampleUITests" */;
+			buildPhases = (
+				75C633231E056478000DBD42 /* Sources */,
+				75C633241E056478000DBD42 /* Frameworks */,
+				75C633251E056478000DBD42 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				75C6332D1E056478000DBD42 /* PBXTargetDependency */,
+			);
+			name = ASPVideoPlayer_ExampleUITests;
+			productName = ASPVideoPlayer_ExampleUITests;
+			productReference = 75C633271E056478000DBD42 /* ASPVideoPlayer_ExampleUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		607FACC81AFB9204008FA782 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0730;
+				LastSwiftUpdateCheck = 0820;
 				LastUpgradeCheck = 0820;
 				ORGANIZATIONNAME = CocoaPods;
 				TargetAttributes = {
@@ -237,6 +290,12 @@
 						CreatedOnToolsVersion = 6.3.1;
 						DevelopmentTeam = SC5NQW88NN;
 						LastSwiftMigration = 0810;
+						TestTargetID = 607FACCF1AFB9204008FA782;
+					};
+					75C633261E056478000DBD42 = {
+						CreatedOnToolsVersion = 8.2;
+						DevelopmentTeam = SC5NQW88NN;
+						ProvisioningStyle = Automatic;
 						TestTargetID = 607FACCF1AFB9204008FA782;
 					};
 				};
@@ -256,6 +315,7 @@
 			targets = (
 				607FACCF1AFB9204008FA782 /* ASPVideoPlayer_Example */,
 				607FACE41AFB9204008FA782 /* ASPVideoPlayer_Tests */,
+				75C633261E056478000DBD42 /* ASPVideoPlayer_ExampleUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -274,6 +334,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		607FACE31AFB9204008FA782 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		75C633251E056478000DBD42 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -390,8 +457,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				75093D8A1D14C1CA0054E08D /* ASPVideoPlayerControlerTests.swift in Sources */,
+				75C6331D1E040D91000DBD42 /* ViewControllerTests.swift in Sources */,
+				75093D8A1D14C1CA0054E08D /* ASPVideoPlayerControlsTests.swift in Sources */,
 				75093D8B1D14C1CA0054E08D /* ASPVideoPlayerViewTests.swift in Sources */,
+				75C633221E054198000DBD42 /* ASPVideoPlayerTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		75C633231E056478000DBD42 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				75C6332A1E056478000DBD42 /* ASPVideoPlayer_ExampleUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -402,6 +479,11 @@
 			isa = PBXTargetDependency;
 			target = 607FACCF1AFB9204008FA782 /* ASPVideoPlayer_Example */;
 			targetProxy = 607FACE61AFB9204008FA782 /* PBXContainerItemProxy */;
+		};
+		75C6332D1E056478000DBD42 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 607FACCF1AFB9204008FA782 /* ASPVideoPlayer_Example */;
+			targetProxy = 75C6332C1E056478000DBD42 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -589,6 +671,40 @@
 			};
 			name = Release;
 		};
+		75C6332F1E056478000DBD42 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = SC5NQW88NN;
+				INFOPLIST_FILE = ASPVideoPlayer_ExampleUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "ro.andreisergiupitis.ASPVideoPlayer-ExampleUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_VERSION = 3.0;
+				TEST_TARGET_NAME = ASPVideoPlayer_Example;
+			};
+			name = Debug;
+		};
+		75C633301E056478000DBD42 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				DEVELOPMENT_TEAM = SC5NQW88NN;
+				INFOPLIST_FILE = ASPVideoPlayer_ExampleUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "ro.andreisergiupitis.ASPVideoPlayer-ExampleUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_TARGET_NAME = ASPVideoPlayer_Example;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -618,6 +734,14 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		75C6332E1E056478000DBD42 /* Build configuration list for PBXNativeTarget "ASPVideoPlayer_ExampleUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				75C6332F1E056478000DBD42 /* Debug */,
+				75C633301E056478000DBD42 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
 	};

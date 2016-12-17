@@ -53,6 +53,16 @@
                ReferencedContainer = "container:ASPVideoPlayer.xcodeproj">
             </BuildableReference>
          </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "75C633261E056478000DBD42"
+               BuildableName = "ASPVideoPlayer_ExampleUITests.xctest"
+               BlueprintName = "ASPVideoPlayer_ExampleUITests"
+               ReferencedContainer = "container:ASPVideoPlayer.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference

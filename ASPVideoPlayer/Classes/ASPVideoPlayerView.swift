@@ -229,13 +229,13 @@ A simple UIView subclass that can play a video and allows animations to be appli
 	
 	//MARK: - Private Variables and Constants -
 	
-	fileprivate let videoPlayerLayer: AVPlayerLayer = AVPlayerLayer()
+	private let videoPlayerLayer: AVPlayerLayer = AVPlayerLayer()
 	
-	fileprivate var animationForwarder: AnimationForwarder!
+	private var animationForwarder: AnimationForwarder!
 	
-	fileprivate var videoGravity: String! = AVLayerVideoGravityResizeAspectFill
+	private var videoGravity: String! = AVLayerVideoGravityResizeAspectFill
 	
-	fileprivate var timeObserver: AnyObject?
+	private var timeObserver: AnyObject?
 	
 	//MARK: - Superclass methods -
 	

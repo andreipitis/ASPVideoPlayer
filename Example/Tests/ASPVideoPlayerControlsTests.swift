@@ -9,7 +9,7 @@
 import XCTest
 @testable import ASPVideoPlayer
 
-class ASPVideoPlayerControlerTests: XCTestCase {
+class ASPVideoPlayerControlsTests: XCTestCase {
 	
 	var videoURL: URL!
 	
@@ -29,6 +29,145 @@ class ASPVideoPlayerControlerTests: XCTestCase {
 		let sut = ASPVideoPlayerControls(videoPlayer: videoPlayer)
 		
 		XCTAssertEqual(sut.videoPlayer, videoPlayer, "Players are equal.")
+	}
+	
+	func testSetNextButtonHidden_ShouldHideNextButton() {
+		let videoPlayer = ASPVideoPlayerView()
+		let sut = ASPVideoPlayerControls(videoPlayer: videoPlayer)
+		
+		sut.nextButtonHidden = true
+		
+		XCTAssertEqual(sut.nextButtonHidden, true, "Next button is not hidden.")
+	}
+	
+	func testSetPreviousButtonHidden_ShouldHidePreviousButton() {
+		let videoPlayer = ASPVideoPlayerView()
+		let sut = ASPVideoPlayerControls(videoPlayer: videoPlayer)
+		
+		sut.previousButtonHidden = true
+		
+		XCTAssertEqual(sut.previousButtonHidden, true, "Next button is not hidden.")
+	}
+	
+	func testSetInteracting_ShouldCallInteractingClosure() {
+		let expectation = self.expectation(description: "Timeout expectation")
+		
+		let videoPlayer = ASPVideoPlayerView()
+		let sut = ASPVideoPlayerControls(videoPlayer: videoPlayer)
+		
+		sut.interacting = { (isInteracting) in
+			XCTAssertTrue(isInteracting, "Interacting is false.")
+			expectation.fulfill()
+		}
+		
+		sut.isInteracting = true
+		
+		waitForExpectations(timeout: 5.0) { (error) in
+			if let error = error {
+				print(error)
+			}
+		}
+	}
+	
+	func testApplicationDidEnterBackgroundReceived_ShouldPauseVideo() {
+		let videoPlayer = ASPVideoPlayerView()
+		let sut = ASPVideoPlayerControls(videoPlayer: videoPlayer)
+		
+		sut.play()
+
+		NotificationCenter.default.post(name: NSNotification.Name.UIApplicationDidEnterBackground, object: nil)
+		
+		XCTAssertEqual(videoPlayer.status, .paused, "Video is not paused.")
+	}
+	
+	func testVideoStoppedAndPlayButtonPressed_ShouldPlayVideo() {
+		let videoPlayer = ASPVideoPlayerView()
+		let sut = ASPVideoPlayerControls(videoPlayer: videoPlayer)
+		
+		sut.playButtonPressed()
+		
+		XCTAssertEqual(videoPlayer.status, .playing, "Video is not playing.")
+	}
+	
+	func testVideoPlayingAndPlayButtonPressed_ShouldPauseVideo() {
+		let videoPlayer = ASPVideoPlayerView()
+		let sut = ASPVideoPlayerControls(videoPlayer: videoPlayer)
+		
+		sut.play()
+		
+		sut.playButtonPressed()
+		
+		XCTAssertEqual(videoPlayer.status, .paused, "Video is not paused.")
+	}
+	
+	func testNextButtonPressed_DidPressNextButton() {
+		let expectation = self.expectation(description: "Timeout expectation")
+		
+		let videoPlayer = ASPVideoPlayerView()
+		let sut = ASPVideoPlayerControls(videoPlayer: videoPlayer)
+		
+		sut.didPressNextButton = {
+			expectation.fulfill()
+		}
+		
+		sut.nextButtonPressed()
+		
+		waitForExpectations(timeout: 5.0) { (error) in
+			if let error = error {
+				print(error)
+			}
+		}
+	}
+	
+	func testPreviousButtonPressed_DidPressPreviousButton() {
+		let expectation = self.expectation(description: "Timeout expectation")
+		
+		let videoPlayer = ASPVideoPlayerView()
+		let sut = ASPVideoPlayerControls(videoPlayer: videoPlayer)
+		
+		sut.didPressPreviousButton = {
+			expectation.fulfill()
+		}
+		
+		sut.previousButtonPressed()
+		
+		waitForExpectations(timeout: 5.0) { (error) in
+			if let error = error {
+				print(error)
+			}
+		}
+	}
+	
+	func testProgressSliderBeginTouch_ShouldSetInteraction() {
+		let expectation = self.expectation(description: "Timeout expectation")
+		
+		let videoPlayer = ASPVideoPlayerView()
+		let sut = ASPVideoPlayerControls(videoPlayer: videoPlayer)
+		
+		sut.interacting = { (isInteracting) in
+			XCTAssertTrue(isInteracting, "Interacting is false.")
+			expectation.fulfill()
+		}
+		
+		sut.progressSliderBeginTouch()
+		
+		waitForExpectations(timeout: 5.0) { (error) in
+			if let error = error {
+				print(error)
+			}
+		}
+	}
+	
+	func testProgressSliderEndTouch_ShouldSetInteraction() {
+		let videoPlayer = ASPVideoPlayerView()
+		let sut = ASPVideoPlayerControls(videoPlayer: videoPlayer)
+		
+		let slider = Scrubber()
+		slider.value = 0.5
+		
+		sut.progressSliderChanged(slider: slider)
+		
+		XCTAssertEqual(sut.videoPlayer!.progress, Double(slider.value), "Values are not equal.")
 	}
 	
 	func testPlayCalled_ShoudStartVideoPlayback() {

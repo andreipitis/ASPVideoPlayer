@@ -183,16 +183,16 @@ open class ASPBasicControls: UIView, VideoPlayerControls, VideoPlayerSeekControl
 	
 	//MARK: - Private Variables and Constants -
 	
-	fileprivate let playPauseButton = PlayPauseButton()
-	fileprivate let progressSlider = Scrubber()
-	fileprivate let nextButton = NextButton()
-	fileprivate let previousButton = PreviousButton()
-	fileprivate let progressLoader = Loader()
+	private let playPauseButton = PlayPauseButton()
+	private let progressSlider = Scrubber()
+	private let nextButton = NextButton()
+	private let previousButton = PreviousButton()
+	private let progressLoader = Loader()
 	
-	fileprivate var currentTimeLabel = UILabel()
-	fileprivate var lengthLabel = UILabel()
+	private var currentTimeLabel = UILabel()
+	private var lengthLabel = UILabel()
 	
-	@objc fileprivate var isInteracting: Bool = false {
+	@objc internal var isInteracting: Bool = false {
 		didSet {
 			interacting?(isInteracting)
 		}
@@ -221,7 +221,7 @@ open class ASPBasicControls: UIView, VideoPlayerControls, VideoPlayerSeekControl
 		NotificationCenter.default.removeObserver(self)
 	}
 	
-	@objc fileprivate func playButtonPressed() {
+	@objc internal func playButtonPressed() {
 		if videoPlayer?.status == .playing {
 			videoPlayer?.startPlayingWhenReady = false
 			pause()
@@ -237,29 +237,31 @@ open class ASPBasicControls: UIView, VideoPlayerControls, VideoPlayerSeekControl
 	
 	//MARK: - Private methods -
 	
-	@objc fileprivate func nextButtonPressed() {
+	@objc internal func nextButtonPressed() {
+		isInteracting = false
 		didPressNextButton?()
 	}
 	
-	@objc fileprivate func previousButtonPressed() {
+	@objc internal func previousButtonPressed() {
+		isInteracting = false
 		didPressPreviousButton?()
 	}
 	
-	@objc fileprivate func progressSliderBeginTouch() {
+	@objc internal func progressSliderBeginTouch() {
 		isInteracting = true
 	}
 	
-	@objc fileprivate func progressSliderChanged(slider: Scrubber) {
+	@objc internal func progressSliderChanged(slider: Scrubber) {
 		seek(value: Double(slider.value))
 		perform(#selector(setter: ASPVideoPlayerControls.isInteracting), with: false, afterDelay: 0.1)
 	}
 	
-	@objc fileprivate func applicationDidEnterBackground() {
+	@objc internal func applicationDidEnterBackground() {
 		playPauseButton.isSelected = false
 		pause()
 	}
 	
-	fileprivate func setupVideoPlayerView() {
+	private func setupVideoPlayerView() {
 		if let videoPlayerView = videoPlayer {
 			videoPlayerView.newVideo = {
 				newVideo?()
@@ -327,7 +329,7 @@ open class ASPBasicControls: UIView, VideoPlayerControls, VideoPlayerSeekControl
 		}
 	}
 	
-	fileprivate func timeFormatted(totalSeconds: UInt) -> String {
+	private func timeFormatted(totalSeconds: UInt) -> String {
 		let seconds = totalSeconds % 60
 		let minutes = (totalSeconds / 60) % 60
 		let hours = totalSeconds / 3600
@@ -335,7 +337,7 @@ open class ASPBasicControls: UIView, VideoPlayerControls, VideoPlayerSeekControl
 		return String(format: "%02d:%02d:%02d", hours, minutes, seconds)
 	}
 	
-	fileprivate func commonInit() {
+	private func commonInit() {
 		NotificationCenter.default.addObserver(self, selector: #selector(ASPVideoPlayerControls.applicationDidEnterBackground), name: NSNotification.Name.UIApplicationDidEnterBackground, object: nil)
 		
 		playPauseButton.translatesAutoresizingMaskIntoConstraints = false
@@ -382,7 +384,7 @@ open class ASPBasicControls: UIView, VideoPlayerControls, VideoPlayerSeekControl
 		setupLayout()
 	}
 	
-	fileprivate func setupLayout() {
+	private func setupLayout() {
 		let viewsDictionary: [String : Any] = ["playPauseButton":playPauseButton,
 		                                       "progressSlider":progressSlider,
 		                                       "nextButton":nextButton,

@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="EOn-E5-GcR">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="EOn-E5-GcR">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
         <scene sceneID="ufC-wZ-h7g">
             <objects>
-                <viewController id="vXZ-lx-hvc" customClass="ViewController" customModule="ASPVideoPlayer_Example" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ASPPlayerViewViewController" id="vXZ-lx-hvc" customClass="ViewController" customModule="ASPVideoPlayer_Example" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="jyV-Pf-zRb"/>
                         <viewControllerLayoutGuide type="bottom" id="2fi-mo-0CV"/>
@@ -49,7 +49,7 @@
         <!--Player View Controller-->
         <scene sceneID="8I2-Y7-Io3">
             <objects>
-                <viewController id="EOn-E5-GcR" customClass="PlayerViewController" customModule="ASPVideoPlayer_Example" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ASPPlayerViewController" id="EOn-E5-GcR" customClass="PlayerViewController" customModule="ASPVideoPlayer_Example" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="udt-In-Mlc"/>
                         <viewControllerLayoutGuide type="bottom" id="SsN-lY-oaF"/>

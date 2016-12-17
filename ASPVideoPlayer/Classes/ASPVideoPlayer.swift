@@ -92,7 +92,7 @@ A video player implementation with basic functionality.
 	
 	//MARK: - Private methods -
 	
-	@objc fileprivate func toggleControls() {
+	@objc internal func toggleControls() {
 		if videoPlayerControls.alpha == 1.0 && videoPlayerView.status == .playing {
 			hideControls()
 		} else {
@@ -105,19 +105,19 @@ A video player implementation with basic functionality.
 		}
 	}
 	
-	fileprivate func showControls() {
+	internal func showControls() {
 		UIView.animate(withDuration: fadeDuration, animations: {
 			self.videoPlayerControls.alpha = 1.0
 		})
 	}
 	
-	@objc fileprivate func hideControls() {
+	@objc internal func hideControls() {
 		UIView.animate(withDuration: fadeDuration, animations: {
 			self.videoPlayerControls.alpha = 0.0
 		})
 	}
 	
-	fileprivate func updateControls() {
+	private func updateControls() {
 		videoPlayerControls.tintColor = tintColor
 		
 		videoPlayerControls.newVideo = {
@@ -131,8 +131,10 @@ A video player implementation with basic functionality.
 		
 		videoPlayerControls.finishedVideo = {
 			if let videoURL = videoPlayerView.videoURL {
-				if videoURL == videoURLs.last && videoPlayerView.shouldLoop == true {
-					videoPlayerView.videoURL = videoURLs.first
+				if videoURL == videoURLs.last {
+					if videoPlayerView.shouldLoop == true {
+						videoPlayerView.videoURL = videoURLs.first
+					}
 				} else {
 					let currentURLIndex = videoURLs.index(of: videoURL)
 					let nextURL = videoURLs[currentURLIndex! + 1]
@@ -163,8 +165,8 @@ A video player implementation with basic functionality.
 		}
 		
 		videoPlayerControls.interacting = { (isInteracting) in
+			NSObject.cancelPreviousPerformRequests(withTarget: self, selector: #selector(ASPVideoPlayer.hideControls), object: nil)
 			if isInteracting == true {
-				NSObject.cancelPreviousPerformRequests(withTarget: self, selector: #selector(ASPVideoPlayer.hideControls), object: nil)
 				showControls()
 			} else {
 				if videoPlayerView.status == .playing {
@@ -174,7 +176,7 @@ A video player implementation with basic functionality.
 		}
 	}
 	
-	fileprivate func commonInit() {
+	private func commonInit() {
 		let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(ASPVideoPlayer.toggleControls))
 		tapGestureRecognizer.delegate = self
 		addGestureRecognizer(tapGestureRecognizer)
@@ -195,7 +197,7 @@ A video player implementation with basic functionality.
 		setupLayout()
 	}
 	
-	fileprivate func setupLayout() {
+	private func setupLayout() {
 		let viewsDictionary: [String: Any] = ["videoPlayerView":videoPlayerView,
 		                                      "videoPlayerControls":videoPlayerControls]
 		

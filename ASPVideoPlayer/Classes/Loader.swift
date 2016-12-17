@@ -12,7 +12,7 @@ open class Loader: UIView {
 	
 	//MARK: - Private Variables and Constants -
 	
-	fileprivate let progressLayer = CAShapeLayer()
+	private let progressLayer = CAShapeLayer()
 	
 	//MARK: - Public Variables -
 	

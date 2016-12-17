@@ -17,10 +17,10 @@ open class Scrubber: UIControl {
 	
 	//MARK: - Private Variables and Constants -
 	
-	fileprivate var previousLocation = CGPoint()
-	fileprivate let trackLayer = CALayer()
-	fileprivate let trackFillLayer = CALayer()
-	fileprivate let thumbLayer = ScrubberThumb()
+	private var previousLocation = CGPoint()
+	private let trackLayer = CALayer()
+	private let trackFillLayer = CALayer()
+	private let thumbLayer = ScrubberThumb()
 	
 	//MARK: - Public Variables -
 	
@@ -186,7 +186,7 @@ open class Scrubber: UIControl {
 	
 	//MARK: - Private Methods -
 	
-	fileprivate func commonInit() {
+	private func commonInit() {
 		thumbLayer.scrubber = self
 		
 		trackLayer.backgroundColor = trackColor
@@ -207,7 +207,7 @@ open class Scrubber: UIControl {
 		updateFrames()
 	}
 	
-	fileprivate func updateFrames() {
+	private func updateFrames() {
 		CATransaction.begin()
 		CATransaction.setDisableActions(true)
 		
