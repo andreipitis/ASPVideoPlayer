@@ -1,9 +1,18 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [2.0.1] - 2016-12-18
+### Added
+- UI Tests.
+- More Unit Tests.
+- Image to README.
+
+### Changed
+- Access for some variables and functions from `fileprivate` to `internal`.
+
 ## [2.0.0] - 2016-12-16
 ### Added
-- Video control UI items (Buttons, Scrubber, Loader)
+- Video control UI items (Buttons, Scrubber, Loader).
 - ASPVideoPlayer implementation as a full video player with controls.
 - ASPVideoPlayer Example for the full video player (Set as the default ViewController in the Storyboard).
 - Code comments.
@@ -13,7 +22,7 @@ All notable changes to this project will be documented in this file.
 - Updated ASPVideoPlayerControls implementation and UI.
 
 ### Removed
-- Unused methods throughout the Example
+- Unused methods throughout the Example.
 
 ## [1.2.0] - 2016-10-13
 
