@@ -55,7 +55,7 @@ open class Loader: UIView {
 		let rotationAnimation = CABasicAnimation(keyPath: "transform.rotation")
 		rotationAnimation.duration = 4.0
 		rotationAnimation.fromValue = 0.0
-		rotationAnimation.toValue = 2 * M_PI
+		rotationAnimation.toValue = 2 * Double.pi
 		rotationAnimation.repeatCount = .infinity
 		progressLayer.add(rotationAnimation, forKey: "rotationAnimation")
 		
@@ -105,7 +105,7 @@ open class Loader: UIView {
 	
 	private func updatePath() {
 		let startAngle: CGFloat = 0.0
-		let endAngle: CGFloat = CGFloat(2.0 * M_PI)
+		let endAngle: CGFloat = CGFloat(2.0 * Double.pi)
 		let radius: CGFloat = min(bounds.size.width / 2.0, bounds.size.height / 2.0)
 		let path = UIBezierPath(arcCenter: CGPoint(x: bounds.midX, y: bounds.midY), radius: radius - lineWidth / 2.0, startAngle: startAngle, endAngle: endAngle, clockwise: true)
 		

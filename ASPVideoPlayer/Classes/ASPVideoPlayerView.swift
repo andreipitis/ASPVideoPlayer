@@ -20,19 +20,19 @@ A simple UIView subclass that can play a video and allows animations to be appli
 	/**
 	Basic closure type.
 	*/
-	public typealias VoidClosure = (@noescape () -> Void)?
+	public typealias VoidClosure = (() -> Void)?
 	
 	/**
 	Closure type for recurring actions.
 	- Parameter progress: The progress indicator value. Value is in range [0.0, 1.0].
 	*/
-	public typealias ProgressClosure = (@noescape (_ progress: Double) -> Void)?
+	public typealias ProgressClosure = ((_ progress: Double) -> Void)?
 	
 	/**
 	Closure type for error handling.
 	- Parameter error: The error that occured.
 	*/
-	public typealias ErrorClosure = (@noescape (_ error: NSError) -> Void)?
+	public typealias ErrorClosure = ((_ error: NSError) -> Void)?
 	
 	//MARK: - Enumerations -
 	
