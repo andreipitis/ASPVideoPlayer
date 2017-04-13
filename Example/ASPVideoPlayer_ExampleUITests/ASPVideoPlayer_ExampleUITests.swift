@@ -37,12 +37,20 @@ class ASPVideoPlayer_ExampleUITests: XCTestCase {
 	}
 	
 	func testAdjustScrubber_ShouldSeekVideo() {
-		let app = XCUIApplication()
-		app.children(matching: .window).element(boundBy: 0).children(matching: .other).element.children(matching: .other).element.children(matching: .other).element(boundBy: 1).children(matching: .other).element(boundBy: 1).swipeRight()
+        let app = XCUIApplication()
+		let element = app.children(matching: .window).element(boundBy: 0)
+        let labelValue = app.staticTexts.element(boundBy: 0)
+        
+        let screenSize = element.frame.size
+        let scrubberRelativeXOffset = (labelValue.frame.origin.x + labelValue.frame.size.width + 10) / screenSize.width
+        let scrubberRelativeYOffset = labelValue.frame.origin.y / screenSize.height
+        
+        let startCoordinate: XCUICoordinate = element.coordinate(withNormalizedOffset: CGVector(dx: scrubberRelativeXOffset, dy: scrubberRelativeYOffset))
+        let destinationCoordinate: XCUICoordinate = element.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 1.0))
+        
+        startCoordinate.press(forDuration: 0.0, thenDragTo: destinationCoordinate)
 		
-		let labelValue = app.staticTexts.element(boundBy: 0).label
-		
-		XCTAssertNotEqual(labelValue, "00:00:00", "Values are equal.")
+		XCTAssertNotEqual(labelValue.label, "00:00:00", "Values are equal.")
 	}
 	
 	func testTapVideo_ShouldHideControls() {
@@ -62,7 +70,7 @@ class ASPVideoPlayer_ExampleUITests: XCTestCase {
 		
 		sleep(4)
 		
-		element.children(matching: .other).element.tap()
+		element.children(matching: .other).element(boundBy: 0).tap()
 
 		XCTAssertEqual(element.exists, true, "Controls are not visible.")
 	}
