@@ -1,6 +1,14 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [2.0.2] - 2017-04-13
+### Changed
+- Updated UI Tests.
+
+### Fixed
+- Strong references to `self` in closures.
+  - Fixed by [Rob Phillips](https://github.com/iwasrobbed) in Pull Request [#8](https://github.com/andreipitis/ASPVideoPlayer/pull/8)
+
 ## [2.0.1] - 2016-12-18
 ### Added
 - UI Tests.
