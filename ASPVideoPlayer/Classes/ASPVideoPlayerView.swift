@@ -338,10 +338,10 @@ A simple UIView subclass that can play a video and allows animations to be appli
 	//MARK: - KeyValueObserving methods -
 	
 	open override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
-		guard let player = object as? AVPlayerItem, let keyPath = keyPath else { return }
+		guard let asset = object as? AVPlayerItem, let keyPath = keyPath else { return }
 		
-		if player == videoPlayerLayer.player?.currentItem && keyPath == "status" {
-			if player.status == .readyToPlay {
+		if asset == videoPlayerLayer.player?.currentItem && keyPath == "status" {
+			if asset.status == .readyToPlay {
 				if status == .new {
 					status = .readyToPlay
 				}
@@ -352,7 +352,7 @@ A simple UIView subclass that can play a video and allows animations to be appli
 				} else {
 					readyToPlayVideo?()
 				}
-			} else if player.status == .failed {
+			} else if asset.status == .failed {
 				status = .error
 				
 				let userInfo = [NSLocalizedDescriptionKey: "Error loading video."]
