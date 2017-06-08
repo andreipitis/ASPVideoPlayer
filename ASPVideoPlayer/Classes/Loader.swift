@@ -86,6 +86,7 @@ open class Loader: UIView {
 		endTailAnimation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
 		
 		let animations = CAAnimationGroup()
+        animations.beginTime = CACurrentMediaTime() + 0.25
 		animations.duration = 1.5
 		animations.animations = [headAnimation, tailAnimation, endHeadAnimation, endTailAnimation]
 		animations.repeatCount = .infinity

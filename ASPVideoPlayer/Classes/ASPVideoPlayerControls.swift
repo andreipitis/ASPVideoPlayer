@@ -279,36 +279,36 @@ open class ASPBasicControls: UIView, VideoPlayerControls, VideoPlayerSeekControl
 				strongSelf.progressLoader.startAnimating()
 			}
 			
-            videoPlayerView.readyToPlayVideo = { [weak self] in
-                guard let strongSelf = self else { return }
+            videoPlayerView.readyToPlayVideo = { [weak self, weak videoPlayerView] in
+                guard let strongSelf = self, let strongVideoPlayerView = videoPlayerView else { return }
                 
 				strongSelf.progressSlider.isUserInteractionEnabled = true
 				
-				let currentTime = videoPlayerView.currentTime
-				strongSelf.lengthLabel.text = strongSelf.timeFormatted(totalSeconds: UInt(videoPlayerView.videoLength))
+				let currentTime = strongVideoPlayerView.currentTime
+				strongSelf.lengthLabel.text = strongSelf.timeFormatted(totalSeconds: UInt(strongVideoPlayerView.videoLength))
 				strongSelf.currentTimeLabel.text = strongSelf.timeFormatted(totalSeconds: UInt(currentTime))
 				
 				strongSelf.progressLoader.stopAnimating()
 			}
 			
-			videoPlayerView.playingVideo = { [weak self] (progress) in
-                guard let strongSelf = self else { return }
+			videoPlayerView.playingVideo = { [weak self, weak videoPlayerView] (progress) in
+                guard let strongSelf = self, let strongVideoPlayerView = videoPlayerView else { return }
                 
 				if strongSelf.isInteracting == false {
 					strongSelf.progressSlider.value = CGFloat(progress)
 				}
 				
-				let currentTime = videoPlayerView.currentTime
+				let currentTime = strongVideoPlayerView.currentTime
 				strongSelf.currentTimeLabel.text = strongSelf.timeFormatted(totalSeconds: UInt(currentTime))
 			}
 			
-            videoPlayerView.startedVideo = { [weak self] in
-                guard let strongSelf = self else { return }
+            videoPlayerView.startedVideo = { [weak self, weak videoPlayerView] in
+                guard let strongSelf = self, let strongVideoPlayerView = videoPlayerView else { return }
                 
 				strongSelf.progressSlider.isUserInteractionEnabled = true
 				
-				let currentTime = videoPlayerView.currentTime
-				strongSelf.lengthLabel.text = strongSelf.timeFormatted(totalSeconds: UInt(videoPlayerView.videoLength))
+				let currentTime = strongVideoPlayerView.currentTime
+				strongSelf.lengthLabel.text = strongSelf.timeFormatted(totalSeconds: UInt(strongVideoPlayerView.videoLength))
 				strongSelf.currentTimeLabel.text = strongSelf.timeFormatted(totalSeconds: UInt(currentTime))
 				
 				strongSelf.progressLoader.stopAnimating()

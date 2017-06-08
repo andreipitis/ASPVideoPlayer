@@ -158,14 +158,16 @@ A simple UIView subclass that can play a video and allows animations to be appli
 				error?(videoError)
 				return
 			}
+
+            let asset = AVAsset(url: url)
+            let playerItem = AVPlayerItem(asset: asset, automaticallyLoadedAssetKeys: ["duration", "tracks"])
 			
 			deinitObservers()
-			
-			videoPlayerLayer.player = AVPlayer(url: url)
-			videoPlayerLayer.player?.rate = 0.0
+            
+			videoPlayerLayer.player?.replaceCurrentItem(with: playerItem)
 			videoPlayerLayer.videoGravity = videoGravity
 			
-			videoPlayerLayer.player?.addObserver(self, forKeyPath: "status", options: [], context: nil)
+			videoPlayerLayer.player?.currentItem?.addObserver(self, forKeyPath: "status", options: [], context: nil)
 			
 			status = .new
 			newVideo?()
@@ -241,10 +243,12 @@ A simple UIView subclass that can play a video and allows animations to be appli
 	
 	override init(frame: CGRect) {
 		super.init(frame: frame)
+        commonInit()
 	}
 	
 	public required init?(coder aDecoder: NSCoder) {
 		super.init(coder: aDecoder)
+        commonInit()
 	}
 	
 	open override var frame: CGRect {
@@ -334,9 +338,9 @@ A simple UIView subclass that can play a video and allows animations to be appli
 	//MARK: - KeyValueObserving methods -
 	
 	open override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
-		guard let player = object as? AVPlayer, let keyPath = keyPath else { return }
+		guard let player = object as? AVPlayerItem, let keyPath = keyPath else { return }
 		
-		if player == videoPlayerLayer.player && keyPath == "status" {
+		if player == videoPlayerLayer.player?.currentItem && keyPath == "status" {
 			if player.status == .readyToPlay {
 				if status == .new {
 					status = .readyToPlay
@@ -360,6 +364,10 @@ A simple UIView subclass that can play a video and allows animations to be appli
 	}
 	
 	//MARK: - Private methods -
+    
+    private func commonInit() {
+        videoPlayerLayer.player = AVPlayer()
+    }
 	
 	fileprivate func seekToZero() {
 		progress = 0.0
@@ -384,7 +392,10 @@ A simple UIView subclass that can play a video and allows animations to be appli
 	
 	fileprivate func deinitObservers() {
 		NotificationCenter.default.removeObserver(self)
-		videoPlayerLayer.player?.removeObserver(self, forKeyPath: "status")
+        if let video = videoPlayerLayer.player?.currentItem, video.observationInfo != nil {
+            video.removeObserver(self, forKeyPath: "status")
+        }
+        
 		if let observer = timeObserver {
 			videoPlayerLayer.player?.removeTimeObserver(observer)
 			timeObserver = nil
