@@ -367,6 +367,7 @@ A simple UIView subclass that can play a video and allows animations to be appli
     
     private func commonInit() {
         videoPlayerLayer.player = AVPlayer()
+        videoPlayerLayer.contentsScale = UIScreen.main.scale
     }
 	
 	fileprivate func seekToZero() {
