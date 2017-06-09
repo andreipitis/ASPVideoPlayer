@@ -44,6 +44,29 @@ A simple UIView subclass that can play a video and allows animations to be appli
 		case aspectFit
 		case resize
 	}
+    
+    /**
+     Specifies how the video is rotated within a player layer’s bounds.
+     */
+    public enum PlayerRotation {
+        case none
+        case left
+        case right
+        case upsideDown
+        
+        func radians() -> CGFloat {
+            switch self {
+            case .none:
+                return 0.0
+            case .left:
+                return .pi / 2.0
+            case .right:
+                return -.pi / 2.0
+            case .upsideDown:
+                return .pi
+            }
+        }
+    }
 	
 	/**
 	Specifies the current status of the player.
@@ -191,6 +214,15 @@ A simple UIView subclass that can play a video and allows animations to be appli
 			videoPlayerLayer.videoGravity = videoGravity
 		}
 	}
+    
+    /**
+     The rotation of the video.
+     */
+    open var rotation: PlayerRotation = .none {
+        didSet {
+            videoPlayerLayer.setAffineTransform(CGAffineTransform(rotationAngle: rotation.radians()))
+        }
+    }
 	
 	/**
 	The volume of the player. Should be a value in the range [0.0, 1.0].
