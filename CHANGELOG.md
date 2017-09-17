@@ -1,13 +1,29 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [3.0.0] - 2017-09-17
+
+### Added
+- Resize button with callback
+- Ability to use AVAssets to set videos
+- Delay for loader animation
+- VideoPlayerView rotation
+
+### Changed
+- Updated to Swift 4
+- Updated UI Tests.
+- Internal player logic to not create a separate AVPlayer for each video
+
+### Fixed
+- Strong references to `self` in closures.
+
 ## [2.0.2] - 2017-04-13
 ### Changed
 - Updated UI Tests.
 
 ### Fixed
 - Strong references to `self` in closures.
-  - Fixed by [Rob Phillips](https://github.com/iwasrobbed) in Pull Request [#8](https://github.com/andreipitis/ASPVideoPlayer/pull/8)
+- Fixed by [Rob Phillips](https://github.com/iwasrobbed) in Pull Request [#8](https://github.com/andreipitis/ASPVideoPlayer/pull/8)
 
 ## [2.0.1] - 2016-12-18
 ### Added
