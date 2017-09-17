@@ -1,9 +1,14 @@
+platform :ios, '11.0'
 use_frameworks!
 
 target 'ASPVideoPlayer_Example' do
   pod 'ASPVideoPlayer', :path => '../'
 
   target 'ASPVideoPlayer_Tests' do
+    inherit! :search_paths
+  end
+
+  target 'ASPVideoPlayer_ExampleUITests' do
     inherit! :search_paths
   end
 end
