@@ -38,7 +38,7 @@ let videoPlayer = ASPVideoPlayer()
 @IBOutlet weak var videoPlayer: ASPVideoPlayer!
 ```
 
-- Once you have the reference, you can set the video URLs, the gravity and wether the videos should loop:
+- Once you have the reference, you can set the video URLs, the gravity and whether the videos should loop:
 
 ```swift
 let firstVideoURL = Bundle.main.url(forResource: "video", withExtension: "mp4")

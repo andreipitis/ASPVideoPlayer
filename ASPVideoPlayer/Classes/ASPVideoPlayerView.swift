@@ -153,12 +153,12 @@ A simple UIView subclass that can play a video and allows animations to be appli
 	//MARK: - Public Variables -
 	
 	/**
-	Sets wether the video should loop.
+	Sets whether the video should loop.
 	*/
 	open var shouldLoop: Bool = false
 	
 	/**
-	Sets wether the video should start automatically after it has been successfuly loaded.
+	Sets whether the video should start automatically after it has been successfuly loaded.
 	*/
 	open var startPlayingWhenReady: Bool = false
 	

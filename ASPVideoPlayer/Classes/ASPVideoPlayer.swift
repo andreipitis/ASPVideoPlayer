@@ -66,7 +66,7 @@ A video player implementation with basic functionality.
 	}
 	
 	/**
-	Sets wether the playlist should loop. Once the last video has finished playing, the first one will start.
+	Sets whether the playlist should loop. Once the last video has finished playing, the first one will start.
 	*/
 	open var shouldLoop: Bool {
 		set {
