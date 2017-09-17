@@ -183,19 +183,28 @@ A simple UIView subclass that can play a video and allows animations to be appli
 			}
 
             let asset = AVAsset(url: url)
-            let playerItem = AVPlayerItem(asset: asset, automaticallyLoadedAssetKeys: ["duration", "tracks"])
-			
-			deinitObservers()
-            
-			videoPlayerLayer.player?.replaceCurrentItem(with: playerItem)
-			videoPlayerLayer.videoGravity = videoGravity
-			
-			videoPlayerLayer.player?.currentItem?.addObserver(self, forKeyPath: "status", options: [], context: nil)
-			
-			status = .new
-			newVideo?()
+            setVideoAsset(asset: asset)
 		}
 	}
+
+    /**
+     The video asset that should be loaded.
+     */
+    open var videoAsset: AVAsset? = nil {
+        didSet {
+            guard let asset = videoAsset else {
+                status = .error
+
+                let userInfo = [NSLocalizedDescriptionKey: "Video asset is invalid."]
+                let videoError = NSError(domain: "com.andreisergiupitis.aspvideoplayer", code: 99, userInfo: userInfo)
+                
+                error?(videoError)
+                return
+            }
+
+            setVideoAsset(asset: asset)
+        }
+    }
 	
 	/**
 	The gravity of the video. Adjusts how the video fills the space of the container.
@@ -396,7 +405,21 @@ A simple UIView subclass that can play a video and allows animations to be appli
 	}
 	
 	//MARK: - Private methods -
-    
+
+    private func setVideoAsset(asset: AVAsset) {
+        let playerItem = AVPlayerItem(asset: asset, automaticallyLoadedAssetKeys: ["duration", "tracks"])
+
+        deinitObservers()
+
+        videoPlayerLayer.player?.replaceCurrentItem(with: playerItem)
+        videoPlayerLayer.videoGravity = videoGravity
+
+        videoPlayerLayer.player?.currentItem?.addObserver(self, forKeyPath: "status", options: [], context: nil)
+
+        status = .new
+        newVideo?()
+    }
+
     private func commonInit() {
         videoPlayerLayer.player = AVPlayer()
         videoPlayerLayer.contentsScale = UIScreen.main.scale

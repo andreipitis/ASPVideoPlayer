@@ -122,6 +122,8 @@ open class ASPBasicControls: UIView, VideoPlayerControls, VideoPlayerSeekControl
 	
 	open var didPressNextButton: (() -> Void)?
 	open var didPressPreviousButton: (() -> Void)?
+
+    open var didPressResizeButton: ((Bool) -> Void)?
 	
 	open var interacting: ((Bool) -> Void)?
 	open var newVideo: (() -> Void)?
@@ -131,7 +133,7 @@ open class ASPBasicControls: UIView, VideoPlayerControls, VideoPlayerSeekControl
 	open var previousButtonHidden: Bool = true
 }
 
-@IBDesignable open class ASPVideoPlayerControls: ASPBasicControls {
+@IBDesignable final public class ASPVideoPlayerControls: ASPBasicControls {
 	/**
 	Reference to the video player. Can be set through the Interface Builder.
 	*/
@@ -178,9 +180,25 @@ open class ASPBasicControls: UIView, VideoPlayerControls, VideoPlayerSeekControl
 			
 			lengthLabel.textColor = tintColor
 			currentTimeLabel.textColor = tintColor
+
+            resizeButton.tintColor = tintColor
 		}
 	}
-	
+
+
+    open override var didPressResizeButton: ((Bool) -> Void)? {
+        didSet {
+            if didPressResizeButton != nil {
+                resizeButtonWidthConstraint.constant = 26.0
+            } else {
+                resizeButtonWidthConstraint.constant = -8.0
+            }
+
+            setNeedsLayout()
+            layoutIfNeeded()
+        }
+    }
+
 	//MARK: - Private Variables and Constants -
 	
 	private let playPauseButton = PlayPauseButton()
@@ -188,9 +206,12 @@ open class ASPBasicControls: UIView, VideoPlayerControls, VideoPlayerSeekControl
 	private let nextButton = NextButton()
 	private let previousButton = PreviousButton()
 	private let progressLoader = Loader()
+    private let resizeButton = ResizeButton()
 	
 	private var currentTimeLabel = UILabel()
 	private var lengthLabel = UILabel()
+
+    private var resizeButtonWidthConstraint: NSLayoutConstraint!
 	
 	@objc internal var isInteracting: Bool = false {
 		didSet {
@@ -250,6 +271,10 @@ open class ASPBasicControls: UIView, VideoPlayerControls, VideoPlayerSeekControl
 	@objc internal func progressSliderBeginTouch() {
 		isInteracting = true
 	}
+
+    @objc internal func resizeButtonPressed() {
+        didPressResizeButton?(resizeButton.buttonState == .large)
+    }
 	
 	@objc internal func progressSliderChanged(slider: Scrubber) {
 		seek(value: Double(slider.value))
@@ -363,6 +388,7 @@ open class ASPBasicControls: UIView, VideoPlayerControls, VideoPlayerSeekControl
 		progressLoader.translatesAutoresizingMaskIntoConstraints = false
 		currentTimeLabel.translatesAutoresizingMaskIntoConstraints = false
 		lengthLabel.translatesAutoresizingMaskIntoConstraints = false
+        resizeButton.translatesAutoresizingMaskIntoConstraints = false
 		
 		previousButton.isHidden = true
 		nextButton.isHidden = true
@@ -382,12 +408,16 @@ open class ASPBasicControls: UIView, VideoPlayerControls, VideoPlayerSeekControl
 		lengthLabel.textColor = tintColor
 		lengthLabel.textAlignment = .center
 		lengthLabel.font = UIFont(name: "Courier-Bold", size: 12.0)
+
+        resizeButton.backgroundColor = .clear
+        resizeButton.tintColor = tintColor
 		
 		playPauseButton.addTarget(self, action: #selector(ASPVideoPlayerControls.playButtonPressed), for: .touchUpInside)
 		nextButton.addTarget(self, action: #selector(ASPVideoPlayerControls.nextButtonPressed), for: .touchUpInside)
 		previousButton.addTarget(self, action: #selector(ASPVideoPlayerControls.previousButtonPressed), for: .touchUpInside)
 		progressSlider.addTarget(self, action: #selector(ASPVideoPlayerControls.progressSliderChanged(slider:)), for: [.touchUpInside])
 		progressSlider.addTarget(self, action: #selector(ASPVideoPlayerControls.progressSliderBeginTouch), for: [.touchDown])
+        resizeButton.addTarget(self, action: #selector(ASPVideoPlayerControls.resizeButtonPressed), for: .touchUpInside)
 		
 		addSubview(progressLoader)
 		addSubview(playPauseButton)
@@ -396,6 +426,7 @@ open class ASPBasicControls: UIView, VideoPlayerControls, VideoPlayerSeekControl
 		addSubview(previousButton)
 		addSubview(currentTimeLabel)
 		addSubview(lengthLabel)
+        addSubview(resizeButton)
 		
 		setupLayout()
 	}
@@ -407,7 +438,8 @@ open class ASPBasicControls: UIView, VideoPlayerControls, VideoPlayerSeekControl
 		                                       "previousButton":previousButton,
 		                                       "progressLoader":progressLoader,
 		                                       "currentTimeLabel":currentTimeLabel,
-		                                       "lengthLabel":lengthLabel]
+		                                       "lengthLabel":lengthLabel,
+		                                       "resizeButton":resizeButton]
 		
 		var constraintsArray = [NSLayoutConstraint]()
 		
@@ -420,17 +452,24 @@ open class ASPBasicControls: UIView, VideoPlayerControls, VideoPlayerSeekControl
 		constraintsArray.append(NSLayoutConstraint(item: progressLoader, attribute: .centerX, relatedBy: .equal, toItem: self, attribute: .centerX, multiplier: 1.0, constant: 0.0))
 		constraintsArray.append(NSLayoutConstraint(item: progressLoader, attribute: .centerY, relatedBy: .equal, toItem: self, attribute: .centerY, multiplier: 1.0, constant: 0.0))
 		constraintsArray.append(NSLayoutConstraint(item: progressLoader, attribute: .width, relatedBy: .equal, toItem: progressLoader, attribute: .height, multiplier: 1.0, constant: 0.0))
+
+        constraintsArray.append(NSLayoutConstraint(item: resizeButton, attribute: .centerY, relatedBy: .equal, toItem: lengthLabel, attribute: .centerY, multiplier: 1.0, constant: -2.0))
+
+        resizeButtonWidthConstraint = NSLayoutConstraint(item: resizeButton, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: -8.0)
+
+        constraintsArray.append(resizeButtonWidthConstraint)
 		
 		constraintsArray.append(contentsOf: NSLayoutConstraint.constraints(withVisualFormat: "V:[progressLoader(==60)]", options: [], metrics: nil, views: viewsDictionary))
 		
 		
-		constraintsArray.append(contentsOf: NSLayoutConstraint.constraints(withVisualFormat: "H:[previousButton(==playPauseButton)]-50-[playPauseButton(==66)]-50-[nextButton(==playPauseButton)]", options: [], metrics: nil, views: viewsDictionary))
+		constraintsArray.append(contentsOf: NSLayoutConstraint.constraints(withVisualFormat: "H:|-(>=10)-[previousButton(==playPauseButton)]-(50@750)-[playPauseButton(==66)]-(50@750)-[nextButton(==playPauseButton)]-(>=10)-|", options: [], metrics: nil, views: viewsDictionary))
 		constraintsArray.append(contentsOf: NSLayoutConstraint.constraints(withVisualFormat: "V:[playPauseButton(==78)]", options: [], metrics: nil, views: viewsDictionary))
 		
 		constraintsArray.append(contentsOf: NSLayoutConstraint.constraints(withVisualFormat: "V:[nextButton(==66)]", options: [], metrics: nil, views: viewsDictionary))
 		constraintsArray.append(contentsOf: NSLayoutConstraint.constraints(withVisualFormat: "V:[previousButton(==nextButton)]", options: [], metrics: nil, views: viewsDictionary))
 		
-		constraintsArray.append(contentsOf: NSLayoutConstraint.constraints(withVisualFormat: "H:|-[currentTimeLabel(==lengthLabel)]-10-[progressSlider]-10-[lengthLabel]-|", options: [], metrics: nil, views: viewsDictionary))
+		constraintsArray.append(contentsOf: NSLayoutConstraint.constraints(withVisualFormat: "H:|-[currentTimeLabel(==lengthLabel)]-10-[progressSlider]-10-[lengthLabel]-[resizeButton]-|", options: [], metrics: nil, views: viewsDictionary))
+        constraintsArray.append(contentsOf: NSLayoutConstraint.constraints(withVisualFormat: "V:[resizeButton(==24)]", options: [], metrics: nil, views: viewsDictionary))
 		constraintsArray.append(contentsOf: NSLayoutConstraint.constraints(withVisualFormat: "V:[progressSlider(==40)]-6-|", options: [], metrics: nil, views: viewsDictionary))
 		constraintsArray.append(contentsOf: NSLayoutConstraint.constraints(withVisualFormat: "V:[currentTimeLabel(==40)]-3-|", options: [], metrics: nil, views: viewsDictionary))
 		constraintsArray.append(contentsOf: NSLayoutConstraint.constraints(withVisualFormat: "V:[lengthLabel(==40)]-3-|", options: [], metrics: nil, views: viewsDictionary))

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AVFoundation
 
 /**
 A video player implementation with basic functionality.
@@ -35,13 +36,22 @@ A video player implementation with basic functionality.
 	open var fadeDuration = 0.3
 	
 	/**
-	An array of URLs that the player will load. Can be local or remote URLs.
+	An array of URLs that the player will load. Can be local or remote URLs. Do not use videoURLs and videoAssets together, only use one of the arrays.
 	*/
 	open var videoURLs: [URL] = [] {
 		didSet {
 			videoPlayerView.videoURL = videoURLs.first
 		}
 	}
+
+    /**
+     An array of video assets that the player will load. Do not use videoURLs and videoAssets together, only use one of the arrays.
+     */
+    open var videoAssets: [AVAsset] = [] {
+        didSet {
+            videoPlayerView.videoAsset = videoAssets.first
+        }
+    }
 	
 	/**
 	The gravity of the video. Adjusts how the video fills the space of the container.
@@ -66,7 +76,19 @@ A video player implementation with basic functionality.
 			return videoPlayerView.shouldLoop
 		}
 	}
-	
+
+    /**
+     Sets the resize callback method for the resize button action.
+     */
+    open var resizeClosure: ((Bool) -> Void)? {
+        set {
+            videoPlayerControls.didPressResizeButton = newValue
+        }
+        get {
+            return videoPlayerControls.didPressResizeButton
+        }
+    }
+
 	/**
 	Sets the color of the controls.
 	*/
@@ -128,7 +150,12 @@ A video player implementation with basic functionality.
 					strongSelf.videoPlayerControls.nextButtonHidden = currentURLIndex == strongSelf.videoURLs.count - 1
 					strongSelf.videoPlayerControls.previousButtonHidden = currentURLIndex == 0
 				}
-			}
+            } else if let videoAsset = strongSelf.videoPlayerView.videoAsset {
+                if let currentURLIndex = strongSelf.videoAssets.index(of: videoAsset) {
+                    strongSelf.videoPlayerControls.nextButtonHidden = currentURLIndex == strongSelf.videoAssets.count - 1
+                    strongSelf.videoPlayerControls.previousButtonHidden = currentURLIndex == 0
+                }
+            }
 		}
 		
         videoPlayerControls.finishedVideo = { [weak self] in
@@ -145,7 +172,18 @@ A video player implementation with basic functionality.
 					
 					strongSelf.videoPlayerView.videoURL = nextURL
 				}
-			}
+            } else if let videoAsset = strongSelf.videoPlayerView.videoAsset {
+                if videoAsset == strongSelf.videoAssets.last {
+                    if strongSelf.videoPlayerView.shouldLoop == true {
+                        strongSelf.videoPlayerView.videoAsset = strongSelf.videoAssets.first
+                    }
+                } else {
+                    let currentURLIndex = strongSelf.videoAssets.index(of: videoAsset)
+                    let nextAsset = strongSelf.videoAssets[currentURLIndex! + 1]
+                    
+                    strongSelf.videoPlayerView.videoAsset = nextAsset
+                }
+            }
 		}
 		
         videoPlayerControls.didPressNextButton = { [weak self] in
@@ -157,7 +195,13 @@ A video player implementation with basic functionality.
 					
 					strongSelf.videoPlayerView.videoURL = nextURL
 				}
-			}
+            } else if let videoAsset = strongSelf.videoPlayerView.videoAsset {
+                if let currentURLIndex = strongSelf.videoAssets.index(of: videoAsset), currentURLIndex + 1 < strongSelf.videoAssets.count {
+                    let nextAsset = strongSelf.videoAssets[currentURLIndex + 1]
+
+                    strongSelf.videoPlayerView.videoAsset = nextAsset
+                }
+            }
 		}
 		
         videoPlayerControls.didPressPreviousButton = { [weak self] in
@@ -169,7 +213,13 @@ A video player implementation with basic functionality.
 					
 					strongSelf.videoPlayerView.videoURL = nextURL
 				}
-			}
+            } else if let videoAsset = strongSelf.videoPlayerView.videoAsset {
+                if let currentURLIndex = strongSelf.videoAssets.index(of: videoAsset), currentURLIndex > 0 {
+                    let nextAsset = strongSelf.videoAssets[currentURLIndex - 1]
+
+                    strongSelf.videoPlayerView.videoAsset = nextAsset
+                }
+            }
 		}
 		
 		videoPlayerControls.interacting = { [weak self] (isInteracting) in
@@ -184,6 +234,12 @@ A video player implementation with basic functionality.
 				}
 			}
 		}
+
+        videoPlayerControls.didPressResizeButton = { [weak self] (isExpanded) in
+            guard let strongSelf = self else { return }
+
+            strongSelf.resizeClosure?(isExpanded)
+        }
 	}
 	
 	private func commonInit() {

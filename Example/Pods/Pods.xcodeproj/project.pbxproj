@@ -19,6 +19,7 @@
 		75A4727B1DFAA49000F459E9 /* ASPVideoPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75A4727A1DFAA49000F459E9 /* ASPVideoPlayer.swift */; };
 		75A4727F1DFCE02300F459E9 /* Scrubber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75A4727E1DFCE02300F459E9 /* Scrubber.swift */; };
 		75E2B1931DFF3BC600DA5690 /* ControlButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75E2B1921DFF3BC600DA5690 /* ControlButtons.swift */; };
+		75EA02A71EEB44C7008E43C3 /* ResizeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75EA02A61EEB44C7008E43C3 /* ResizeButton.swift */; };
 		93822CDA0A626ACE04E6196B6CC0C263 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEC22C73C1608DFA5D5D78BDCB218219 /* Foundation.framework */; };
 		B43FCF033768DA901FD0ED0FB3F075DD /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEC22C73C1608DFA5D5D78BDCB218219 /* Foundation.framework */; };
 		C505D42412B61335D815C1AD6E7FB153 /* Pods-ASPVideoPlayer_Tests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 76C38C82AE0F553697DE1E485B446BCD /* Pods-ASPVideoPlayer_Tests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -58,6 +59,7 @@
 		75A4727A1DFAA49000F459E9 /* ASPVideoPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ASPVideoPlayer.swift; sourceTree = "<group>"; };
 		75A4727E1DFCE02300F459E9 /* Scrubber.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Scrubber.swift; sourceTree = "<group>"; };
 		75E2B1921DFF3BC600DA5690 /* ControlButtons.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ControlButtons.swift; sourceTree = "<group>"; };
+		75EA02A61EEB44C7008E43C3 /* ResizeButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResizeButton.swift; sourceTree = "<group>"; };
 		76526CBDC34BF9AF8FE6A49490F93995 /* Pods-ASPVideoPlayer_Tests-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-ASPVideoPlayer_Tests-frameworks.sh"; sourceTree = "<group>"; };
 		76C38C82AE0F553697DE1E485B446BCD /* Pods-ASPVideoPlayer_Tests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-ASPVideoPlayer_Tests-umbrella.h"; sourceTree = "<group>"; };
 		77EDF47C1B48CB7132F02974759130EA /* Pods-ASPVideoPlayer_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-ASPVideoPlayer_Example.release.xcconfig"; sourceTree = "<group>"; };
@@ -160,6 +162,7 @@
 				75E2B1921DFF3BC600DA5690 /* ControlButtons.swift */,
 				75A4727E1DFCE02300F459E9 /* Scrubber.swift */,
 				753C6F131E01256B00D8D697 /* Loader.swift */,
+				75EA02A61EEB44C7008E43C3 /* ResizeButton.swift */,
 			);
 			name = UIItems;
 			sourceTree = "<group>";
@@ -393,6 +396,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				75EA02A71EEB44C7008E43C3 /* ResizeButton.swift in Sources */,
 				3D2ABC381A37E8A783C23028C78BA819 /* ASPVideoPlayer-dummy.m in Sources */,
 				75A4727F1DFCE02300F459E9 /* Scrubber.swift in Sources */,
 				75A472781DFA04B800F459E9 /* PlayPauseLayer.swift in Sources */,

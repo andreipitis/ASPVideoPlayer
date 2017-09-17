@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="EOn-E5-GcR">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="EOn-E5-GcR">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -44,7 +44,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="32.799999999999997" y="37.331334332833585"/>
+            <point key="canvasLocation" x="56.799999999999997" y="20.239880059970016"/>
         </scene>
         <!--Player View Controller-->
         <scene sceneID="8I2-Y7-Io3">
@@ -58,21 +58,34 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WOE-LH-9YQ" customClass="ASPVideoPlayer" customModule="ASPVideoPlayer">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="n9D-8N-YUa">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="300"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WOE-LH-9YQ" customClass="ASPVideoPlayer" customModule="ASPVideoPlayer">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="300"/>
+                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="WOE-LH-9YQ" firstAttribute="top" secondItem="n9D-8N-YUa" secondAttribute="top" id="BfZ-97-bfF"/>
+                                    <constraint firstAttribute="trailing" secondItem="WOE-LH-9YQ" secondAttribute="trailing" id="Hdf-ue-334"/>
+                                    <constraint firstAttribute="height" constant="300" id="KZx-Vj-GRg"/>
+                                    <constraint firstItem="WOE-LH-9YQ" firstAttribute="leading" secondItem="n9D-8N-YUa" secondAttribute="leading" id="MvB-0K-29d"/>
+                                    <constraint firstAttribute="bottom" secondItem="WOE-LH-9YQ" secondAttribute="bottom" id="pK0-eJ-CWS"/>
+                                </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="SsN-lY-oaF" firstAttribute="top" secondItem="WOE-LH-9YQ" secondAttribute="bottom" id="5Gq-yU-3Jj"/>
-                            <constraint firstItem="WOE-LH-9YQ" firstAttribute="leading" secondItem="aPq-f4-bC9" secondAttribute="leading" id="dWZ-0u-E3A"/>
-                            <constraint firstItem="WOE-LH-9YQ" firstAttribute="top" secondItem="aPq-f4-bC9" secondAttribute="top" id="gUu-9y-rnX"/>
-                            <constraint firstAttribute="trailing" secondItem="WOE-LH-9YQ" secondAttribute="trailing" id="lIu-Lu-Vhu"/>
+                            <constraint firstAttribute="trailing" secondItem="n9D-8N-YUa" secondAttribute="trailing" id="LWL-P6-7yb"/>
+                            <constraint firstItem="n9D-8N-YUa" firstAttribute="top" secondItem="aPq-f4-bC9" secondAttribute="top" id="R2Q-Rj-EI4"/>
+                            <constraint firstItem="n9D-8N-YUa" firstAttribute="leading" secondItem="aPq-f4-bC9" secondAttribute="leading" id="pei-9R-J3w"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="containerView" destination="n9D-8N-YUa" id="1pT-Hc-IdI"/>
                         <outlet property="videoPlayer" destination="WOE-LH-9YQ" id="IdS-he-ew1"/>
                     </connections>
                 </viewController>
