@@ -29,7 +29,7 @@ class ASPVideoPlayer_ExampleUITests: XCTestCase {
 	}
 
 	func testPressPlayButtons_ShouldSelectPlayButton() {
-		let element = XCUIApplication().children(matching: .window).element(boundBy: 0).children(matching: .other).element.children(matching: .other).element
+		let element = XCUIApplication().children(matching: .window).element(boundBy: 0).children(matching: .other).element.children(matching: .other).element.children(matching: .other).element
 		let button = element.children(matching: .other).element(boundBy: 1).children(matching: .button).element(boundBy: 0)
 		button.tap()
 
@@ -54,24 +54,30 @@ class ASPVideoPlayer_ExampleUITests: XCTestCase {
 	}
 	
 	func testTapVideo_ShouldHideControls() {
-		let element = XCUIApplication().children(matching: .window).element(boundBy: 0).children(matching: .other).element.children(matching: .other).element.children(matching: .other).element(boundBy: 1)
-		let button = element.children(matching: .button).element(boundBy: 0)
-		button.tap()
+        let background = XCUIApplication().children(matching: .window).element(boundBy: 0).children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .other).element(boundBy: 1)
+        let element = XCUIApplication().children(matching: .window).element(boundBy: 0).children(matching: .other).element.children(matching: .other).element
+        let button = element.children(matching: .other).element.children(matching: .other).element(boundBy: 1).children(matching: .button).element(boundBy: 0)
+        button.tap()
 		
 		sleep(4)
 
-		XCTAssertEqual(element.exists, false, "Controls are visible.")
+		XCTAssertEqual(background.exists, false, "Controls are visible.")
 	}
 	
 	func testTapVideoWhenControlsHidden_ShouldShowControls() {
-		let element = XCUIApplication().children(matching: .window).element(boundBy: 0).children(matching: .other).element.children(matching: .other).element
-		let button = element.children(matching: .other).element(boundBy: 1).children(matching: .button).element(boundBy: 0)
-		button.tap()
-		
-		sleep(4)
-		
-		element.children(matching: .other).element(boundBy: 0).tap()
+        XCUIDevice.shared.orientation = .portrait
+        
+        let element = XCUIApplication().children(matching: .window).element(boundBy: 0).children(matching: .other).element.children(matching: .other).element.children(matching: .other).element
+        let background = element.children(matching: .other).element
+        let button = element.children(matching: .other).element(boundBy: 1).children(matching: .button).element(boundBy: 0)
+        button.tap()
 
-		XCTAssertEqual(element.exists, true, "Controls are not visible.")
+        sleep(4)
+
+        background.tap()
+
+
+
+        XCTAssertEqual(background.exists, true, "Controls are not visible.")
 	}
 }

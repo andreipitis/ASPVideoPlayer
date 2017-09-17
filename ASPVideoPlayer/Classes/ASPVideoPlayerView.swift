@@ -213,14 +213,14 @@ A simple UIView subclass that can play a video and allows animations to be appli
 		didSet {
 			switch gravity {
 			case .aspectFill:
-				videoGravity = AVLayerVideoGravityResizeAspectFill
+				videoGravity = AVLayerVideoGravity.resizeAspectFill
 			case .aspectFit:
-				videoGravity = AVLayerVideoGravityResizeAspect
+				videoGravity = AVLayerVideoGravity.resizeAspect
 			case .resize:
-				videoGravity = AVLayerVideoGravityResize
+				videoGravity = AVLayerVideoGravity.resize
 			}
 			
-			videoPlayerLayer.videoGravity = videoGravity
+            videoPlayerLayer.videoGravity = videoGravity
 		}
 	}
     
@@ -276,7 +276,7 @@ A simple UIView subclass that can play a video and allows animations to be appli
 	
 	private var animationForwarder: AnimationForwarder!
 	
-	private var videoGravity: String! = AVLayerVideoGravityResizeAspectFill
+	private var videoGravity: AVLayerVideoGravity! = AVLayerVideoGravity.resizeAspectFill
 	
 	private var timeObserver: AnyObject?
 	
@@ -458,7 +458,7 @@ A simple UIView subclass that can play a video and allows animations to be appli
 		}
 	}
 	
-	@objc internal func itemDidFinishPlaying(_ notification: Notification) {
+    @objc internal func itemDidFinishPlaying(_ notification: Notification) {
 		let currentItem = videoPlayerLayer.player?.currentItem
 		let notificationObject = notification.object as! AVPlayerItem
 		
