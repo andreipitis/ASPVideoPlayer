@@ -78,7 +78,7 @@ A video player implementation with basic functionality.
 	}
 
     /**
-     Sets the resize callback method for the resize button action.
+     Sets the callback method for the resize button action. You should implement your layout resizing code here and use weak references where appropriate to prevent retain cycles.
      */
     open var resizeClosure: ((Bool) -> Void)? {
         set {
@@ -234,12 +234,6 @@ A video player implementation with basic functionality.
 				}
 			}
 		}
-
-        videoPlayerControls.didPressResizeButton = { [weak self] (isExpanded) in
-            guard let strongSelf = self else { return }
-
-            strongSelf.resizeClosure?(isExpanded)
-        }
 	}
 	
 	private func commonInit() {
