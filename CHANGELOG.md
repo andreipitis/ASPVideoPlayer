@@ -1,6 +1,12 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [3.0.1](https://github.com/andreipitis/ASPVideoPlayer/releases/tag/3.0.1) - 2017-10-05
+
+### Fixed
+- Length label positioning
+- Resize button not disappearing when closure is not set
+
 ## [3.0.0](https://github.com/andreipitis/ASPVideoPlayer/releases/tag/3.0.0) - 2017-09-17
 
 ### Added

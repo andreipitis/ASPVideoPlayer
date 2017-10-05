@@ -188,11 +188,8 @@ open class ASPBasicControls: UIView, VideoPlayerControls, VideoPlayerSeekControl
 
     open override var didPressResizeButton: ((Bool) -> Void)? {
         didSet {
-            if didPressResizeButton != nil {
-                resizeButtonWidthConstraint.constant = 26.0
-            } else {
-                resizeButtonWidthConstraint.constant = -8.0
-            }
+            resizeButtonWidthConstraint.isActive = didPressResizeButton != nil
+            resizeButtonRightConstraint.isActive = didPressResizeButton != nil
 
             setNeedsLayout()
             layoutIfNeeded()
@@ -212,6 +209,7 @@ open class ASPBasicControls: UIView, VideoPlayerControls, VideoPlayerSeekControl
 	private var lengthLabel = UILabel()
 
     private var resizeButtonWidthConstraint: NSLayoutConstraint!
+    private var resizeButtonRightConstraint: NSLayoutConstraint!
 	
 	@objc internal var isInteracting: Bool = false {
 		didSet {
@@ -455,9 +453,8 @@ open class ASPBasicControls: UIView, VideoPlayerControls, VideoPlayerSeekControl
 
         constraintsArray.append(NSLayoutConstraint(item: resizeButton, attribute: .centerY, relatedBy: .equal, toItem: lengthLabel, attribute: .centerY, multiplier: 1.0, constant: -2.0))
 
-        resizeButtonWidthConstraint = NSLayoutConstraint(item: resizeButton, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: -8.0)
-
-        constraintsArray.append(resizeButtonWidthConstraint)
+        resizeButtonWidthConstraint = NSLayoutConstraint(item: resizeButton, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: 26.0)
+        resizeButtonRightConstraint = NSLayoutConstraint(item: resizeButton, attribute: .right, relatedBy: .equal, toItem: self, attribute: .right, multiplier: 1.0, constant: -8.0)
 		
 		constraintsArray.append(contentsOf: NSLayoutConstraint.constraints(withVisualFormat: "V:[progressLoader(==60)]", options: [], metrics: nil, views: viewsDictionary))
 		
@@ -468,7 +465,9 @@ open class ASPBasicControls: UIView, VideoPlayerControls, VideoPlayerSeekControl
 		constraintsArray.append(contentsOf: NSLayoutConstraint.constraints(withVisualFormat: "V:[nextButton(==66)]", options: [], metrics: nil, views: viewsDictionary))
 		constraintsArray.append(contentsOf: NSLayoutConstraint.constraints(withVisualFormat: "V:[previousButton(==nextButton)]", options: [], metrics: nil, views: viewsDictionary))
 		
-		constraintsArray.append(contentsOf: NSLayoutConstraint.constraints(withVisualFormat: "H:|-[currentTimeLabel(==lengthLabel)]-10-[progressSlider]-10-[lengthLabel]-[resizeButton]-|", options: [], metrics: nil, views: viewsDictionary))
+		constraintsArray.append(contentsOf: NSLayoutConstraint.constraints(withVisualFormat: "H:|-[currentTimeLabel(==lengthLabel)]-10-[progressSlider]-10-[lengthLabel]-[resizeButton]", options: [], metrics: nil, views: viewsDictionary))
+        constraintsArray.append(contentsOf: NSLayoutConstraint.constraints(withVisualFormat: "H:[lengthLabel]-(8@750)-|", options: [], metrics: nil, views: viewsDictionary))
+        
         constraintsArray.append(contentsOf: NSLayoutConstraint.constraints(withVisualFormat: "V:[resizeButton(==24)]", options: [], metrics: nil, views: viewsDictionary))
 		constraintsArray.append(contentsOf: NSLayoutConstraint.constraints(withVisualFormat: "V:[progressSlider(==40)]-6-|", options: [], metrics: nil, views: viewsDictionary))
 		constraintsArray.append(contentsOf: NSLayoutConstraint.constraints(withVisualFormat: "V:[currentTimeLabel(==40)]-3-|", options: [], metrics: nil, views: viewsDictionary))

@@ -31,11 +31,13 @@ class PlayerViewController: UIViewController {
         videoPlayer.gravity = .aspectFit
         videoPlayer.shouldLoop = true
 
-        videoPlayer.resizeClosure = { isExpanded in
-            self.isExpanded = isExpanded
-            self.rotate()
+        videoPlayer.resizeClosure = { [weak self] isExpanded in
+            guard let strongSelf = self else {
+                return
+            }
+            strongSelf.isExpanded = isExpanded
+            strongSelf.rotate()
         }
-
     }
 
     override var prefersStatusBarHidden: Bool {
