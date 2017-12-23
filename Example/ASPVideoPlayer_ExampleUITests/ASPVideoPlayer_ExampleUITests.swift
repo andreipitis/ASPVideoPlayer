@@ -34,7 +34,7 @@ class ASPVideoPlayer_ExampleUITests: XCTestCase {
         let button = element.children(matching: .other).element(boundBy: 1).children(matching: .button).element(boundBy: 0)
         button.tap()
 
-        XCTAssertEqual(button.isSelected, false, "Button is not selected.")
+        XCTAssertEqual(button.isSelected, true, "Button is selected.")
     }
 
     func testAdjustScrubber_ShouldSeekVideo() {
