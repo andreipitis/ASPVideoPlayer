@@ -30,6 +30,7 @@ class PlayerViewController: UIViewController {
         videoPlayer.videoAssets = [firstAsset, secondAsset, thirdAsset, fourthAsset]
         videoPlayer.gravity = .aspectFit
         videoPlayer.shouldLoop = true
+        videoPlayer.startPlayingWhenReady = true
 
         videoPlayer.resizeClosure = { [weak self] isExpanded in
             guard let strongSelf = self else {

@@ -78,6 +78,18 @@ A video player implementation with basic functionality.
 	}
 
     /**
+     Sets whether the video should start automatically after it has been successfuly loaded.
+     */
+    open var startPlayingWhenReady: Bool {
+        set {
+            videoPlayerView.startPlayingWhenReady = newValue
+        }
+        get {
+            return videoPlayerView.startPlayingWhenReady
+        }
+    }
+
+    /**
      Sets the callback method for the resize button action. You should implement your layout resizing code here and use weak references where appropriate to prevent retain cycles.
      */
     open var resizeClosure: ((Bool) -> Void)? {

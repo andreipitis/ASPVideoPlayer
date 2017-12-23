@@ -324,10 +324,18 @@ open class ASPBasicControls: UIView, VideoPlayerControls, VideoPlayerSeekControl
 				let currentTime = strongVideoPlayerView.currentTime
 				strongSelf.currentTimeLabel.text = strongSelf.timeFormatted(totalSeconds: UInt(currentTime))
 			}
+
+            videoPlayerView.pausedVideo = { [weak self] in
+                guard let strongSelf = self else { return }
+
+                strongSelf.playPauseButton.buttonState = .play
+            }
 			
             videoPlayerView.startedVideo = { [weak self, weak videoPlayerView] in
                 guard let strongSelf = self, let strongVideoPlayerView = videoPlayerView else { return }
-                
+
+                strongSelf.playPauseButton.buttonState = .pause
+
 				strongSelf.progressSlider.isUserInteractionEnabled = true
 				
 				let currentTime = strongVideoPlayerView.currentTime
