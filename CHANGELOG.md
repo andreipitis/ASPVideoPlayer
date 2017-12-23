@@ -1,6 +1,15 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [3.0.2](https://github.com/andreipitis/ASPVideoPlayer/releases/tag/3.0.2) - 2017-12-23
+
+### Fixed
+- `buttonState` on `PlayPauseButton` setting the opposite state
+- `buttonState` updating on video player state change using the default controls
+
+### Added
+-  `startPlayingWhenReady`property to `ASPVideoPlayer`
+
 ## [3.0.1](https://github.com/andreipitis/ASPVideoPlayer/releases/tag/3.0.1) - 2017-10-05
 
 ### Fixed
@@ -11,14 +20,14 @@ All notable changes to this project will be documented in this file.
 
 ### Added
 - Resize button with callback
-- Ability to use AVAssets to set videos
+- Ability to use `AVAssets` to set videos
 - Delay for loader animation
-- VideoPlayerView rotation
+- `VideoPlayerView` rotation
 
 ### Changed
 - Updated to Swift 4
 - Updated UI Tests.
-- Internal player logic to not create a separate AVPlayer for each video
+- Internal player logic to not create a separate `AVPlayer` for each video
 
 ### Fixed
 - Strong references to `self` in closures.
@@ -43,13 +52,13 @@ All notable changes to this project will be documented in this file.
 ## [2.0.0](https://github.com/andreipitis/ASPVideoPlayer/releases/tag/2.0.0) - 2016-12-16
 ### Added
 - Video control UI items (Buttons, Scrubber, Loader).
-- ASPVideoPlayer implementation as a full video player with controls.
-- ASPVideoPlayer Example for the full video player (Set as the default ViewController in the Storyboard).
+- `ASPVideoPlayer` implementation as a full video player with controls.
+- `ASPVideoPlayer` Example for the full video player (Set as the default ViewController in the Storyboard).
 - Code comments.
 
 ### Changed
-- Renamed existing ASPVideoPlayer to ASPVideoPlayerView.
-- Updated ASPVideoPlayerControls implementation and UI.
+- Renamed existing `ASPVideoPlayer` to `ASPVideoPlayerView`.
+- Updated `ASPVideoPlayerControls` implementation and UI.
 
 ### Removed
 - Unused methods throughout the Example.
