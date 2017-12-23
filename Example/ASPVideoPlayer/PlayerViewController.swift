@@ -26,11 +26,11 @@ class PlayerViewController: UIViewController {
         let secondAsset = AVURLAsset(url: secondLocalVideoURL!)
         let thirdAsset = AVURLAsset(url: firstNetworkURL!)
         let fourthAsset = AVURLAsset(url: secondNetworkURL!)
-//        videoPlayer.videoURLs = [firstLocalVideoURL!, secondLocalVideoURL!, firstNetworkURL!, secondNetworkURL!]
+        //        videoPlayer.videoURLs = [firstLocalVideoURL!, secondLocalVideoURL!, firstNetworkURL!, secondNetworkURL!]
         videoPlayer.videoAssets = [firstAsset, secondAsset, thirdAsset, fourthAsset]
         videoPlayer.gravity = .aspectFit
         videoPlayer.shouldLoop = true
-        videoPlayer.startPlayingWhenReady = true
+//        videoPlayer.startPlayingWhenReady = true
 
         videoPlayer.resizeClosure = { [weak self] isExpanded in
             guard let strongSelf = self else {

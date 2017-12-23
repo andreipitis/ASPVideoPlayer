@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'ASPVideoPlayer'
-  s.version          = '3.0.2'
+  s.version          = '3.1.0'
   s.summary          = 'A simple UIView subclass that can play a video and allows animations to be applied during playback.'
 
 # This description is used to generate tags and improve search results.

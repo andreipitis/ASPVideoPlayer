@@ -83,6 +83,9 @@ A video player implementation with basic functionality.
     open var startPlayingWhenReady: Bool {
         set {
             videoPlayerView.startPlayingWhenReady = newValue
+            if newValue == true {
+                perform(#selector(ASPVideoPlayer.hideControls), with: nil, afterDelay: 3.0)
+            }
         }
         get {
             return videoPlayerView.startPlayingWhenReady
@@ -123,7 +126,7 @@ A video player implementation with basic functionality.
 		
 		commonInit()
 	}
-	
+
 	//MARK: - Private methods -
 	
 	@objc internal func toggleControls() {

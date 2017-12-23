@@ -1,11 +1,12 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
-## [3.0.2](https://github.com/andreipitis/ASPVideoPlayer/releases/tag/3.0.2) - 2017-12-23
+## [3.1.0](https://github.com/andreipitis/ASPVideoPlayer/releases/tag/3.1.0) - 2017-12-23
 
 ### Fixed
-- `buttonState` on `PlayPauseButton` setting the opposite state
-- `buttonState` updating on video player state change using the default controls
+- `buttonState` on `PlayPauseButton` setting the opposite state.
+- `buttonState` updating on video player state change using the default controls.
+- Autohide delay for the resize action.
 
 ### Added
 -  `startPlayingWhenReady`property to `ASPVideoPlayer`
@@ -13,19 +14,19 @@ All notable changes to this project will be documented in this file.
 ## [3.0.1](https://github.com/andreipitis/ASPVideoPlayer/releases/tag/3.0.1) - 2017-10-05
 
 ### Fixed
-- Length label positioning
-- Resize button not disappearing when closure is not set
+- Length label positioning.
+- Resize button not disappearing when closure is not set.
 
 ## [3.0.0](https://github.com/andreipitis/ASPVideoPlayer/releases/tag/3.0.0) - 2017-09-17
 
 ### Added
-- Resize button with callback
-- Ability to use `AVAssets` to set videos
-- Delay for loader animation
-- `VideoPlayerView` rotation
+- Resize button with callback.
+- Ability to use `AVAssets` to set videos.
+- Delay for loader animation.
+- `VideoPlayerView` rotation.
 
 ### Changed
-- Updated to Swift 4
+- Updated to Swift 4.
 - Updated UI Tests.
 - Internal player logic to not create a separate `AVPlayer` for each video
 
