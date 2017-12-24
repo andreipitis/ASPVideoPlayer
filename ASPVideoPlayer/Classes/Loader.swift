@@ -10,18 +10,18 @@ import UIKit
 
 open class Loader: UIView {
 
-    //MARK: - Private Variables and Constants -
+    // MARK: - Private Variables and Constants -
 
     private let progressLayer = CAShapeLayer()
 
-    //MARK: - Public Variables -
+    // MARK: - Public Variables -
 
     /*
      The width of the circle.
      */
     open var lineWidth: CGFloat = 5.0
 
-    //MARK: - Superclass methods -
+    // MARK: - Superclass methods -
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -46,7 +46,7 @@ open class Loader: UIView {
         updatePath()
     }
 
-    //MARK: - Public methods -
+    // MARK: - Public methods -
 
     /*
      Starts the loader animation.
@@ -91,7 +91,6 @@ open class Loader: UIView {
         animations.animations = [headAnimation, tailAnimation, endHeadAnimation, endTailAnimation]
         animations.repeatCount = .infinity
 
-
         progressLayer.add(animations, forKey: "fillAnimations")
     }
 
@@ -102,7 +101,7 @@ open class Loader: UIView {
         progressLayer.removeAllAnimations()
     }
 
-    //MARK: - Private methods -
+    // MARK: - Private methods -
 
     private func updatePath() {
         let startAngle: CGFloat = 0.0

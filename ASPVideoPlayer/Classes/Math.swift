@@ -31,7 +31,7 @@ extension UInt32 : NumericType { }
 extension UInt64 : NumericType { }
 extension CGFloat : NumericType { }
 
-//MARK: - Math mapping functions -
+// MARK: - Math mapping functions -
 
 /**
  Maps the value from one range to another.

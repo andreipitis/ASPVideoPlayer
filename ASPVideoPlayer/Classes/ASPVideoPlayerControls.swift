@@ -196,7 +196,7 @@ open class ASPBasicControls: UIView, VideoPlayerControls, VideoPlayerSeekControl
         }
     }
 
-    //MARK: - Private Variables and Constants -
+    // MARK: - Private Variables and Constants -
 
     private let playPauseButton = PlayPauseButton()
     private let progressSlider = Scrubber()
@@ -217,7 +217,7 @@ open class ASPBasicControls: UIView, VideoPlayerControls, VideoPlayerSeekControl
         }
     }
 
-    //MARK: - Superclass methods -
+    // MARK: - Superclass methods -
 
     public override init(frame: CGRect) {
         super.init(frame: frame)
@@ -254,7 +254,7 @@ open class ASPBasicControls: UIView, VideoPlayerControls, VideoPlayerSeekControl
         }
     }
 
-    //MARK: - Private methods -
+    // MARK: - Private methods -
 
     @objc internal func nextButtonPressed() {
         isInteracting = false
@@ -303,16 +303,10 @@ open class ASPBasicControls: UIView, VideoPlayerControls, VideoPlayerSeekControl
                 strongSelf.progressLoader.startAnimating()
             }
 
-            videoPlayerView.readyToPlayVideo = { [weak self, weak videoPlayerView] in
-                guard let strongSelf = self, let strongVideoPlayerView = videoPlayerView else { return }
+            videoPlayerView.readyToPlayVideo = { [weak self] in
+                guard let strongSelf = self else { return }
                 
-                strongSelf.progressSlider.isUserInteractionEnabled = true
-
-                let currentTime = strongVideoPlayerView.currentTime
-                strongSelf.lengthLabel.text = strongSelf.timeFormatted(totalSeconds: UInt(strongVideoPlayerView.videoLength))
-                strongSelf.currentTimeLabel.text = strongSelf.timeFormatted(totalSeconds: UInt(currentTime))
-
-                strongSelf.progressLoader.stopAnimating()
+                strongSelf.configureInitialControlState()
             }
 
             videoPlayerView.playingVideo = { [weak self, weak videoPlayerView] (progress) in
@@ -332,18 +326,12 @@ open class ASPBasicControls: UIView, VideoPlayerControls, VideoPlayerSeekControl
                 strongSelf.playPauseButton.buttonState = .play
             }
 
-            videoPlayerView.startedVideo = { [weak self, weak videoPlayerView] in
-                guard let strongSelf = self, let strongVideoPlayerView = videoPlayerView else { return }
+            videoPlayerView.startedVideo = { [weak self] in
+                guard let strongSelf = self else { return }
 
                 strongSelf.playPauseButton.buttonState = .pause
 
-                strongSelf.progressSlider.isUserInteractionEnabled = true
-
-                let currentTime = strongVideoPlayerView.currentTime
-                strongSelf.lengthLabel.text = strongSelf.timeFormatted(totalSeconds: UInt(strongVideoPlayerView.videoLength))
-                strongSelf.currentTimeLabel.text = strongSelf.timeFormatted(totalSeconds: UInt(currentTime))
-
-                strongSelf.progressLoader.stopAnimating()
+                strongSelf.configureInitialControlState()
             }
 
             videoPlayerView.stoppedVideo = { [weak self] in
@@ -375,6 +363,19 @@ open class ASPBasicControls: UIView, VideoPlayerControls, VideoPlayerSeekControl
                 strongSelf.progressLoader.stopAnimating()
             }
         }
+    }
+
+    private func configureInitialControlState() {
+        guard let videoPlayerView = videoPlayer else {
+            return
+        }
+
+        progressSlider.isUserInteractionEnabled = true
+
+        lengthLabel.text = timeFormatted(totalSeconds: UInt(videoPlayerView.videoLength))
+        currentTimeLabel.text = timeFormatted(totalSeconds: UInt(videoPlayerView.currentTime))
+
+        progressLoader.stopAnimating()
     }
 
     private func timeFormatted(totalSeconds: UInt) -> String {

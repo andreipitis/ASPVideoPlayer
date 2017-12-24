@@ -13,12 +13,33 @@ import AVFoundation
 A video player implementation with basic functionality.
 */
 @IBDesignable open class ASPVideoPlayer: UIView {
-	
-	//MARK: - Private Variables and Constants -
+    public struct Configuration {
+        //The gravity of the video. Adjusts how the video fills the space of the container.
+        let videoGravity: ASPVideoPlayerView.PlayerContentMode
+        //Sets whether the playlist should loop. Once the last video has finished playing, the first one will start.
+        let shouldLoop: Bool
+        //Sets whether the video should start automatically after it has been successfuly loaded.
+        let startPlayingWhenReady: Bool
+        //Sets whether the video controls should be hidden initially.
+        let controlsInitiallyHidden: Bool
+
+        public init(videoGravity: ASPVideoPlayerView.PlayerContentMode = .aspectFit, shouldLoop: Bool = false, startPlayingWhenReady: Bool = false, controlsInitiallyHidden: Bool = false) {
+            self.videoGravity = videoGravity
+            self.shouldLoop = shouldLoop
+            self.startPlayingWhenReady = startPlayingWhenReady
+            self.controlsInitiallyHidden = controlsInitiallyHidden
+        }
+
+        public static func `default`() -> Configuration {
+            return Configuration(videoGravity: .aspectFit, shouldLoop: false, startPlayingWhenReady: false, controlsInitiallyHidden: false)
+        }
+    }
+
+	// MARK: - Private Variables and Constants -
 	
 	fileprivate var videoPlayerView: ASPVideoPlayerView!
 	
-	//MARK: - Public Variables -
+	// MARK: - Public Variables -
 	
 	/**
 	Sets the controls to use for the player. By default the controls are ASPVideoPlayerControls.
@@ -52,43 +73,23 @@ A video player implementation with basic functionality.
             videoPlayerView.videoAsset = videoAssets.first
         }
     }
-	
-	/**
-	The gravity of the video. Adjusts how the video fills the space of the container.
-	*/
-	open var gravity: ASPVideoPlayerView.PlayerContentMode {
-		set {
-			videoPlayerView.gravity = newValue
-		}
-		get {
-			return videoPlayerView.gravity
-		}
-	}
-	
-	/**
-	Sets whether the playlist should loop. Once the last video has finished playing, the first one will start.
-	*/
-	open var shouldLoop: Bool {
-		set {
-			videoPlayerView.shouldLoop = newValue
-		}
-		get {
-			return videoPlayerView.shouldLoop
-		}
-	}
 
     /**
-     Sets whether the video should start automatically after it has been successfuly loaded.
+     The current configuration of the video player.
      */
-    open var startPlayingWhenReady: Bool {
-        set {
-            videoPlayerView.startPlayingWhenReady = newValue
-            if newValue == true {
-                perform(#selector(ASPVideoPlayer.hideControls), with: nil, afterDelay: 3.0)
+    open var configuration: Configuration = .default() {
+        didSet {
+            videoPlayerView.gravity = configuration.videoGravity
+            videoPlayerView.shouldLoop = configuration.shouldLoop
+
+            videoPlayerView.startPlayingWhenReady = configuration.startPlayingWhenReady
+            if configuration.startPlayingWhenReady == true {
+                if configuration.controlsInitiallyHidden == false {
+                    perform(#selector(ASPVideoPlayer.hideControls), with: nil, afterDelay: 3.0)
+                } else {
+                    videoPlayerControls.alpha = 0.0
+                }
             }
-        }
-        get {
-            return videoPlayerView.startPlayingWhenReady
         }
     }
 
@@ -113,7 +114,7 @@ A video player implementation with basic functionality.
 		}
 	}
 	
-	//MARK: - Superclass methods -
+	// MARK: - Superclass methods -
 	
 	public override init(frame: CGRect) {
 		super.init(frame: frame)
@@ -127,7 +128,7 @@ A video player implementation with basic functionality.
 		commonInit()
 	}
 
-	//MARK: - Private methods -
+	// MARK: - Private methods -
 	
 	@objc internal func toggleControls() {
 		if videoPlayerControls.alpha == 1.0 && videoPlayerView.status == .playing {
@@ -258,6 +259,7 @@ A video player implementation with basic functionality.
 		
 		videoPlayerView = ASPVideoPlayerView()
 		videoPlayerControls = ASPVideoPlayerControls(videoPlayer: videoPlayerView)
+        configuration = .default()
 		
 		videoPlayerView.translatesAutoresizingMaskIntoConstraints = false
 		videoPlayerControls.translatesAutoresizingMaskIntoConstraints = false
