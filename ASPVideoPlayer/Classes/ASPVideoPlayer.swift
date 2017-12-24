@@ -47,7 +47,7 @@ A video player implementation with basic functionality.
 	open var videoPlayerControls: ASPBasicControls! {
 		didSet {
 			videoPlayerControls.videoPlayer = videoPlayerView
-			updateControls()
+			updateControls(videoPlayerControls)
 		}
 	}
 	
@@ -155,39 +155,49 @@ A video player implementation with basic functionality.
 		})
 	}
 	
-	private func updateControls() {
+    private func updateControls(_ controls: ASPBasicControls) {
 		videoPlayerControls.tintColor = tintColor
-		
-        videoPlayerControls.newVideo = { [weak self] in
+
+        updateControlsNewVideoAction(controls)
+        updateControlsFinishedVideoAction(controls)
+        updateControlsNextButtonAction(controls)
+        updateControlsPreviousButtonAction(controls)
+        updateControlsInteractingAction(controls)
+	}
+
+    private func updateControlsNewVideoAction(_ controls: ASPBasicControls) {
+        controls.newVideo = { [weak self] in
             guard let strongSelf = self else { return }
-            
-			if let videoURL = strongSelf.videoPlayerView.videoURL {
-				if let currentURLIndex = strongSelf.videoURLs.index(of: videoURL) {
-					strongSelf.videoPlayerControls.nextButtonHidden = currentURLIndex == strongSelf.videoURLs.count - 1
-					strongSelf.videoPlayerControls.previousButtonHidden = currentURLIndex == 0
-				}
+
+            if let videoURL = strongSelf.videoPlayerView.videoURL {
+                if let currentURLIndex = strongSelf.videoURLs.index(of: videoURL) {
+                    strongSelf.videoPlayerControls.nextButtonHidden = currentURLIndex == strongSelf.videoURLs.count - 1
+                    strongSelf.videoPlayerControls.previousButtonHidden = currentURLIndex == 0
+                }
             } else if let videoAsset = strongSelf.videoPlayerView.videoAsset {
                 if let currentURLIndex = strongSelf.videoAssets.index(of: videoAsset) {
                     strongSelf.videoPlayerControls.nextButtonHidden = currentURLIndex == strongSelf.videoAssets.count - 1
                     strongSelf.videoPlayerControls.previousButtonHidden = currentURLIndex == 0
                 }
             }
-		}
-		
-        videoPlayerControls.finishedVideo = { [weak self] in
+        }
+    }
+
+    private func updateControlsFinishedVideoAction(_ controls: ASPBasicControls) {
+        controls.finishedVideo = { [weak self] in
             guard let strongSelf = self else { return }
-            
-			if let videoURL = strongSelf.videoPlayerView.videoURL {
-				if videoURL == strongSelf.videoURLs.last {
-					if strongSelf.videoPlayerView.shouldLoop == true {
-						strongSelf.videoPlayerView.videoURL = strongSelf.videoURLs.first
-					}
-				} else {
-					let currentURLIndex = strongSelf.videoURLs.index(of: videoURL)
-					let nextURL = strongSelf.videoURLs[currentURLIndex! + 1]
-					
-					strongSelf.videoPlayerView.videoURL = nextURL
-				}
+
+            if let videoURL = strongSelf.videoPlayerView.videoURL {
+                if videoURL == strongSelf.videoURLs.last {
+                    if strongSelf.videoPlayerView.shouldLoop == true {
+                        strongSelf.videoPlayerView.videoURL = strongSelf.videoURLs.first
+                    }
+                } else {
+                    let currentURLIndex = strongSelf.videoURLs.index(of: videoURL)
+                    let nextURL = strongSelf.videoURLs[currentURLIndex! + 1]
+
+                    strongSelf.videoPlayerView.videoURL = nextURL
+                }
             } else if let videoAsset = strongSelf.videoPlayerView.videoAsset {
                 if videoAsset == strongSelf.videoAssets.last {
                     if strongSelf.videoPlayerView.shouldLoop == true {
@@ -196,21 +206,23 @@ A video player implementation with basic functionality.
                 } else {
                     let currentURLIndex = strongSelf.videoAssets.index(of: videoAsset)
                     let nextAsset = strongSelf.videoAssets[currentURLIndex! + 1]
-                    
+
                     strongSelf.videoPlayerView.videoAsset = nextAsset
                 }
             }
-		}
-		
-        videoPlayerControls.didPressNextButton = { [weak self] in
+        }
+    }
+
+    private func updateControlsNextButtonAction(_ controls: ASPBasicControls) {
+        controls.didPressNextButton = { [weak self] in
             guard let strongSelf = self else { return }
-            
-			if let videoURL = strongSelf.videoPlayerView.videoURL {
-				if let currentURLIndex = strongSelf.videoURLs.index(of: videoURL), currentURLIndex + 1 < strongSelf.videoURLs.count {
-					let nextURL = strongSelf.videoURLs[currentURLIndex + 1]
-					
-					strongSelf.videoPlayerView.videoURL = nextURL
-				}
+
+            if let videoURL = strongSelf.videoPlayerView.videoURL {
+                if let currentURLIndex = strongSelf.videoURLs.index(of: videoURL), currentURLIndex + 1 < strongSelf.videoURLs.count {
+                    let nextURL = strongSelf.videoURLs[currentURLIndex + 1]
+
+                    strongSelf.videoPlayerView.videoURL = nextURL
+                }
             } else if let videoAsset = strongSelf.videoPlayerView.videoAsset {
                 if let currentURLIndex = strongSelf.videoAssets.index(of: videoAsset), currentURLIndex + 1 < strongSelf.videoAssets.count {
                     let nextAsset = strongSelf.videoAssets[currentURLIndex + 1]
@@ -218,17 +230,19 @@ A video player implementation with basic functionality.
                     strongSelf.videoPlayerView.videoAsset = nextAsset
                 }
             }
-		}
-		
-        videoPlayerControls.didPressPreviousButton = { [weak self] in
+        }
+    }
+
+    private func updateControlsPreviousButtonAction(_ controls: ASPBasicControls) {
+        controls.didPressPreviousButton = { [weak self] in
             guard let strongSelf = self else { return }
-            
-			if let videoURL = strongSelf.videoPlayerView.videoURL {
-				if let currentURLIndex = strongSelf.videoURLs.index(of: videoURL), currentURLIndex > 0 {
-					let nextURL = strongSelf.videoURLs[currentURLIndex - 1]
-					
-					strongSelf.videoPlayerView.videoURL = nextURL
-				}
+
+            if let videoURL = strongSelf.videoPlayerView.videoURL {
+                if let currentURLIndex = strongSelf.videoURLs.index(of: videoURL), currentURLIndex > 0 {
+                    let nextURL = strongSelf.videoURLs[currentURLIndex - 1]
+
+                    strongSelf.videoPlayerView.videoURL = nextURL
+                }
             } else if let videoAsset = strongSelf.videoPlayerView.videoAsset {
                 if let currentURLIndex = strongSelf.videoAssets.index(of: videoAsset), currentURLIndex > 0 {
                     let nextAsset = strongSelf.videoAssets[currentURLIndex - 1]
@@ -236,21 +250,23 @@ A video player implementation with basic functionality.
                     strongSelf.videoPlayerView.videoAsset = nextAsset
                 }
             }
-		}
-		
-		videoPlayerControls.interacting = { [weak self] (isInteracting) in
+        }
+    }
+
+    private func updateControlsInteractingAction(_ controls: ASPBasicControls) {
+        controls.interacting = { [weak self] (isInteracting) in
             guard let strongSelf = self else { return }
-            
-			NSObject.cancelPreviousPerformRequests(withTarget: strongSelf, selector: #selector(ASPVideoPlayer.hideControls), object: nil)
-			if isInteracting == true {
-				strongSelf.showControls()
-			} else {
-				if strongSelf.videoPlayerView.status == .playing {
-					strongSelf.perform(#selector(ASPVideoPlayer.hideControls), with: nil, afterDelay: 3.0)
-				}
-			}
-		}
-	}
+
+            NSObject.cancelPreviousPerformRequests(withTarget: strongSelf, selector: #selector(ASPVideoPlayer.hideControls), object: nil)
+            if isInteracting == true {
+                strongSelf.showControls()
+            } else {
+                if strongSelf.videoPlayerView.status == .playing {
+                    strongSelf.perform(#selector(ASPVideoPlayer.hideControls), with: nil, afterDelay: 3.0)
+                }
+            }
+        }
+    }
 	
 	private func commonInit() {
 		let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(ASPVideoPlayer.toggleControls))
@@ -266,7 +282,7 @@ A video player implementation with basic functionality.
 		
 		videoPlayerControls.backgroundColor = UIColor.black.withAlphaComponent(0.15)
 		
-		updateControls()
+		updateControls(videoPlayerControls)
 		
 		addSubview(videoPlayerView)
 		addSubview(videoPlayerControls)
@@ -291,7 +307,8 @@ A video player implementation with basic functionality.
 
 extension ASPVideoPlayer: UIGestureRecognizerDelegate {
 	public func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
-		if let view = touch.view, view.isDescendant(of: self) == true, view != videoPlayerView, view != videoPlayerControls || touch.location(in: videoPlayerControls).y > videoPlayerControls.bounds.size.height - 50 {
+		if let view = touch.view, view.isDescendant(of: self) == true, view != videoPlayerView,
+            view != videoPlayerControls || touch.location(in: videoPlayerControls).y > videoPlayerControls.bounds.size.height - 50 {
 			return false
 		} else {
 			return true

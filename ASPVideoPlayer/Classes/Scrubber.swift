@@ -54,7 +54,6 @@ open class Scrubber: UIControl {
             }
 
             updateFrames()
-
         }
     }
 
@@ -135,7 +134,7 @@ open class Scrubber: UIControl {
     }
 
     override open func layoutSubviews() {
-        value = value + 0.0
+        value += 0.0
         updateFrames()
     }
 

@@ -207,7 +207,12 @@ class ASPVideoPlayerControlsTests: XCTestCase {
         videoPlayer.videoURL = videoURL
         let sut = ASPVideoPlayerControls(videoPlayer: videoPlayer)
 
-        videoPlayer.readyToPlayVideo = {
+        videoPlayer.readyToPlayVideo = { [weak videoPlayer] in
+            guard let videoPlayer = videoPlayer else {
+                XCTFail()
+                return
+            }
+
             videoPlayer.seek(0.5)
             let initialProgress = videoPlayer.progress
 
@@ -231,7 +236,12 @@ class ASPVideoPlayerControlsTests: XCTestCase {
         videoPlayer.videoURL = videoURL
         let sut = ASPVideoPlayerControls(videoPlayer: videoPlayer)
 
-        videoPlayer.readyToPlayVideo = {
+        videoPlayer.readyToPlayVideo = { [weak videoPlayer] in
+            guard let videoPlayer = videoPlayer else {
+                XCTFail()
+                return
+            }
+            
             videoPlayer.seek(0.5)
             let initialProgress = videoPlayer.progress
 

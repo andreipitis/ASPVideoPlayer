@@ -185,7 +185,6 @@ open class ASPBasicControls: UIView, VideoPlayerControls, VideoPlayerSeekControl
         }
     }
 
-
     open override var didPressResizeButton: ((Bool) -> Void)? {
         didSet {
             resizeButtonWidthConstraint.isActive = didPressResizeButton != nil
@@ -467,7 +466,6 @@ open class ASPBasicControls: UIView, VideoPlayerControls, VideoPlayerSeekControl
         resizeButtonRightConstraint = NSLayoutConstraint(item: resizeButton, attribute: .right, relatedBy: .equal, toItem: self, attribute: .right, multiplier: 1.0, constant: -8.0)
 
         constraintsArray.append(contentsOf: NSLayoutConstraint.constraints(withVisualFormat: "V:[progressLoader(==60)]", options: [], metrics: nil, views: viewsDictionary))
-
 
         constraintsArray.append(contentsOf: NSLayoutConstraint.constraints(withVisualFormat: "H:|-(>=10)-[previousButton(==playPauseButton)]-(50@750)-[playPauseButton(==66)]-(50@750)-[nextButton(==playPauseButton)]-(>=10)-|", options: [], metrics: nil, views: viewsDictionary))
         constraintsArray.append(contentsOf: NSLayoutConstraint.constraints(withVisualFormat: "V:[playPauseButton(==78)]", options: [], metrics: nil, views: viewsDictionary))
