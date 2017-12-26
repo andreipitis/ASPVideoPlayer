@@ -29,14 +29,17 @@ open class ResizeButton: UIButton {
         }
     }
     
-    open var buttonState: ButtonState = .large {
-        didSet {
+    open var buttonState: ButtonState {
+        set {
             switch buttonState {
             case .large:
                 isSelected = false
             default:
                 isSelected = true
             }
+        }
+        get {
+            return isSelected == true ? .small : .large
         }
     }
     
@@ -61,11 +64,7 @@ open class ResizeButton: UIButton {
     }
     
     @objc fileprivate func changeState() {
-        if isSelected == true {
-            buttonState = .large
-        } else {
-            buttonState = .small
-        }
+        isSelected = !isSelected
     }
     
     private func commonInit() {

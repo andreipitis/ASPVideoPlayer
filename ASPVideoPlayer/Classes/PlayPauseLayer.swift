@@ -46,8 +46,7 @@ internal class PlayPauseLayer: AnimateableLayer {
  */
 internal class AnimateableLayer: CALayer {
     @NSManaged public var animationDirection: CGFloat
-
-    public var color: UIColor = .black
+    @NSManaged public var color: UIColor
 
     public override init() {
         super.init()
