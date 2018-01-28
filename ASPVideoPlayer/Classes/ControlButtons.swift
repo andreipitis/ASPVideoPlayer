@@ -35,7 +35,7 @@ open class PlayPauseButton: UIButton {
 
     open var buttonState: ButtonState {
         set {
-            switch buttonState {
+            switch newValue {
             case .play:
                 isSelected = false
             default:

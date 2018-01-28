@@ -280,7 +280,7 @@ open class ASPBasicControls: UIView, VideoPlayerControls, VideoPlayerSeekControl
     }
 
     @objc internal func applicationDidEnterBackground() {
-        playPauseButton.isSelected = false
+        playPauseButton.buttonState = .pause
         pause()
     }
 
