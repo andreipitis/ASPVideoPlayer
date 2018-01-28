@@ -31,7 +31,7 @@ open class ResizeButton: UIButton {
     
     open var buttonState: ButtonState {
         set {
-            switch buttonState {
+            switch newValue {
             case .large:
                 isSelected = false
             default:

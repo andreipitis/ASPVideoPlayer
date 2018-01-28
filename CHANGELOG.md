@@ -5,7 +5,9 @@ All notable changes to this project will be documented in this file.
 
 ### Fixed
 - `buttonState` return value for `PlayPauseButton` and `ResizeButton`.
-- `buttonState` updating UI for `PlayPauseButton` 
+- `buttonState` updating UI for `PlayPauseButton`.
+- `buttonState` updating UI for `ResizeButton`.
+- Changed `ASPVideoPlayer` next and previous actions to wrap around.
 - Animation for `ResizeButton` state change.
 
 ### Added

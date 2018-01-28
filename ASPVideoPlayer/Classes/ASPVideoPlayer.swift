@@ -218,14 +218,16 @@ A video player implementation with basic functionality.
             guard let strongSelf = self else { return }
 
             if let videoURL = strongSelf.videoPlayerView.videoURL {
-                if let currentURLIndex = strongSelf.videoURLs.index(of: videoURL), currentURLIndex + 1 < strongSelf.videoURLs.count {
-                    let nextURL = strongSelf.videoURLs[currentURLIndex + 1]
+                if let currentURLIndex = strongSelf.videoURLs.index(of: videoURL) {
+                    let newIndex = (currentURLIndex + 1) % strongSelf.videoURLs.count
+                    let nextURL = strongSelf.videoURLs[newIndex]
 
                     strongSelf.videoPlayerView.videoURL = nextURL
                 }
             } else if let videoAsset = strongSelf.videoPlayerView.videoAsset {
-                if let currentURLIndex = strongSelf.videoAssets.index(of: videoAsset), currentURLIndex + 1 < strongSelf.videoAssets.count {
-                    let nextAsset = strongSelf.videoAssets[currentURLIndex + 1]
+                if let currentURLIndex = strongSelf.videoAssets.index(of: videoAsset) {
+                    let newIndex = (currentURLIndex + 1) % strongSelf.videoAssets.count
+                    let nextAsset = strongSelf.videoAssets[newIndex]
 
                     strongSelf.videoPlayerView.videoAsset = nextAsset
                 }
@@ -238,14 +240,16 @@ A video player implementation with basic functionality.
             guard let strongSelf = self else { return }
 
             if let videoURL = strongSelf.videoPlayerView.videoURL {
-                if let currentURLIndex = strongSelf.videoURLs.index(of: videoURL), currentURLIndex > 0 {
-                    let nextURL = strongSelf.videoURLs[currentURLIndex - 1]
+                if let currentURLIndex = strongSelf.videoURLs.index(of: videoURL) {
+                    let previousIndex = currentURLIndex > 0 ? currentURLIndex : strongSelf.videoURLs.count
+                    let nextURL = strongSelf.videoURLs[previousIndex - 1]
 
                     strongSelf.videoPlayerView.videoURL = nextURL
                 }
             } else if let videoAsset = strongSelf.videoPlayerView.videoAsset {
-                if let currentURLIndex = strongSelf.videoAssets.index(of: videoAsset), currentURLIndex > 0 {
-                    let nextAsset = strongSelf.videoAssets[currentURLIndex - 1]
+                if let currentURLIndex = strongSelf.videoAssets.index(of: videoAsset) {
+                    let previousIndex = currentURLIndex > 0 ? currentURLIndex : strongSelf.videoAssets.count
+                    let nextAsset = strongSelf.videoAssets[previousIndex - 1]
 
                     strongSelf.videoPlayerView.videoAsset = nextAsset
                 }
