@@ -29,14 +29,17 @@ open class ResizeButton: UIButton {
         }
     }
     
-    open var buttonState: ButtonState = .large {
-        didSet {
-            switch buttonState {
+    open var buttonState: ButtonState {
+        set {
+            switch newValue {
             case .large:
                 isSelected = false
             default:
                 isSelected = true
             }
+        }
+        get {
+            return isSelected == true ? .small : .large
         }
     }
     
@@ -61,11 +64,7 @@ open class ResizeButton: UIButton {
     }
     
     @objc fileprivate func changeState() {
-        if isSelected == true {
-            buttonState = .large
-        } else {
-            buttonState = .small
-        }
+        isSelected = !isSelected
     }
     
     private func commonInit() {
@@ -80,34 +79,7 @@ open class ResizeButton: UIButton {
 /*
  Internal class used for the resize animation on the ResizeButton.
  */
-internal class ResizeLayer: CALayer {
-    @NSManaged public var animationDirection: CGFloat
-    
-    public var color: UIColor = .black
-    
-    public override init() {
-        super.init()
-        contentsScale = UIScreen.main.scale
-        
-        CATransaction.begin()
-        CATransaction.setDisableActions(true)
-        animationDirection = 1.0
-        CATransaction.commit()
-    }
-    
-    public override init(layer: Any) {
-        super.init(layer: layer)
-        
-        if let layer = layer as? ResizeLayer {
-            animationDirection = layer.animationDirection
-            color = layer.color
-        }
-    }
-    
-    required public init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
+internal class ResizeLayer: AnimateableLayer {
     open override func draw(in context: CGContext) {
         super.draw(in: context)
         
@@ -139,27 +111,5 @@ internal class ResizeLayer: CALayer {
         
         context.setShadow(offset: CGSize(width: 0.5, height: 0.5), blur: 3.0)
         context.strokePath()
-    }
-    
-    open override func action(forKey event: String) -> CAAction? {
-        if event == "animationDirection" {
-            let basicAnimation = CABasicAnimation(keyPath: event)
-            basicAnimation.fromValue = animationDirection
-            basicAnimation.toValue = 1.0 - animationDirection
-            basicAnimation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseOut)
-            basicAnimation.duration = 0.25
-            
-            return basicAnimation
-        }
-        
-        return super.action(forKey: event)
-    }
-    
-    open override class func needsDisplay(forKey key: String) -> Bool {
-        if key == "animationDirection" || key == "color" {
-            return true
-        }
-        
-        return super.needsDisplay(forKey: key)
     }
 }

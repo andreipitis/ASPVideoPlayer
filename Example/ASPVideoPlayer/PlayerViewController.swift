@@ -28,14 +28,10 @@ class PlayerViewController: UIViewController {
         let fourthAsset = AVURLAsset(url: secondNetworkURL!)
         //        videoPlayer.videoURLs = [firstLocalVideoURL!, secondLocalVideoURL!, firstNetworkURL!, secondNetworkURL!]
         videoPlayer.videoAssets = [firstAsset, secondAsset, thirdAsset, fourthAsset]
-        videoPlayer.gravity = .aspectFit
-        videoPlayer.shouldLoop = true
-//        videoPlayer.startPlayingWhenReady = true
+//        videoPlayer.configuration = ASPVideoPlayer.Configuration(videoGravity: .aspectFit, shouldLoop: true, startPlayingWhenReady: true, controlsInitiallyHidden: true)
 
         videoPlayer.resizeClosure = { [weak self] isExpanded in
-            guard let strongSelf = self else {
-                return
-            }
+            guard let strongSelf = self else { return }
             strongSelf.isExpanded = isExpanded
             strongSelf.rotate()
         }

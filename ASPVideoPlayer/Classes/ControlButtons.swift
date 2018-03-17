@@ -20,9 +20,9 @@ open class PlayPauseButton: UIButton {
     open override var isSelected: Bool {
         didSet {
             if isSelected == true {
-                playPauseLayer.animationDirection = 0
+                playPauseLayer.animationDirection = 0.0
             } else {
-                playPauseLayer.animationDirection = 1
+                playPauseLayer.animationDirection = 1.0
             }
         }
     }
@@ -33,14 +33,17 @@ open class PlayPauseButton: UIButton {
         }
     }
 
-    open var buttonState: ButtonState = .play {
-        didSet {
-            switch buttonState {
+    open var buttonState: ButtonState {
+        set {
+            switch newValue {
             case .play:
                 isSelected = false
             default:
                 isSelected = true
             }
+        }
+        get {
+            return isSelected == true ? .pause : .play
         }
     }
 

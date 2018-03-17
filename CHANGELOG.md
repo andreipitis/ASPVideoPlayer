@@ -1,6 +1,23 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [4.0.0](https://github.com/andreipitis/ASPVideoPlayer/releases/tag/4.0.0) -
+
+### Fixed
+- `buttonState` return value for `PlayPauseButton` and `ResizeButton`.
+- `buttonState` updating UI for `PlayPauseButton`.
+- `buttonState` updating UI for `ResizeButton`.
+- Animation for `ResizeButton` state change.
+- Deallocation delay caused by `perform(selector:afterDelay:)` on `ASPVideoPlayer`
+
+### Added
+- Ability to set the controls of `ASPVideoPlayer` as initially hidden.
+- Property to set `preferredRate` for both `ASPVideoPlayer` and `ASPVideoPlayerView`
+
+### Changed
+- `ASPVideoPlayer` properties are grouped in a `Configuration` structure.
+- `ASPVideoPlayer` next and previous actions to wrap around.
+
 ## [3.1.0](https://github.com/andreipitis/ASPVideoPlayer/releases/tag/3.1.0) - 2017-12-23
 
 ### Fixed

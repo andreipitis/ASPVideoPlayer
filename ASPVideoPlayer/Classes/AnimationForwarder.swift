@@ -15,7 +15,7 @@ import UIKit
 internal class AnimationForwarder: UIView {
 
     fileprivate weak var backingView: UIView?
-
+    
     internal convenience init(view: UIView) {
         self.init()
         backingView = view

@@ -15,19 +15,19 @@ internal class ScrubberThumb: CALayer {
 
 open class Scrubber: UIControl {
 
-    //MARK: - Private Variables and Constants -
+    // MARK: - Private Variables and Constants -
 
     private var previousLocation = CGPoint()
     private let trackLayer = CALayer()
     private let trackFillLayer = CALayer()
     private let thumbLayer = ScrubberThumb()
 
-    //MARK: - Public Variables -
+    // MARK: - Public Variables -
 
     /*
      Sets the minimum value of the scrubber. Defaults to 0.0 .
      */
-    open var minimumValue: CGFloat = 0.0  {
+    open var minimumValue: CGFloat = 0.0 {
         didSet {
             updateFrames()
         }
@@ -36,7 +36,7 @@ open class Scrubber: UIControl {
     /*
      Sets the maximum value of the scrubber. Defaults to 1.0 .
      */
-    open var maximumValue: CGFloat = 1.0  {
+    open var maximumValue: CGFloat = 1.0 {
         didSet {
             updateFrames()
         }
@@ -45,7 +45,7 @@ open class Scrubber: UIControl {
     /*
      The current value of the scrubber.
      */
-    open var value: CGFloat = 0.0  {
+    open var value: CGFloat = 0.0 {
         didSet {
             if thumbLayer.highlighted == false {
                 let clampedValue = clamp(value, lower: minimumValue, upper: maximumValue)
@@ -54,14 +54,13 @@ open class Scrubber: UIControl {
             }
 
             updateFrames()
-
         }
     }
 
     /*
      The height of the track. Defaults to 6.0 .
      */
-    open var trackHeight: CGFloat = 6.0  {
+    open var trackHeight: CGFloat = 6.0 {
         didSet {
             updateFrames()
         }
@@ -70,7 +69,7 @@ open class Scrubber: UIControl {
     /*
      Sets the color of the unfilled part of the track.
      */
-    open var trackColor = UIColor.white.withAlphaComponent(0.3).cgColor  {
+    open var trackColor = UIColor.white.withAlphaComponent(0.3).cgColor {
         didSet {
             trackLayer.backgroundColor = trackColor
             trackLayer.setNeedsDisplay()
@@ -80,7 +79,7 @@ open class Scrubber: UIControl {
     /*
      Sets the color of the filled part of the track.
      */
-    open var trackFillColor = UIColor.white.cgColor  {
+    open var trackFillColor = UIColor.white.cgColor {
         didSet {
             trackFillLayer.backgroundColor = trackFillColor
             trackFillLayer.setNeedsDisplay()
@@ -90,7 +89,7 @@ open class Scrubber: UIControl {
     /*
      Sets the color of thumb.
      */
-    open var thumbColor = UIColor.white.cgColor  {
+    open var thumbColor = UIColor.white.cgColor {
         didSet {
             thumbLayer.backgroundColor = thumbColor
             thumbLayer.setNeedsDisplay()
@@ -100,7 +99,7 @@ open class Scrubber: UIControl {
     /*
      Sets the width of the track.
      */
-    open var thumbWidth: CGFloat = 12.0  {
+    open var thumbWidth: CGFloat = 12.0 {
         didSet {
             updateFrames()
         }
@@ -116,7 +115,7 @@ open class Scrubber: UIControl {
         }
     }
 
-    //MARK: - Superclass methods -
+    // MARK: - Superclass methods -
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -135,11 +134,11 @@ open class Scrubber: UIControl {
     }
 
     override open func layoutSubviews() {
-        value = value + 0.0
+        value += 0.0
         updateFrames()
     }
 
-    //MARK: - UIControl methods -
+    // MARK: - UIControl methods -
 
     override open func beginTracking(_ touch: UITouch, with event: UIEvent?) -> Bool {
         previousLocation = thumbLayer.position
@@ -184,7 +183,7 @@ open class Scrubber: UIControl {
         sendActions(for: .touchCancel)
     }
 
-    //MARK: - Private Methods -
+    // MARK: - Private Methods -
 
     private func commonInit() {
         thumbLayer.scrubber = self
@@ -210,7 +209,7 @@ open class Scrubber: UIControl {
     private func updateFrames() {
         CATransaction.begin()
         CATransaction.setDisableActions(true)
-
+        
         trackLayer.frame = CGRect(x: 0.0, y: bounds.height / 2.0, width: bounds.width, height: trackHeight)
         trackLayer.cornerRadius = trackHeight / 2.0
         trackLayer.setNeedsDisplay()

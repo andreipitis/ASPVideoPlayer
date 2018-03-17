@@ -23,20 +23,17 @@ class ASPVideoPlayerTests: XCTestCase {
         super.tearDown()
     }
 
-    func testSetGravity_ShouldSetGravity() {
+    func testSetConfiguration_ShouldSetConfiguration() {
         let sut = ASPVideoPlayer()
 
-        sut.gravity = .resize
+        let configuration = ASPVideoPlayer.Configuration(videoGravity: .aspectFill, shouldLoop: true, startPlayingWhenReady: false, controlsInitiallyHidden: true)
 
-        XCTAssertEqual(sut.gravity, .resize, "Player gravity not set correctly.")
-    }
+        sut.configuration = configuration
 
-    func testSetShouldLoop_ShouldSetShouldLoop() {
-        let sut = ASPVideoPlayer()
-
-        sut.shouldLoop = true
-
-        XCTAssertEqual(sut.shouldLoop, true, "Player shouldLoop not set correctly.")
+        XCTAssertEqual(sut.configuration.videoGravity, configuration.videoGravity, "Player gravity not set correctly.")
+        XCTAssertEqual(sut.configuration.shouldLoop, configuration.shouldLoop, "Player shouldLoop not set correctly.")
+        XCTAssertEqual(sut.configuration.startPlayingWhenReady, configuration.startPlayingWhenReady, "Player startPlayingWhenReady not set correctly.")
+        XCTAssertEqual(sut.configuration.controlsInitiallyHidden, configuration.controlsInitiallyHidden, "Player controlsInitiallyHidden not set correctly.")
     }
 
     func testSetVideoURLs_ShouldSetVideoURLs() {

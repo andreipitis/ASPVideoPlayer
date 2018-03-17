@@ -10,11 +10,11 @@ import Foundation
 import UIKit
 
 internal protocol NumericType: Comparable {
-    static func +(lhs: Self, rhs: Self) -> Self
-    static func -(lhs: Self, rhs: Self) -> Self
-    static func *(lhs: Self, rhs: Self) -> Self
-    static func /(lhs: Self, rhs: Self) -> Self
-    init(_ v: Int)
+    static func + (lhs: Self, rhs: Self) -> Self
+    static func - (lhs: Self, rhs: Self) -> Self
+    static func * (lhs: Self, rhs: Self) -> Self
+    static func / (lhs: Self, rhs: Self) -> Self
+    init(_ value: Int)
 }
 
 extension Double : NumericType { }
@@ -31,7 +31,7 @@ extension UInt32 : NumericType { }
 extension UInt64 : NumericType { }
 extension CGFloat : NumericType { }
 
-//MARK: - Math mapping functions -
+// MARK: - Math mapping functions -
 
 /**
  Maps the value from one range to another.
