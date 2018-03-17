@@ -209,7 +209,7 @@ open class Scrubber: UIControl {
     private func updateFrames() {
         CATransaction.begin()
         CATransaction.setDisableActions(true)
-
+        
         trackLayer.frame = CGRect(x: 0.0, y: bounds.height / 2.0, width: bounds.width, height: trackHeight)
         trackLayer.cornerRadius = trackHeight / 2.0
         trackLayer.setNeedsDisplay()

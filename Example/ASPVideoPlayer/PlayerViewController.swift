@@ -31,9 +31,7 @@ class PlayerViewController: UIViewController {
 //        videoPlayer.configuration = ASPVideoPlayer.Configuration(videoGravity: .aspectFit, shouldLoop: true, startPlayingWhenReady: true, controlsInitiallyHidden: true)
 
         videoPlayer.resizeClosure = { [weak self] isExpanded in
-            guard let strongSelf = self else {
-                return
-            }
+            guard let strongSelf = self else { return }
             strongSelf.isExpanded = isExpanded
             strongSelf.rotate()
         }

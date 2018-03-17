@@ -26,6 +26,7 @@ class ASPVideoPlayerControlsTests: XCTestCase {
 
     func testInitPlayerControler_ShouldSetWeakReferenceToViedeoPlayer() {
         let videoPlayer = ASPVideoPlayerView()
+        videoPlayer.videoURL = videoURL
         let sut = ASPVideoPlayerControls(videoPlayer: videoPlayer)
 
         XCTAssertEqual(sut.videoPlayer, videoPlayer, "Players are equal.")
@@ -33,6 +34,7 @@ class ASPVideoPlayerControlsTests: XCTestCase {
 
     func testSetNextButtonHidden_ShouldHideNextButton() {
         let videoPlayer = ASPVideoPlayerView()
+        videoPlayer.videoURL = videoURL
         let sut = ASPVideoPlayerControls(videoPlayer: videoPlayer)
 
         sut.nextButtonHidden = true
@@ -42,6 +44,7 @@ class ASPVideoPlayerControlsTests: XCTestCase {
 
     func testSetPreviousButtonHidden_ShouldHidePreviousButton() {
         let videoPlayer = ASPVideoPlayerView()
+        videoPlayer.videoURL = videoURL
         let sut = ASPVideoPlayerControls(videoPlayer: videoPlayer)
 
         sut.previousButtonHidden = true
@@ -53,6 +56,7 @@ class ASPVideoPlayerControlsTests: XCTestCase {
         let expectation = self.expectation(description: "Timeout expectation")
 
         let videoPlayer = ASPVideoPlayerView()
+        videoPlayer.videoURL = videoURL
         let sut = ASPVideoPlayerControls(videoPlayer: videoPlayer)
 
         sut.interacting = { (isInteracting) in
@@ -71,6 +75,7 @@ class ASPVideoPlayerControlsTests: XCTestCase {
 
     func testApplicationDidEnterBackgroundReceived_ShouldPauseVideo() {
         let videoPlayer = ASPVideoPlayerView()
+        videoPlayer.videoURL = videoURL
         let sut = ASPVideoPlayerControls(videoPlayer: videoPlayer)
 
         sut.play()
@@ -82,6 +87,7 @@ class ASPVideoPlayerControlsTests: XCTestCase {
 
     func testVideoStoppedAndPlayButtonPressed_ShouldPlayVideo() {
         let videoPlayer = ASPVideoPlayerView()
+        videoPlayer.videoURL = videoURL
         let sut = ASPVideoPlayerControls(videoPlayer: videoPlayer)
 
         sut.playButtonPressed()
@@ -91,6 +97,7 @@ class ASPVideoPlayerControlsTests: XCTestCase {
 
     func testVideoPlayingAndPlayButtonPressed_ShouldPauseVideo() {
         let videoPlayer = ASPVideoPlayerView()
+        videoPlayer.videoURL = videoURL
         let sut = ASPVideoPlayerControls(videoPlayer: videoPlayer)
 
         sut.play()
@@ -104,6 +111,7 @@ class ASPVideoPlayerControlsTests: XCTestCase {
         let expectation = self.expectation(description: "Timeout expectation")
 
         let videoPlayer = ASPVideoPlayerView()
+        videoPlayer.videoURL = videoURL
         let sut = ASPVideoPlayerControls(videoPlayer: videoPlayer)
 
         sut.didPressNextButton = {
@@ -123,6 +131,7 @@ class ASPVideoPlayerControlsTests: XCTestCase {
         let expectation = self.expectation(description: "Timeout expectation")
 
         let videoPlayer = ASPVideoPlayerView()
+        videoPlayer.videoURL = videoURL
         let sut = ASPVideoPlayerControls(videoPlayer: videoPlayer)
 
         sut.didPressPreviousButton = {
@@ -142,6 +151,7 @@ class ASPVideoPlayerControlsTests: XCTestCase {
         let expectation = self.expectation(description: "Timeout expectation")
 
         let videoPlayer = ASPVideoPlayerView()
+        videoPlayer.videoURL = videoURL
         let sut = ASPVideoPlayerControls(videoPlayer: videoPlayer)
 
         sut.interacting = { (isInteracting) in
@@ -160,6 +170,7 @@ class ASPVideoPlayerControlsTests: XCTestCase {
 
     func testProgressSliderEndTouch_ShouldSetInteraction() {
         let videoPlayer = ASPVideoPlayerView()
+        videoPlayer.videoURL = videoURL
         let sut = ASPVideoPlayerControls(videoPlayer: videoPlayer)
 
         let slider = Scrubber()
