@@ -246,10 +246,10 @@ import AVFoundation
     open var volume: Float {
         set {
             let value = min(1.0, max(0.0, newValue))
-            videoPlayerLayer.player?.volume = value
+            player.volume = value
         }
         get {
-            return videoPlayerLayer.player?.volume ?? 0.0
+            return player.volume
         }
     }
 
@@ -257,7 +257,7 @@ import AVFoundation
      The current playback time in seconds.
      */
     open var currentTime: Double {
-        if let time = videoPlayerLayer.player?.currentItem?.currentTime() {
+        if let time = player.currentItem?.currentTime() {
             return time.seconds
         }
 
@@ -268,7 +268,7 @@ import AVFoundation
      The length of the video in seconds.
      */
     open var videoLength: Double {
-        if let duration = videoPlayerLayer.player?.currentItem?.asset.duration {
+        if let duration = player.currentItem?.asset.duration {
             return duration.seconds
         }
 
@@ -280,6 +280,7 @@ import AVFoundation
     // MARK: - Private Variables and Constants -
 
     private let videoPlayerLayer: AVPlayerLayer = AVPlayerLayer()
+    private let player = AVPlayer()
 
     private var animationForwarder: AnimationForwarder!
 
@@ -318,6 +319,7 @@ import AVFoundation
     }
 
     deinit {
+        NotificationCenter.default.removeObserver(self)
         deinitObservers()
     }
 
@@ -327,17 +329,17 @@ import AVFoundation
      Starts the video player from the beginning.
      */
     @objc open func playVideo() {
-        guard let playerItem = videoPlayerLayer.player?.currentItem else { return }
+        guard let playerItem = player.currentItem else { return }
 
         if progress >= 1.0 {
             seekToZero()
         }
 
         status = .playing
-        videoPlayerLayer.player?.rate = preferredRate
+        player.rate = preferredRate
         startedVideo?()
 
-        NotificationCenter.default.removeObserver(self)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(itemDidFinishPlaying(_:)) , name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: playerItem)
     }
 
@@ -345,7 +347,7 @@ import AVFoundation
      Pauses the video.
      */
     open func pauseVideo() {
-        videoPlayerLayer.player?.rate = 0.0
+        player.rate = 0.0
         status = .paused
         pausedVideo?()
     }
@@ -354,7 +356,7 @@ import AVFoundation
      Stops the video.
      */
     open func stopVideo() {
-        videoPlayerLayer.player?.rate = 0.0
+        player.rate = 0.0
         seekToZero()
         status = .stopped
         stoppedVideo?()
@@ -365,14 +367,14 @@ import AVFoundation
      */
     open func seek(_ percentage: Double) {
         progress = min(1.0, max(0.0, percentage))
-        guard let currentItem = videoPlayerLayer.player?.currentItem else { return }
+        guard let currentItem = player.currentItem else { return }
 
         if progress == 0.0 {
             seekToZero()
             playingVideo?(progress)
         } else {
             let time = CMTime(seconds: progress * currentItem.asset.duration.seconds, preferredTimescale: currentItem.asset.duration.timescale)
-            videoPlayerLayer.player?.seek(to: time, toleranceBefore: kCMTimeZero, toleranceAfter: kCMTimeZero, completionHandler: { [weak self] (finished) in
+            player.seek(to: time, toleranceBefore: kCMTimeZero, toleranceAfter: kCMTimeZero, completionHandler: { [weak self] (finished) in
                 guard let strongSelf = self else { return }
 
                 if finished == false {
@@ -390,7 +392,7 @@ import AVFoundation
     open override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey: Any]?, context: UnsafeMutableRawPointer?) {
         guard let asset = object as? AVPlayerItem, let keyPath = keyPath else { return }
 
-        if asset == videoPlayerLayer.player?.currentItem && keyPath == "status" {
+        if asset == player.currentItem && keyPath == "status" {
             if asset.status == .readyToPlay {
                 if status == .new {
                     status = .readyToPlay
@@ -420,32 +422,35 @@ import AVFoundation
 
         deinitObservers()
 
-        videoPlayerLayer.player?.replaceCurrentItem(with: playerItem)
+        player.replaceCurrentItem(with: playerItem)
         videoPlayerLayer.videoGravity = videoGravity
 
-        videoPlayerLayer.player?.currentItem?.addObserver(self, forKeyPath: "status", options: [], context: nil)
+        player.currentItem?.addObserver(self, forKeyPath: "status", options: [], context: nil)
 
         status = .new
         newVideo?()
     }
 
     private func commonInit() {
-        videoPlayerLayer.player = AVPlayer()
+        videoPlayerLayer.player = player
         videoPlayerLayer.contentsScale = UIScreen.main.scale
+
+        NotificationCenter.default.addObserver(self, selector: #selector(ASPVideoPlayerView.applicationDidEnterBackground), name: NSNotification.Name.UIApplicationDidEnterBackground, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(ASPVideoPlayerView.applicationWillEnterForeground), name: NSNotification.Name.UIApplicationWillEnterForeground, object: nil)
     }
 
     fileprivate func seekToZero() {
         progress = 0.0
         let time = CMTime(seconds: 0.0, preferredTimescale: 1)
-        videoPlayerLayer.player?.seek(to: time, toleranceBefore: kCMTimeZero, toleranceAfter: kCMTimeZero)
+        player.seek(to: time, toleranceBefore: kCMTimeZero, toleranceAfter: kCMTimeZero)
     }
 
     fileprivate func addTimeObserver() {
         if let observer = timeObserver {
-            videoPlayerLayer.player?.removeTimeObserver(observer)
+            player.removeTimeObserver(observer)
         }
 
-        timeObserver = videoPlayerLayer.player?.addPeriodicTimeObserver(forInterval: CMTime(seconds: 0.01, preferredTimescale: Int32(NSEC_PER_SEC)), queue: nil, using: { [weak self] (time) in
+        timeObserver = player.addPeriodicTimeObserver(forInterval: CMTime(seconds: 0.01, preferredTimescale: Int32(NSEC_PER_SEC)), queue: nil, using: { [weak self] (time) in
             guard let strongSelf = self, strongSelf.status == .playing else { return }
 
             let currentTime = time.seconds
@@ -456,26 +461,34 @@ import AVFoundation
     }
 
     fileprivate func deinitObservers() {
-        NotificationCenter.default.removeObserver(self)
-        if let video = videoPlayerLayer.player?.currentItem, video.observationInfo != nil {
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: nil)
+        if let video = player.currentItem, video.observationInfo != nil {
             video.removeObserver(self, forKeyPath: "status")
         }
         
         if let observer = timeObserver {
-            videoPlayerLayer.player?.removeTimeObserver(observer)
+            player.removeTimeObserver(observer)
             timeObserver = nil
         }
     }
 
+    @objc fileprivate func applicationDidEnterBackground() {
+        videoPlayerLayer.player = nil
+    }
+
+    @objc fileprivate func applicationWillEnterForeground() {
+        videoPlayerLayer.player = player
+    }
+
     @objc internal func itemDidFinishPlaying(_ notification: Notification) {
-        let currentItem = videoPlayerLayer.player?.currentItem
+        let currentItem = player.currentItem
         let notificationObject = notification.object as? AVPlayerItem
 
         finishedVideo?()
         if currentItem == notificationObject && shouldLoop == true {
             status = .playing
             seekToZero()
-            videoPlayerLayer.player?.rate = preferredRate
+            player.rate = preferredRate
         } else {
             stopVideo()
         }

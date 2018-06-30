@@ -22,13 +22,14 @@ class PlayerViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
         let firstAsset = AVURLAsset(url: firstLocalVideoURL!)
         let secondAsset = AVURLAsset(url: secondLocalVideoURL!)
         let thirdAsset = AVURLAsset(url: firstNetworkURL!)
         let fourthAsset = AVURLAsset(url: secondNetworkURL!)
         //        videoPlayer.videoURLs = [firstLocalVideoURL!, secondLocalVideoURL!, firstNetworkURL!, secondNetworkURL!]
         videoPlayer.videoAssets = [firstAsset, secondAsset, thirdAsset, fourthAsset]
-//        videoPlayer.configuration = ASPVideoPlayer.Configuration(videoGravity: .aspectFit, shouldLoop: true, startPlayingWhenReady: true, controlsInitiallyHidden: true)
+//        videoPlayer.configuration = ASPVideoPlayer.Configuration(videoGravity: .aspectFit, shouldLoop: true, startPlayingWhenReady: true, controlsInitiallyHidden: true, allowBackgroundPlay: true)
 
         videoPlayer.resizeClosure = { [weak self] isExpanded in
             guard let strongSelf = self else { return }
@@ -54,9 +55,17 @@ class PlayerViewController: UIViewController {
 
                 let padding = (self.view.bounds.height - self.view.bounds.width) / 2.0
 
-                let metrics: [String:Any] = ["padding":padding, "negativePadding":-padding]
-
                 self.videoPlayer.transform = CGAffineTransform(rotationAngle: .pi / 2.0)
+
+                var bottomPadding: CGFloat = 0
+
+                if #available(iOS 11.0, *) {
+                    if self.view.safeAreaInsets != .zero {
+                        bottomPadding = self.view.safeAreaInsets.bottom
+                    }
+                }
+
+                let metrics: [String:Any] = ["padding":padding, "negativePadding":-(padding - bottomPadding)]
 
                 var constraints: [NSLayoutConstraint] = []
                 constraints.append(contentsOf: NSLayoutConstraint.constraints(withVisualFormat: "H:|-(negativePadding)-[videoPlayer]-(negativePadding)-|", options: [], metrics: metrics, views: views))

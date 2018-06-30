@@ -73,18 +73,6 @@ class ASPVideoPlayerControlsTests: XCTestCase {
         }
     }
 
-    func testApplicationDidEnterBackgroundReceived_ShouldPauseVideo() {
-        let videoPlayer = ASPVideoPlayerView()
-        videoPlayer.videoURL = videoURL
-        let sut = ASPVideoPlayerControls(videoPlayer: videoPlayer)
-
-        sut.play()
-
-        NotificationCenter.default.post(name: NSNotification.Name.UIApplicationDidEnterBackground, object: nil)
-
-        XCTAssertEqual(videoPlayer.status, .paused, "Video is not paused.")
-    }
-
     func testVideoStoppedAndPlayButtonPressed_ShouldPlayVideo() {
         let videoPlayer = ASPVideoPlayerView()
         videoPlayer.videoURL = videoURL

@@ -54,6 +54,16 @@ class ASPVideoPlayerTests: XCTestCase {
         XCTAssertEqual(sut.tintColor, sut.videoPlayerControls.tintColor, "Player tint color not set correctly.")
     }
 
+    func testApplicationDidEnterBackgroundReceived_ShouldPauseVideo() {
+        let sut = ASPVideoPlayer()
+        sut.videoURLs = [videoURL]
+        sut.videoPlayerControls.play()
+
+        NotificationCenter.default.post(name: NSNotification.Name.UIApplicationDidEnterBackground, object: nil)
+
+        XCTAssertEqual(sut.videoPlayerControls.videoPlayer?.status, .paused, "Video is not paused.")
+    }
+
     func testControlsVisibleAndPlayerRunningToggleControls_ShouldHideControls() {
         let sut = ASPVideoPlayer()
         sut.videoURLs = [videoURL]

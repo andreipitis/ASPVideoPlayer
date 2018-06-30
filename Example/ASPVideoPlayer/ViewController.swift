@@ -26,7 +26,7 @@ class ViewController: UIViewController {
 		videoPlayer.gravity = .aspectFit
 		videoPlayer.shouldLoop = true
 		videoPlayer.startPlayingWhenReady = true
-		
+
 		videoPlayer.backgroundColor = UIColor.black
 		
 		videoPlayer.newVideo = {

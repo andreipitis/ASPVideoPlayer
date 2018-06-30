@@ -34,11 +34,17 @@ import AVFoundation
          */
         let controlsInitiallyHidden: Bool
 
-        public init(videoGravity: ASPVideoPlayerView.PlayerContentMode = .aspectFit, shouldLoop: Bool = false, startPlayingWhenReady: Bool = false, controlsInitiallyHidden: Bool = false) {
+        /**
+         Sets whether the video player should be paused when entering the background.
+         */
+        let allowBackgroundPlay: Bool
+
+        public init(videoGravity: ASPVideoPlayerView.PlayerContentMode = .aspectFit, shouldLoop: Bool = false, startPlayingWhenReady: Bool = false, controlsInitiallyHidden: Bool = false, allowBackgroundPlay: Bool = false) {
             self.videoGravity = videoGravity
             self.shouldLoop = shouldLoop
             self.startPlayingWhenReady = startPlayingWhenReady
             self.controlsInitiallyHidden = controlsInitiallyHidden
+            self.allowBackgroundPlay = allowBackgroundPlay
         }
 
         public static func `default`() -> Configuration {
@@ -310,6 +316,12 @@ import AVFoundation
         }
     }
 
+    @objc fileprivate func applicationDidEnterBackground() {
+        if configuration.allowBackgroundPlay == false {
+            videoPlayerControls.pause()
+        }
+    }
+
     private func commonInit() {
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(ASPVideoPlayer.toggleControls))
         tapGestureRecognizer.delegate = self
@@ -328,6 +340,8 @@ import AVFoundation
 
         addSubview(videoPlayerView)
         addSubview(videoPlayerControls)
+
+        NotificationCenter.default.addObserver(self, selector: #selector(ASPVideoPlayer.applicationDidEnterBackground), name: NSNotification.Name.UIApplicationDidEnterBackground, object: nil)
 
         setupLayout()
     }

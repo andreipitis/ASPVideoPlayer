@@ -14,8 +14,9 @@ import UIKit
 public protocol VideoPlayerControls {
     /**
      Reference to the video player.
+     Should be a weak reference to prevent retain cycles.
      */
-    weak var videoPlayer: ASPVideoPlayerView? {get set}
+    var videoPlayer: ASPVideoPlayerView? {get set}
 
     /**
      Starts the video playback.
@@ -57,8 +58,9 @@ public protocol VideoPlayerControls {
 public protocol VideoPlayerSeekControls {
     /**
      Reference to the video player.
+     Should be a weak reference to prevent retain cycles.
      */
-    weak var videoPlayer: ASPVideoPlayerView? {get set}
+    var videoPlayer: ASPVideoPlayerView? {get set}
 
     /**
      Set the new position in the video playback.
@@ -235,10 +237,6 @@ open class ASPBasicControls: UIView, VideoPlayerControls, VideoPlayerSeekControl
         self.videoPlayer = videoPlayer
     }
 
-    deinit {
-        NotificationCenter.default.removeObserver(self)
-    }
-
     @objc internal func playButtonPressed() {
         if videoPlayer?.status == .playing {
             videoPlayer?.startPlayingWhenReady = false
@@ -277,11 +275,6 @@ open class ASPBasicControls: UIView, VideoPlayerControls, VideoPlayerSeekControl
     @objc internal func progressSliderChanged(slider: Scrubber) {
         seek(value: Double(slider.value))
         perform(#selector(setter: ASPVideoPlayerControls.isInteracting), with: false, afterDelay: 0.1)
-    }
-
-    @objc internal func applicationDidEnterBackground() {
-        playPauseButton.buttonState = .pause
-        pause()
     }
 
     private func setupVideoPlayerView() {
@@ -384,8 +377,6 @@ open class ASPBasicControls: UIView, VideoPlayerControls, VideoPlayerSeekControl
     }
 
     private func commonInit() {
-        NotificationCenter.default.addObserver(self, selector: #selector(ASPVideoPlayerControls.applicationDidEnterBackground), name: NSNotification.Name.UIApplicationDidEnterBackground, object: nil)
-
         playPauseButton.translatesAutoresizingMaskIntoConstraints = false
         progressSlider.translatesAutoresizingMaskIntoConstraints = false
         nextButton.translatesAutoresizingMaskIntoConstraints = false
