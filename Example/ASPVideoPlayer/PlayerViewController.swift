@@ -36,6 +36,8 @@ class PlayerViewController: UIViewController {
             strongSelf.isExpanded = isExpanded
             strongSelf.rotate()
         }
+
+        videoPlayer.delegate = self
     }
 
     override var prefersStatusBarHidden: Bool {
@@ -100,5 +102,47 @@ class PlayerViewController: UIViewController {
                 self.isExpanded = false
             })
         }
+    }
+}
+
+extension PlayerViewController: ASPVideoPlayerViewDelegate {
+    func startedVideo() {
+        print("Started video")
+    }
+
+    func stoppedVideo() {
+        print("Stopped video")
+    }
+
+    func newVideo() {
+        print("New Video")
+    }
+
+    func readyToPlayVideo() {
+        print("Ready to play video")
+    }
+
+    func playingVideo(progress: Double) {
+        print("Playing: \(progress)")
+    }
+
+    func pausedVideo() {
+        print("Paused Video")
+    }
+
+    func finishedVideo() {
+        print("Finished Video")
+    }
+
+    func seekStarted() {
+        print("Seek started")
+    }
+
+    func seekEnded() {
+        print("Seek ended")
+    }
+
+    func error(error: Error) {
+        print("Error: \(error)")
     }
 }

@@ -9,6 +9,20 @@
 import UIKit
 import AVFoundation
 
+//TODO: Replace with a better implementation for event forwarding.
+@objc public protocol ASPVideoPlayerViewDelegate: class {
+    @objc optional func newVideo()
+    @objc optional func readyToPlayVideo()
+    @objc optional func startedVideo()
+    @objc optional func playingVideo(progress: Double)
+    @objc optional func pausedVideo()
+    @objc optional func finishedVideo()
+    @objc optional func stoppedVideo()
+    @objc optional func seekStarted()
+    @objc optional func seekEnded()
+    @objc optional func error(error: Error)
+}
+
 /**
  A video player implementation with basic functionality.
  */
@@ -64,10 +78,21 @@ import AVFoundation
     // MARK: - Public Variables -
 
     /**
+     Sets the delegate to use for event handling on the video player.
+    */
+    public weak var delegate: ASPVideoPlayerViewDelegate? {
+        didSet {
+            //TODO: Replace with a better implementation for event forwarding.
+            videoPlayerView.delegate = delegate;
+        }
+    }
+
+    /**
      Sets the controls to use for the player. By default the controls are ASPVideoPlayerControls.
      */
     open var videoPlayerControls: ASPBasicControls! {
         didSet {
+            //Set the player view on the controls to register for events
             videoPlayerControls.videoPlayer = videoPlayerView
             updateControls(videoPlayerControls)
         }

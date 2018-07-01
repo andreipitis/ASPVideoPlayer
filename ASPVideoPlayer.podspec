@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'ASPVideoPlayer'
-  s.version          = '4.0.0'
+  s.version          = '4.1.0'
   s.summary          = 'A simple UIView subclass that can play a video and allows animations to be applied during playback.'
 
 # This description is used to generate tags and improve search results.
@@ -18,7 +18,7 @@ Pod::Spec.new do |s|
 #   * Finally, don't worry about the indent, CocoaPods strips it!
 
   s.description      = <<-DESC
-A simple UIView subclass that can play a video and allows animations to be applied during playback. The component offers various hooks as closures for various playback states.
+A simple UIView subclass that can play a video and allows animations to be applied during playback. The component offers various hooks as closures for different playback states.
                        DESC
 
   s.homepage         = 'https://github.com/andreipitis/ASPVideoPlayer'

@@ -1,6 +1,12 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [4.1.0](https://github.com/andreipitis/ASPVideoPlayer/releases/tag/4.1.0) - 2018-07-01
+
+### Added
+- Ability to play video sound in background for  `ASPVideoPlayer` and `ASPVideoPlayerView`.
+- Delegate to `ASPVideoPlayer` to handle events.
+
 ## [4.0.0](https://github.com/andreipitis/ASPVideoPlayer/releases/tag/4.0.0) - 2018-03-17
 
 ### Fixed

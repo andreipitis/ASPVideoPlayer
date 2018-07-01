@@ -288,6 +288,9 @@ import AVFoundation
 
     private var timeObserver: AnyObject?
 
+    //TODO: Replace the delegate with a better implementation for event registration
+    internal weak var delegate: ASPVideoPlayerViewDelegate?
+
     // MARK: - Superclass methods -
 
     override init(frame: CGRect) {
@@ -338,6 +341,7 @@ import AVFoundation
         status = .playing
         player.rate = preferredRate
         startedVideo?()
+        delegate?.startedVideo?()
 
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(itemDidFinishPlaying(_:)) , name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: playerItem)
@@ -350,6 +354,8 @@ import AVFoundation
         player.rate = 0.0
         status = .paused
         pausedVideo?()
+
+        delegate?.pausedVideo?()
     }
 
     /**
@@ -360,6 +366,8 @@ import AVFoundation
         seekToZero()
         status = .stopped
         stoppedVideo?()
+
+        delegate?.stoppedVideo?()
     }
 
     /**
@@ -372,6 +380,8 @@ import AVFoundation
         if progress == 0.0 {
             seekToZero()
             playingVideo?(progress)
+
+            delegate?.playingVideo?(progress: progress)
         } else {
             let time = CMTime(seconds: progress * currentItem.asset.duration.seconds, preferredTimescale: currentItem.asset.duration.timescale)
             player.seek(to: time, toleranceBefore: kCMTimeZero, toleranceAfter: kCMTimeZero, completionHandler: { [weak self] (finished) in
@@ -379,9 +389,13 @@ import AVFoundation
 
                 if finished == false {
                     strongSelf.seekStarted?()
+                    strongSelf.delegate?.seekStarted?()
                 } else {
                     strongSelf.seekEnded?()
                     strongSelf.playingVideo?(strongSelf.progress)
+
+                    strongSelf.delegate?.seekEnded?()
+                    strongSelf.delegate?.playingVideo?(progress: strongSelf.progress)
                 }
             })
         }
@@ -403,6 +417,8 @@ import AVFoundation
                     playVideo()
                 } else {
                     readyToPlayVideo?()
+
+                    delegate?.readyToPlayVideo?()
                 }
             } else if asset.status == .failed {
                 status = .error
@@ -411,6 +427,8 @@ import AVFoundation
                 let videoError = NSError(domain: "com.andreisergiupitis.aspvideoplayer", code: 99, userInfo: userInfo)
 
                 error?(videoError)
+
+                delegate?.error?(error: videoError)
             }
         }
     }
@@ -429,6 +447,8 @@ import AVFoundation
 
         status = .new
         newVideo?()
+
+        delegate?.newVideo?()
     }
 
     private func commonInit() {
@@ -457,6 +477,8 @@ import AVFoundation
             strongSelf.progress = currentTime / (strongSelf.videoLength != 0.0 ? strongSelf.videoLength : 1.0)
 
             strongSelf.playingVideo?(strongSelf.progress)
+
+            strongSelf.delegate?.playingVideo?(progress: strongSelf.progress)
         }) as AnyObject?
     }
 
@@ -485,6 +507,9 @@ import AVFoundation
         let notificationObject = notification.object as? AVPlayerItem
 
         finishedVideo?()
+
+        delegate?.finishedVideo?()
+
         if currentItem == notificationObject && shouldLoop == true {
             status = .playing
             seekToZero()
