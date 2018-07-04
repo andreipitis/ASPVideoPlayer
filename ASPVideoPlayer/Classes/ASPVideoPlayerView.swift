@@ -186,6 +186,8 @@ import AVFoundation
                 let videoError = NSError(domain: "com.andreisergiupitis.aspvideoplayer", code: 99, userInfo: userInfo)
 
                 error?(videoError)
+
+                delegate?.error?(error: videoError)
                 return
             }
 
@@ -206,6 +208,8 @@ import AVFoundation
                 let videoError = NSError(domain: "com.andreisergiupitis.aspvideoplayer", code: 99, userInfo: userInfo)
                 
                 error?(videoError)
+                
+                delegate?.error?(error: videoError)
                 return
             }
 

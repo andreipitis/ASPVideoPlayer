@@ -309,7 +309,7 @@ class ASPVideoPlayerViewTests: XCTestCase {
     }
 
     func testShouldLoopSet_ShouldLoopVideoWhenFinished() {
-        let expectation = self.expectation(description: "Timeout expectationShouldLoop")
+        let expectation = self.expectation(description: "Timeout expectation")
         let player = ASPVideoPlayerView()
         player.shouldLoop = true
 

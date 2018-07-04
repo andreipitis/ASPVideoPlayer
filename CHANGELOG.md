@@ -1,6 +1,14 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [4.2.0](https://github.com/andreipitis/ASPVideoPlayer/releases/tag/4.2.0) - 2018-07-04
+
+### Added
+- New methods to `ASPVideoPlayerViewDelegate` for controls visibility.
+
+### Fixed
+- Added missing delegate calls for `error(:)` in `ASPVideoPlayerView`.
+
 ## [4.1.0](https://github.com/andreipitis/ASPVideoPlayer/releases/tag/4.1.0) - 2018-07-01
 
 ### Added

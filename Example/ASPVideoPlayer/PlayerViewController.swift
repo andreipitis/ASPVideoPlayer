@@ -31,10 +31,9 @@ class PlayerViewController: UIViewController {
         videoPlayer.videoAssets = [firstAsset, secondAsset, thirdAsset, fourthAsset]
 //        videoPlayer.configuration = ASPVideoPlayer.Configuration(videoGravity: .aspectFit, shouldLoop: true, startPlayingWhenReady: true, controlsInitiallyHidden: true, allowBackgroundPlay: true)
 
-        videoPlayer.resizeClosure = { [weak self] isExpanded in
-            guard let strongSelf = self else { return }
-            strongSelf.isExpanded = isExpanded
-            strongSelf.rotate()
+        videoPlayer.resizeClosure = { [unowned self] isExpanded in
+            self.isExpanded = isExpanded
+            self.rotate()
         }
 
         videoPlayer.delegate = self
@@ -123,7 +122,7 @@ extension PlayerViewController: ASPVideoPlayerViewDelegate {
     }
 
     func playingVideo(progress: Double) {
-        print("Playing: \(progress)")
+//        print("Playing: \(progress)")
     }
 
     func pausedVideo() {
@@ -144,5 +143,21 @@ extension PlayerViewController: ASPVideoPlayerViewDelegate {
 
     func error(error: Error) {
         print("Error: \(error)")
+    }
+
+    func willShowControls() {
+        print("will show controls")
+    }
+
+    func didShowControls() {
+        print("did show controls")
+    }
+
+    func willHideControls() {
+        print("will hide controls")
+    }
+
+    func didHideControls() {
+        print("did hide controls")
     }
 }

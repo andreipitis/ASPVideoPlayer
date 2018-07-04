@@ -21,6 +21,11 @@ import AVFoundation
     @objc optional func seekStarted()
     @objc optional func seekEnded()
     @objc optional func error(error: Error)
+
+    @objc optional func willShowControls()
+    @objc optional func didShowControls()
+    @objc optional func willHideControls()
+    @objc optional func didHideControls()
 }
 
 /**
@@ -209,14 +214,20 @@ import AVFoundation
     }
 
     internal func showControls() {
+        delegate?.willShowControls?()
         UIView.animate(withDuration: fadeDuration, animations: {
             self.videoPlayerControls.alpha = 1.0
+        }, completion: { finished in
+            self.delegate?.didShowControls?()
         })
     }
 
     @objc internal func hideControls() {
+        delegate?.willHideControls?()
         UIView.animate(withDuration: fadeDuration, animations: {
             self.videoPlayerControls.alpha = 0.0
+        }, completion: { finished in
+            self.delegate?.didHideControls?()
         })
     }
 
