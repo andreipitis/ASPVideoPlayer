@@ -11,7 +11,7 @@ import UIKit
 /*
  Internal class used for the play/pause animation on the PlayButton.
  */
-internal class PlayPauseLayer: AnimateableLayer {
+internal class PlayPauseLayer: AnimatableLayer {
     open override func draw(in context: CGContext) {
         super.draw(in: context)
 
@@ -44,7 +44,7 @@ internal class PlayPauseLayer: AnimateableLayer {
 /*
  Internal class used for creating layers with animations.
  */
-internal class AnimateableLayer: CALayer {
+internal class AnimatableLayer: CALayer {
     @NSManaged public var animationDirection: CGFloat
     @NSManaged public var color: UIColor
 
@@ -61,7 +61,7 @@ internal class AnimateableLayer: CALayer {
     public override init(layer: Any) {
         super.init(layer: layer)
 
-        if let layer = layer as? PlayPauseLayer {
+        if let layer = layer as? AnimatableLayer {
             animationDirection = layer.animationDirection
             color = layer.color
         }

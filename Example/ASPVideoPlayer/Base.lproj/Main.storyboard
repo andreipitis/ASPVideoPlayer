@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="EOn-E5-GcR">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="EOn-E5-GcR">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -61,6 +61,10 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="n9D-8N-YUa">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="300"/>
                                 <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OUB-cg-wM5">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="300"/>
+                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WOE-LH-9YQ" customClass="ASPVideoPlayer" customModule="ASPVideoPlayer">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="300"/>
                                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
@@ -71,8 +75,12 @@
                                 <constraints>
                                     <constraint firstItem="WOE-LH-9YQ" firstAttribute="top" secondItem="n9D-8N-YUa" secondAttribute="top" id="BfZ-97-bfF"/>
                                     <constraint firstAttribute="trailing" secondItem="WOE-LH-9YQ" secondAttribute="trailing" id="Hdf-ue-334"/>
-                                    <constraint firstAttribute="height" constant="300" id="KZx-Vj-GRg"/>
+                                    <constraint firstAttribute="height" priority="750" constant="300" id="KZx-Vj-GRg"/>
                                     <constraint firstItem="WOE-LH-9YQ" firstAttribute="leading" secondItem="n9D-8N-YUa" secondAttribute="leading" id="MvB-0K-29d"/>
+                                    <constraint firstItem="OUB-cg-wM5" firstAttribute="top" secondItem="n9D-8N-YUa" secondAttribute="top" id="ZnR-kt-tSn"/>
+                                    <constraint firstItem="OUB-cg-wM5" firstAttribute="leading" secondItem="n9D-8N-YUa" secondAttribute="leading" id="acN-jP-tzq"/>
+                                    <constraint firstAttribute="bottom" secondItem="OUB-cg-wM5" secondAttribute="bottom" id="cXX-DQ-lcI"/>
+                                    <constraint firstAttribute="trailing" secondItem="OUB-cg-wM5" secondAttribute="trailing" id="kAk-Iz-aiO"/>
                                     <constraint firstAttribute="bottom" secondItem="WOE-LH-9YQ" secondAttribute="bottom" id="pK0-eJ-CWS"/>
                                 </constraints>
                             </view>
@@ -87,6 +95,7 @@
                     <connections>
                         <outlet property="containerView" destination="n9D-8N-YUa" id="1pT-Hc-IdI"/>
                         <outlet property="videoPlayer" destination="WOE-LH-9YQ" id="IdS-he-ew1"/>
+                        <outlet property="videoPlayerBackgroundView" destination="OUB-cg-wM5" id="bH9-KA-qad"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2Hg-Ni-G9M" userLabel="First Responder" sceneMemberID="firstResponder"/>
