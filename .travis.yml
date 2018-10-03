@@ -4,8 +4,6 @@
 
 osx_image: xcode10
 xcode_sdk: iphonesimulator12.0
-xcode_workspace: Example/ASPVideoPlayer.xcworkspace
-xcode_scheme: ASPVideoPlayer-Example
 language: swift
 
 before_install:
@@ -17,11 +15,12 @@ before_install:
 # cache: cocoapods
 # podfile: Example/Podfile
 before_install:
-#- gem install cocoapods --pre # Since Travis is not always on latest version
-- pod install --project-directory=Example
+# - gem install cocoapods --pre # Since Travis is not always on latest version
+# - pod install --project-directory=Example
 script:
-- set -o pipefail
-- travis_retry xcodebuild -workspace 'Example/ASPVideoPlayer.xcworkspace' -scheme 'ASPVideoPlayer-Example' -sdk iphonesimulator -destination 'platform=iOS Simulator,OS=12.0,name=iPhone XS' -enableCodeCoverage YES build test | xcpretty -c
+
+- set -o pipefail && xcodebuild -workspace 'Example/ASPVideoPlayer.xcworkspace' -scheme 'ASPVideoPlayer-Example' -sdk iphonesimulator -destination 'platform=iOS Simulator,OS=12.0,name=iPhone XS' build test | xcpretty -c
 - pod lib lint --allow-warnings
+
 after_success:
   - bash <(curl -s https://codecov.io/bash) -J 'ASPVideoPlayer'
