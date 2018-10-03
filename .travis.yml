@@ -22,6 +22,6 @@ before_install:
 script:
 - set -o pipefail
 - travis_retry xcodebuild -workspace 'Example/ASPVideoPlayer.xcworkspace' -scheme 'ASPVideoPlayer-Example' -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone XS' -enableCodeCoverage YES build test | xcpretty -c
-- pod lib lint --allow-warnings
+- pod lib lint --swift-version=4.2 --allow-warnings
 after_success:
   - bash <(curl -s https://codecov.io/bash) -J 'ASPVideoPlayer'
