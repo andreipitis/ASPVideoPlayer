@@ -1,7 +1,7 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
-## [5.0.0](https://github.com/andreipitis/ASPVideoPlayer/releases/tag/4.2.0) - 2018-07-04
+## [5.0.0](https://github.com/andreipitis/ASPVideoPlayer/releases/tag/5.0.0) - 2018-10-03
 
 ### Changed
 - Updated to Swift 4.2
