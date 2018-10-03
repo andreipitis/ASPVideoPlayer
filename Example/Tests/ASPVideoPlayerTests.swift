@@ -61,7 +61,7 @@ class ASPVideoPlayerTests: XCTestCase {
         sut.videoURLs = [videoURL]
         sut.videoPlayerControls.play()
 
-        NotificationCenter.default.post(name: NSNotification.Name.UIApplicationDidEnterBackground, object: nil)
+        NotificationCenter.default.post(name: UIApplication.didEnterBackgroundNotification, object: nil)
 
         XCTAssertEqual(sut.videoPlayerControls.videoPlayer?.status, .paused, "Video is not paused.")
     }

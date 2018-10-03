@@ -35,12 +35,6 @@ class ASPVideoPlayerViewTests: XCTestCase {
         XCTAssertEqual(player.frame, frame, "Frames are equal.")
     }
 
-    func testDeinitCalled_ShouldDeallocatePlayer() {
-        weak var player = ASPVideoPlayerView()
-
-        XCTAssertNil(player, "Player deallocated.")
-    }
-
     func testSetVolumeAboveMaximum_ShouldSetPlayerVolumeToMaximum() {
         let player = ASPVideoPlayerView()
         player.videoURL = videoURL

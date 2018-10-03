@@ -370,6 +370,9 @@ import AVFoundation
         videoPlayerView.translatesAutoresizingMaskIntoConstraints = false
         videoPlayerControls.translatesAutoresizingMaskIntoConstraints = false
 
+        videoPlayerView.accessibilityIdentifier = "VideoPlayerView"
+        videoPlayerControls.accessibilityIdentifier = "VideoPlayerControls"
+
         videoPlayerControls.backgroundColor = UIColor.black.withAlphaComponent(0.15)
 
         updateControls(videoPlayerControls)
@@ -377,7 +380,7 @@ import AVFoundation
         addSubview(videoPlayerView)
         addSubview(videoPlayerControls)
 
-        NotificationCenter.default.addObserver(self, selector: #selector(ASPVideoPlayer.applicationDidEnterBackground), name: NSNotification.Name.UIApplicationDidEnterBackground, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(ASPVideoPlayer.applicationDidEnterBackground), name: UIApplication.didEnterBackgroundNotification, object: nil)
 
         setupLayout()
     }

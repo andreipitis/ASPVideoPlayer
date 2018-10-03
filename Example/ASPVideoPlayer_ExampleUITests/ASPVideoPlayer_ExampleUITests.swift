@@ -9,6 +9,7 @@
 import XCTest
 
 class ASPVideoPlayer_ExampleUITests: XCTestCase {
+    var app: XCUIApplication!
 
     override func setUp() {
         super.setUp()
@@ -22,6 +23,8 @@ class ASPVideoPlayer_ExampleUITests: XCTestCase {
 
         // In UI tests it’s important to set the initial state - such as interface orientation - required for your tests before they run. The setUp method is a good place to do this.
         XCUIDevice.shared.orientation = .portrait
+
+        app = XCUIApplication()
     }
 
     override func tearDown() {
@@ -30,8 +33,7 @@ class ASPVideoPlayer_ExampleUITests: XCTestCase {
     }
 
     func testPressPlayButtons_ShouldSelectPlayButton() {
-        let element = XCUIApplication().children(matching: .window).element(boundBy: 0).children(matching: .other).element.children(matching: .other).element.children(matching: .other).element
-        let button = element.children(matching: .other).element(boundBy: 1).children(matching: .button).element(boundBy: 0)
+        let button = app.buttons["PlayPauseButton"]
         button.tap()
 
         XCTAssertEqual(button.isSelected, true, "Button is selected.")
@@ -39,17 +41,14 @@ class ASPVideoPlayer_ExampleUITests: XCTestCase {
 
     func testAdjustScrubber_ShouldSeekVideo() {
         let app = XCUIApplication()
-        let element = app.children(matching: .window).element(boundBy: 0)
-        let labelValue = app.staticTexts.element(boundBy: 0)
-        
-        let screenSize = element.frame.size
-        let scrubberRelativeXOffset = (labelValue.frame.origin.x + labelValue.frame.size.width + 10) / screenSize.width
-        let scrubberRelativeYOffset = labelValue.frame.origin.y / screenSize.height
-        
-        let startCoordinate: XCUICoordinate = element.coordinate(withNormalizedOffset: CGVector(dx: scrubberRelativeXOffset, dy: scrubberRelativeYOffset))
-        let destinationCoordinate: XCUICoordinate = element.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 1.0))
-        
-        startCoordinate.press(forDuration: 0.0, thenDragTo: destinationCoordinate)
+        let element = app.otherElements["Scrubber"]
+
+        let labelValue = app.staticTexts["CurrentTimeLabel"]
+
+        let startCoordinate = element.coordinate(withNormalizedOffset: CGVector(dx: 0.01, dy: 0.0))
+        let endCoordinate = element.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.0))
+
+        startCoordinate.press(forDuration: 0.0, thenDragTo: endCoordinate)
 
         XCTAssertNotEqual(labelValue.label, "00:00:00", "Values are equal.")
     }

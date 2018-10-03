@@ -135,7 +135,7 @@ class PlayerViewController: UIViewController {
 
         self.previousConstraints = constraints
         
-        UIView.animate(withDuration: 2.25, delay: 0.0, options: [], animations: {
+        UIView.animate(withDuration: 0.25, delay: 0.0, options: [], animations: {
             self.videoPlayer.transform = isExpanded == true ? .identity : CGAffineTransform(rotationAngle: .pi / 2.0)
             self.videoPlayerBackgroundView.transform = isExpanded == true ? .identity : CGAffineTransform(rotationAngle: .pi / 2.0)
 

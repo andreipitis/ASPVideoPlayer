@@ -76,7 +76,7 @@ internal class AnimatableLayer: CALayer {
             let basicAnimation = CABasicAnimation(keyPath: event)
             basicAnimation.fromValue = animationDirection
             basicAnimation.toValue = 1.0 - animationDirection
-            basicAnimation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseOut)
+            basicAnimation.timingFunction = CAMediaTimingFunction(name: .easeOut)
             basicAnimation.duration = 0.25
 
             return basicAnimation

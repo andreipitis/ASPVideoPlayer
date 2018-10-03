@@ -19,6 +19,7 @@
 		754153EA1DAE114C00E16BE9 /* video2.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 754153E91DAE114C00E16BE9 /* video2.mp4 */; };
 		757F34C81DAB829700ACF36D /* video.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 757F34C71DAB829700ACF36D /* video.mp4 */; };
 		75A4727D1DFAB12100F459E9 /* PlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75A4727C1DFAB12100F459E9 /* PlayerViewController.swift */; };
+		75A7751521649FED00E6CE10 /* .travis.yml in Resources */ = {isa = PBXBuildFile; fileRef = 75A7751421649FED00E6CE10 /* .travis.yml */; };
 		75C6331D1E040D91000DBD42 /* ViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75C6331C1E040D91000DBD42 /* ViewControllerTests.swift */; };
 		75C633221E054198000DBD42 /* ASPVideoPlayerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75C633211E054198000DBD42 /* ASPVideoPlayerTests.swift */; };
 		75C6332A1E056478000DBD42 /* ASPVideoPlayer_ExampleUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75C633291E056478000DBD42 /* ASPVideoPlayer_ExampleUITests.swift */; };
@@ -65,6 +66,7 @@
 		754153E91DAE114C00E16BE9 /* video2.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = video2.mp4; sourceTree = "<group>"; };
 		757F34C71DAB829700ACF36D /* video.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = video.mp4; sourceTree = "<group>"; };
 		75A4727C1DFAB12100F459E9 /* PlayerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerViewController.swift; sourceTree = "<group>"; };
+		75A7751421649FED00E6CE10 /* .travis.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = .travis.yml; path = ../.travis.yml; sourceTree = "<group>"; };
 		75C6331C1E040D91000DBD42 /* ViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerTests.swift; sourceTree = "<group>"; };
 		75C633211E054198000DBD42 /* ASPVideoPlayerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ASPVideoPlayerTests.swift; sourceTree = "<group>"; };
 		75C633271E056478000DBD42 /* ASPVideoPlayer_ExampleUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ASPVideoPlayer_ExampleUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -187,6 +189,7 @@
 				3D1259E0DF3F1602556E5E16 /* ASPVideoPlayer.podspec */,
 				E46EEA47B4689CB9C4BB8112 /* README.md */,
 				54C08F5A2526001DA6B08C80 /* LICENSE */,
+				75A7751421649FED00E6CE10 /* .travis.yml */,
 			);
 			name = "Podspec Metadata";
 			sourceTree = "<group>";
@@ -280,13 +283,13 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0820;
-				LastUpgradeCheck = 0940;
+				LastUpgradeCheck = 1000;
 				ORGANIZATIONNAME = CocoaPods;
 				TargetAttributes = {
 					607FACCF1AFB9204008FA782 = {
 						CreatedOnToolsVersion = 6.3.1;
 						DevelopmentTeam = SC5NQW88NN;
-						LastSwiftMigration = 0800;
+						LastSwiftMigration = 1000;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
@@ -297,13 +300,13 @@
 					607FACE41AFB9204008FA782 = {
 						CreatedOnToolsVersion = 6.3.1;
 						DevelopmentTeam = SC5NQW88NN;
-						LastSwiftMigration = 0900;
+						LastSwiftMigration = 1000;
 						TestTargetID = 607FACCF1AFB9204008FA782;
 					};
 					75C633261E056478000DBD42 = {
 						CreatedOnToolsVersion = 8.2;
 						DevelopmentTeam = SC5NQW88NN;
-						LastSwiftMigration = 0900;
+						LastSwiftMigration = 1000;
 						ProvisioningStyle = Automatic;
 						TestTargetID = 607FACCF1AFB9204008FA782;
 					};
@@ -339,6 +342,7 @@
 				607FACDB1AFB9204008FA782 /* Main.storyboard in Resources */,
 				607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */,
 				754153EA1DAE114C00E16BE9 /* video2.mp4 in Resources */,
+				75A7751521649FED00E6CE10 /* .travis.yml in Resources */,
 				607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -639,8 +643,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 			};
 			name = Debug;
 		};
@@ -657,8 +660,7 @@
 				MODULE_NAME = ExampleApp;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.ASPVideoPlayer-Example";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 			};
 			name = Release;
 		};
@@ -679,8 +681,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Tests/ASPVideoPlayer_Tests-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ASPVideoPlayer_Example.app/ASPVideoPlayer_Example";
 			};
 			name = Debug;
@@ -697,8 +698,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Tests/ASPVideoPlayer_Tests-Bridging-Header.h";
-				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ASPVideoPlayer_Example.app/ASPVideoPlayer_Example";
 			};
 			name = Release;
@@ -716,8 +716,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "ro.andreisergiupitis.ASPVideoPlayer-ExampleUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
-				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TEST_TARGET_NAME = ASPVideoPlayer_Example;
 			};
 			name = Debug;
@@ -733,8 +732,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "ro.andreisergiupitis.ASPVideoPlayer-ExampleUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TEST_TARGET_NAME = ASPVideoPlayer_Example;
 			};
 			name = Release;

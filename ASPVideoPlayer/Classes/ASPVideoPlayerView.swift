@@ -388,7 +388,7 @@ import AVFoundation
             delegate?.playingVideo?(progress: progress)
         } else {
             let time = CMTime(seconds: progress * currentItem.asset.duration.seconds, preferredTimescale: currentItem.asset.duration.timescale)
-            player.seek(to: time, toleranceBefore: kCMTimeZero, toleranceAfter: kCMTimeZero, completionHandler: { [weak self] (finished) in
+            player.seek(to: time, toleranceBefore: .zero, toleranceAfter: .zero, completionHandler: { [weak self] (finished) in
                 guard let strongSelf = self else { return }
 
                 if finished == false {
@@ -459,14 +459,14 @@ import AVFoundation
         videoPlayerLayer.player = player
         videoPlayerLayer.contentsScale = UIScreen.main.scale
 
-        NotificationCenter.default.addObserver(self, selector: #selector(ASPVideoPlayerView.applicationDidEnterBackground), name: NSNotification.Name.UIApplicationDidEnterBackground, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(ASPVideoPlayerView.applicationWillEnterForeground), name: NSNotification.Name.UIApplicationWillEnterForeground, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(ASPVideoPlayerView.applicationDidEnterBackground), name: UIApplication.didEnterBackgroundNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(ASPVideoPlayerView.applicationWillEnterForeground), name: UIApplication.willEnterForegroundNotification, object: nil)
     }
 
     fileprivate func seekToZero() {
         progress = 0.0
         let time = CMTime(seconds: 0.0, preferredTimescale: 1)
-        player.seek(to: time, toleranceBefore: kCMTimeZero, toleranceAfter: kCMTimeZero)
+        player.seek(to: time, toleranceBefore: .zero, toleranceAfter: .zero)
     }
 
     fileprivate func addTimeObserver() {

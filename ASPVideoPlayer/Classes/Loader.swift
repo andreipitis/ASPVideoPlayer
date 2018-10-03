@@ -63,27 +63,27 @@ open class Loader: UIView {
         headAnimation.duration = 1.0
         headAnimation.fromValue = 0.0
         headAnimation.toValue = 0.25
-        headAnimation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+        headAnimation.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
 
         let tailAnimation = CABasicAnimation(keyPath: "strokeEnd")
         tailAnimation.duration = 1.0
         tailAnimation.fromValue = 0.0
         tailAnimation.toValue = 1.0
-        tailAnimation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+        tailAnimation.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
 
         let endHeadAnimation = CABasicAnimation(keyPath: "strokeStart")
         endHeadAnimation.beginTime = 1.0
         endHeadAnimation.duration = 0.5
         endHeadAnimation.fromValue = 0.25
         endHeadAnimation.toValue = 1.0
-        endHeadAnimation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+        endHeadAnimation.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
 
         let endTailAnimation = CABasicAnimation(keyPath: "strokeEnd")
         endTailAnimation.beginTime = 1.0
         endTailAnimation.duration = 0.5
         endTailAnimation.fromValue = 1.0
         endTailAnimation.toValue = 1.0
-        endTailAnimation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+        endTailAnimation.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
 
         let animations = CAAnimationGroup()
         animations.beginTime = CACurrentMediaTime() + 0.25

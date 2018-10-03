@@ -139,7 +139,7 @@ open class ASPBasicControls: UIView, VideoPlayerControls, VideoPlayerSeekControl
     /**
      Reference to the video player. Can be set through the Interface Builder.
      */
-    @IBOutlet open override weak var videoPlayer: ASPVideoPlayerView? {
+    @IBOutlet public override weak var videoPlayer: ASPVideoPlayerView? {
         didSet {
             setupVideoPlayerView()
         }
@@ -148,7 +148,7 @@ open class ASPBasicControls: UIView, VideoPlayerControls, VideoPlayerSeekControl
     /**
      Sets the visibility of the next button.
      */
-    open override var nextButtonHidden: Bool {
+    public override var nextButtonHidden: Bool {
         set {
             nextButton.isHidden = newValue
         }
@@ -160,7 +160,7 @@ open class ASPBasicControls: UIView, VideoPlayerControls, VideoPlayerSeekControl
     /**
      Sets the visibility of the previous button.
      */
-    open override var previousButtonHidden: Bool {
+    public override var previousButtonHidden: Bool {
         set {
             previousButton.isHidden = newValue
         }
@@ -172,7 +172,7 @@ open class ASPBasicControls: UIView, VideoPlayerControls, VideoPlayerSeekControl
     /**
      Sets the color of the controls.
      */
-    open override var tintColor: UIColor! {
+    public override var tintColor: UIColor! {
         didSet {
             playPauseButton.tintColor = tintColor
             nextButton.tintColor = tintColor
@@ -187,7 +187,7 @@ open class ASPBasicControls: UIView, VideoPlayerControls, VideoPlayerSeekControl
         }
     }
 
-    open override var didPressResizeButton: ((Bool) -> Void)? {
+    public override var didPressResizeButton: ((Bool) -> Void)? {
         didSet {
             resizeButtonWidthConstraint.isActive = didPressResizeButton != nil
             resizeButtonRightConstraint.isActive = didPressResizeButton != nil
@@ -385,6 +385,15 @@ open class ASPBasicControls: UIView, VideoPlayerControls, VideoPlayerSeekControl
         currentTimeLabel.translatesAutoresizingMaskIntoConstraints = false
         lengthLabel.translatesAutoresizingMaskIntoConstraints = false
         resizeButton.translatesAutoresizingMaskIntoConstraints = false
+
+        playPauseButton.accessibilityIdentifier = "PlayPauseButton"
+        progressSlider.accessibilityIdentifier = "Scrubber"
+        nextButton.accessibilityIdentifier = "NextButton"
+        previousButton.accessibilityIdentifier = "PreviousButton"
+        progressLoader.accessibilityIdentifier = "ProgressLoader"
+        currentTimeLabel.accessibilityIdentifier = "CurrentTimeLabel"
+        lengthLabel.accessibilityIdentifier = "TotalTimeLabel"
+        resizeButton.accessibilityIdentifier = "ResizeButton"
 
         previousButton.isHidden = true
         nextButton.isHidden = true
