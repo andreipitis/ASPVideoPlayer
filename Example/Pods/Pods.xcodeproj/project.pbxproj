@@ -349,7 +349,7 @@
 				LastUpgradeCheck = 1000;
 				TargetAttributes = {
 					2DC938451C9B8D766372BF1504D738F4 = {
-						LastSwiftMigration = 1000;
+						LastSwiftMigration = 1020;
 					};
 					7F8E29A2B33AB182636B056A75E452F9 = {
 						LastSwiftMigration = "";
@@ -364,6 +364,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 			);
 			mainGroup = 7DB346D0F39D3F0E887471402A8071AB;
@@ -449,7 +450,7 @@
 				PRODUCT_NAME = ASPVideoPlayer;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -605,7 +606,7 @@
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";

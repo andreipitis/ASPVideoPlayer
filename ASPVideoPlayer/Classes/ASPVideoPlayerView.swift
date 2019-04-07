@@ -103,52 +103,52 @@ import AVFoundation
     /**
      A closure that will be called when a new video is loaded.
      */
-    open var newVideo: VoidClosure
+    open var newVideo: VoidClosure = nil
 
     /**
      A closure that will be called when the video is ready to play.
      */
-    open var readyToPlayVideo: VoidClosure
+    open var readyToPlayVideo: VoidClosure = nil
 
     /**
      A closure that will be called when a video is started.
      */
-    open var startedVideo: VoidClosure
+    open var startedVideo: VoidClosure = nil
 
     /**
      A closure that will be called repeatedly while the video is playing.
      */
-    open var playingVideo: ProgressClosure
+    open var playingVideo: ProgressClosure = nil
 
     /**
      A closure that will be called when a video is paused.
      */
-    open var pausedVideo: VoidClosure
+    open var pausedVideo: VoidClosure = nil
 
     /**
      A closure that will be called when the end of the video has been reached.
      */
-    open var finishedVideo: VoidClosure
+    open var finishedVideo: VoidClosure = nil
 
     /**
      A closure that will be called when a video is stopped.
      */
-    open var stoppedVideo: VoidClosure
+    open var stoppedVideo: VoidClosure = nil
 
     /**
      A closure that will be called when a seek is triggered.
      */
-    open var seekStarted: VoidClosure
+    open var seekStarted: VoidClosure = nil
 
     /**
      A closure that will be called when a seek has ended.
      */
-    open var seekEnded: VoidClosure
+    open var seekEnded: VoidClosure = nil
 
     /**
      A closure that will be called when an error occured.
      */
-    open var error: ErrorClosure
+    open var error: ErrorClosure = nil
 
     // MARK: - Public Variables -
 
