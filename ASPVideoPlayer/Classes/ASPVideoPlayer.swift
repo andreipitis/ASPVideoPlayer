@@ -246,12 +246,12 @@ import AVFoundation
             guard let strongSelf = self else { return }
 
             if let videoURL = strongSelf.videoPlayerView.videoURL {
-                if let currentURLIndex = strongSelf.videoURLs.index(of: videoURL) {
+                if let currentURLIndex = strongSelf.videoURLs.firstIndex(of: videoURL) {
                     strongSelf.videoPlayerControls.nextButtonHidden = currentURLIndex == strongSelf.videoURLs.count - 1
                     strongSelf.videoPlayerControls.previousButtonHidden = currentURLIndex == 0
                 }
             } else if let videoAsset = strongSelf.videoPlayerView.videoAsset {
-                if let currentURLIndex = strongSelf.videoAssets.index(of: videoAsset) {
+                if let currentURLIndex = strongSelf.videoAssets.firstIndex(of: videoAsset) {
                     strongSelf.videoPlayerControls.nextButtonHidden = currentURLIndex == strongSelf.videoAssets.count - 1
                     strongSelf.videoPlayerControls.previousButtonHidden = currentURLIndex == 0
                 }
@@ -269,7 +269,7 @@ import AVFoundation
                         strongSelf.videoPlayerView.videoURL = strongSelf.videoURLs.first
                     }
                 } else {
-                    let currentURLIndex = strongSelf.videoURLs.index(of: videoURL)
+                    let currentURLIndex = strongSelf.videoURLs.firstIndex(of: videoURL)
                     let nextURL = strongSelf.videoURLs[currentURLIndex! + 1]
 
                     strongSelf.videoPlayerView.videoURL = nextURL
@@ -280,7 +280,7 @@ import AVFoundation
                         strongSelf.videoPlayerView.videoAsset = strongSelf.videoAssets.first
                     }
                 } else {
-                    let currentURLIndex = strongSelf.videoAssets.index(of: videoAsset)
+                    let currentURLIndex = strongSelf.videoAssets.firstIndex(of: videoAsset)
                     let nextAsset = strongSelf.videoAssets[currentURLIndex! + 1]
 
                     strongSelf.videoPlayerView.videoAsset = nextAsset
@@ -294,14 +294,14 @@ import AVFoundation
             guard let strongSelf = self else { return }
 
             if let videoURL = strongSelf.videoPlayerView.videoURL {
-                if let currentURLIndex = strongSelf.videoURLs.index(of: videoURL) {
+                if let currentURLIndex = strongSelf.videoURLs.firstIndex(of: videoURL) {
                     let newIndex = (currentURLIndex + 1) % strongSelf.videoURLs.count
                     let nextURL = strongSelf.videoURLs[newIndex]
 
                     strongSelf.videoPlayerView.videoURL = nextURL
                 }
             } else if let videoAsset = strongSelf.videoPlayerView.videoAsset {
-                if let currentURLIndex = strongSelf.videoAssets.index(of: videoAsset) {
+                if let currentURLIndex = strongSelf.videoAssets.firstIndex(of: videoAsset) {
                     let newIndex = (currentURLIndex + 1) % strongSelf.videoAssets.count
                     let nextAsset = strongSelf.videoAssets[newIndex]
 
@@ -316,14 +316,14 @@ import AVFoundation
             guard let strongSelf = self else { return }
 
             if let videoURL = strongSelf.videoPlayerView.videoURL {
-                if let currentURLIndex = strongSelf.videoURLs.index(of: videoURL) {
+                if let currentURLIndex = strongSelf.videoURLs.firstIndex(of: videoURL) {
                     let previousIndex = currentURLIndex > 0 ? currentURLIndex : strongSelf.videoURLs.count
                     let nextURL = strongSelf.videoURLs[previousIndex - 1]
 
                     strongSelf.videoPlayerView.videoURL = nextURL
                 }
             } else if let videoAsset = strongSelf.videoPlayerView.videoAsset {
-                if let currentURLIndex = strongSelf.videoAssets.index(of: videoAsset) {
+                if let currentURLIndex = strongSelf.videoAssets.firstIndex(of: videoAsset) {
                     let previousIndex = currentURLIndex > 0 ? currentURLIndex : strongSelf.videoAssets.count
                     let nextAsset = strongSelf.videoAssets[previousIndex - 1]
 
