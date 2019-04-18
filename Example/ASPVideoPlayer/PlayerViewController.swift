@@ -30,7 +30,7 @@ class PlayerViewController: UIViewController {
         let fourthAsset = AVURLAsset(url: secondNetworkURL!)
         //        videoPlayer.videoURLs = [firstLocalVideoURL!, secondLocalVideoURL!, firstNetworkURL!, secondNetworkURL!]
         videoPlayer.videoAssets = [firstAsset, secondAsset, thirdAsset, fourthAsset]
-//        videoPlayer.configuration = ASPVideoPlayer.Configuration(videoGravity: .aspectFit, shouldLoop: true, startPlayingWhenReady: true, controlsInitiallyHidden: true, allowBackgroundPlay: true)
+        //        videoPlayer.configuration = ASPVideoPlayer.Configuration(videoGravity: .aspectFit, shouldLoop: true, startPlayingWhenReady: true, controlsInitiallyHidden: true, allowBackgroundPlay: true)
 
         videoPlayer.resizeClosure = { [unowned self] isExpanded in
             self.rotate(isExpanded: isExpanded)
@@ -46,8 +46,8 @@ class PlayerViewController: UIViewController {
     var previousConstraints: [NSLayoutConstraint] = []
 
     func rotate(isExpanded: Bool) {
-        let views: [String:Any] = ["videoPlayer": videoPlayer,
-                                   "backgroundView": videoPlayerBackgroundView]
+        let views: [String:Any] = ["videoPlayer": videoPlayer as Any,
+                                   "backgroundView": videoPlayerBackgroundView as Any]
 
         var constraints: [NSLayoutConstraint] = []
 

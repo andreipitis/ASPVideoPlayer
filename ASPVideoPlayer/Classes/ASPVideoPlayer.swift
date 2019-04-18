@@ -386,8 +386,8 @@ import AVFoundation
     }
 
     private func setupLayout() {
-        let viewsDictionary: [String: Any] = ["videoPlayerView":videoPlayerView,
-                                              "videoPlayerControls":videoPlayerControls]
+        let viewsDictionary: [String: Any] = ["videoPlayerView":videoPlayerView as Any,
+                                              "videoPlayerControls":videoPlayerControls as Any]
 
         var constraintsArray = [NSLayoutConstraint]()
 
