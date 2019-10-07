@@ -123,6 +123,13 @@ import AVFoundation
     }
 
     /**
+     The current playback time in seconds.
+     */
+    open var currentTime: Double {
+        return videoPlayerView.currentTime
+    }
+
+    /**
      An array of URLs that the player will load. Can be local or remote URLs. Do not use videoURLs and videoAssets together, only use one of the arrays.
      */
     open var videoURLs: [URL] = [] {
