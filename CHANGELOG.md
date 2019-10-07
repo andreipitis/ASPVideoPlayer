@@ -1,6 +1,11 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [6.1.0](https://github.com/andreipitis/ASPVideoPlayer/releases/tag/6.1.0) - 2019-10-07
+
+### Added
+- `currentTime` property to `ASPVideoPlayer`.
+
 ## [6.0.0](https://github.com/andreipitis/ASPVideoPlayer/releases/tag/6.0.0) - 2019-04-25
 
 ### Changed
