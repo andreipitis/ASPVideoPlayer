@@ -186,7 +186,6 @@ open class Scrubber: UIControl {
     // MARK: - Private Methods -
 
     private func commonInit() {
-        clipsToBounds = true
         thumbLayer.scrubber = self
 
         trackLayer.backgroundColor = trackColor

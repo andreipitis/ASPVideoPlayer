@@ -30,7 +30,7 @@ A simple UIView subclass that can play a video and allows animations to be appli
 
   s.ios.deployment_target = '8.0'
 
-  s.source_files = 'ASPVideoPlayer/Classes/**/*'
+  s.source_files = 'Sources/**/*'
   
   # s.resource_bundles = {
   #   'ASPVideoPlayer' => ['ASPVideoPlayer/Assets/*.png']
