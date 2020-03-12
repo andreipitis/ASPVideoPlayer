@@ -24,7 +24,7 @@ A simple UIView subclass that can play a video and allows animations to be appli
   s.homepage         = 'https://github.com/andreipitis/ASPVideoPlayer'
   # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
-  s.author           = { 'Andrei-Sergiu Pitis' => 'andrei.pitis@lateral-inc.com' }
+  s.author           = { 'Andrei-Sergiu Pitis' => 'andy.pitis@gmail.com' }
   s.source           = { :git => 'https://github.com/andreipitis/ASPVideoPlayer.git', :tag => s.version.to_s }
   s.social_media_url = 'https://twitter.com/AndyPitis'
 
