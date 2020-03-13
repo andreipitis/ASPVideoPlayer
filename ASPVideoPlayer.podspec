@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'ASPVideoPlayer'
-  s.version          = '6.1.0'
+  s.version          = '6.1.1'
   s.summary          = 'A simple UIView subclass that can play a video and allows animations to be applied during playback.'
 
 # This description is used to generate tags and improve search results.
@@ -31,6 +31,7 @@ A simple UIView subclass that can play a video and allows animations to be appli
   s.ios.deployment_target = '8.0'
 
   s.source_files = 'Sources/**/*'
+  s.swift_versions = ['4.2', '5.0']
   
   # s.resource_bundles = {
   #   'ASPVideoPlayer' => ['ASPVideoPlayer/Assets/*.png']
