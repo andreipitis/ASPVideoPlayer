@@ -1,6 +1,11 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [6.1.2](https://github.com/andreipitis/ASPVideoPlayer/releases/tag/6.1.2) - 2020-09-22
+
+### Fixed
+- Resize Button appears outside of the player bounds if the player does not fill the entire width of the parent and the `resizeClosure` is not set
+
 ## [6.1.0](https://github.com/andreipitis/ASPVideoPlayer/releases/tag/6.1.0) - 2019-10-07
 
 ### Added

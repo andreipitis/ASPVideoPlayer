@@ -189,6 +189,7 @@ open class ASPBasicControls: UIView, VideoPlayerControls, VideoPlayerSeekControl
 
     public override var didPressResizeButton: ((Bool) -> Void)? {
         didSet {
+            resizeButton.isHidden = didPressResizeButton == nil
             resizeButtonWidthConstraint.isActive = didPressResizeButton != nil
             resizeButtonRightConstraint.isActive = didPressResizeButton != nil
 
@@ -416,6 +417,7 @@ open class ASPBasicControls: UIView, VideoPlayerControls, VideoPlayerSeekControl
 
         resizeButton.backgroundColor = .clear
         resizeButton.tintColor = tintColor
+        resizeButton.isHidden = true
 
         playPauseButton.addTarget(self, action: #selector(ASPVideoPlayerControls.playButtonPressed), for: .touchUpInside)
         nextButton.addTarget(self, action: #selector(ASPVideoPlayerControls.nextButtonPressed), for: .touchUpInside)
